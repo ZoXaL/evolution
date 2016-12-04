@@ -1,6 +1,8 @@
 #include "model/GameModel.h"
 #include "functions.h"
 
+class CardDeck;
+
 GameModel* GameModel::instance = nullptr;
 
 GameModel::GameModel() {
@@ -17,6 +19,10 @@ GameModel* GameModel::initialize() {
 
 GameModel* GameModel::getInstance() {
 	return instance;
+}
+
+CardDeck* GameModel::getCardDeck() {
+	return &cardDeck;
 }
 
 Player* GameModel::getPlayer(int playerNum) {

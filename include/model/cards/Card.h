@@ -1,13 +1,12 @@
 #ifndef CARD_H
 #define CARD_H
-#include "model/cards/AbilityCard"
+
+class AbilityCard;
 
 class Card {
-AbilityCard abilityCard;
 public:
-	AbilityCard getAbilityCard() {
-		return abilityCard;
-	}
+	virtual ~Card() {};
+	virtual AbilityCard* getAbilityCard() = 0;
 };
 
 #endif

@@ -7,5 +7,7 @@
 class EvolveController : public AbstractController {
 public:
 	AbstractController* run();
+private:
+	void printGameModel();
 };
 #endif

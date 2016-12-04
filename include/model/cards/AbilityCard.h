@@ -1,9 +1,11 @@
 #ifndef ABILITY_CARD_H
 #define ABILITY_CARD_H
 
+class Card;
 
-class AbilityCard {
+class AbilityCard : public Card {
 public:
+
 	enum Ability {
 		FAST, FAT
 	};
@@ -15,6 +17,11 @@ public:
 	Ability getAbility() {
 		return ability;
 	}
+	AbilityCard* getAbilityCard() {
+		return this;
+	}
+	AbilityCard(Ability _ability) : ability(_ability) {};
+	~AbilityCard() {	};
 };
 
 #endif

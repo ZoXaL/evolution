@@ -1,14 +1,17 @@
 #ifndef CARD_DECK_H
 #define CARD_DECK_H
-#include <vector>;
+
+#include <vector>
+#include "model/cards/Card.h"
 using namespace std;
 
 class CardDeck {
-vector<Card> deck;
+vector<Card*> deck;
+vector<Card*>::iterator currentCard;
 public:
 	CardDeck();
-	void shuffleDeck();
-	Card getCard();
+	~CardDeck();
+	Card* getCard();
 	bool isEmpty();
 };
 
