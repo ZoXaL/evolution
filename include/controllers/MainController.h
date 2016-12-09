@@ -9,4 +9,5 @@ public:
 	MainController();
 	AbstractController* run();
 };
+
 #endif

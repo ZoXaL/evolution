@@ -9,7 +9,7 @@ int getInt(istream& stream, int min=INT_MIN, int max=INT_MAX) {
 	do {
 		correctInput = true;
 		stream >> result;
-		if(stream.ios::fail()) {
+		if(stream.ios::fail() || stream.peek() != 10) {
 			stream.ios::clear();
 			stream.ignore(80, '\n');
 			correctInput = false;			

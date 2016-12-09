@@ -3,22 +3,32 @@
 
 #include "model/FoodStore.h"
 #include "model/Player.h"
-#include "model/cards/CardDeck.h"
+#include "model/deck/Deck.h"
 #include <vector> 
+#include <memory> 
 using namespace std;
 
 class GameModel {
 	FoodStore foodStore;
-	CardDeck cardDeck;
+	Deck<Card*> cardDeck;
 	Player players[2];
-
+	Player* currentPlayer;
+	
 	static GameModel* instance;
 	GameModel();
 public:
+	static const int CARDS_ON_START;
+
+
 	static GameModel* getInstance();
 	static GameModel* initialize();
+	
 	Player* getPlayer(int);
-	CardDeck* getCardDeck();
+	Player* getCurrentPlayer();
+	Player* switchPlayer();
+
+	Deck<Card*>* getCardDeck();
+
 };
 
 #endif

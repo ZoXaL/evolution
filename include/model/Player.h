@@ -1,19 +1,23 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-//#include "model/cards/Card.h"
+#include "model/cards/Card.h"
 //#include "model/cards/AnimalCard.h"
-//#include <vector> 
+#include <vector> 
 using namespace std;
 
 class Player {
-	//vector<Card> hand;
+	vector<Card*> hand;
 	//vector<AnimalCard> animals;
 	char name[80];
 public:
 	Player(const char* name = "NoName");
 	const char* getName();
 	void setName(const char*);
+	void addCardToHand(Card*);
+	Card* removeCardFromHand(int);
+	Card* getCard(int);
+	int handSize();
 };
 
 #endif

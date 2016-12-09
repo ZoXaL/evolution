@@ -6,7 +6,6 @@ MainController::MainController() {
 	currentController = new MenuController();
 }
 
-
 AbstractController* MainController::run() {
 	do {
 		AbstractController* tmp = currentController;
@@ -15,5 +14,4 @@ AbstractController* MainController::run() {
 			delete tmp;
 		}
 	} while(currentController != nullptr);
-	//cout << "Bye!" << endl;
 }

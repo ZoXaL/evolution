@@ -13,51 +13,51 @@
 using namespace std;
 
 AbstractController* EvolveController::run() {
+	system("clear");
 	// cout << "Here will be GameModel view" << endl<< endl<< endl;
 	GameModel* model = GameModel::getInstance();
-	cout << "The players now are " << model->getPlayer(0)->getName() << " and " << model->getPlayer(1)->getName() << endl;
-	printGameModel();
-	cout << "Select operation: " << endl;
-	cout << "1) Lay card 1" << endl;
-	cout << "2) Lay card 2" << endl;
-	cout << "3) Lay card 3" << endl;
-	cout << "4) Undo" << endl;
-	cout << "5) Return to menu" << endl;
-	do {
-		int answer = getInt(cin, 1, 5);
-		switch (answer) {
-			case 1 : {
-				cout << "Ok, lay 1 card" << endl;
-				return new GameController();
-			} 
-			case 2 : {
-				cout << "Ok, lay 2 card" << endl;
-				return new GameController();
-			} 
-			case 3 : {
-				cout << "Ok, lay 3 card" << endl;
-				return new GameController();
-			} 
-			case 4 : {
-				cout << "Ok, do undo" << endl;
-				return new GameController();
-			} 
+	Player* currentPlayer = model->getCurrentPlayer();
 
-			case 5 : {
-				return new MenuController();
-			} 
-			default : {
-				continue;
+	displayModel();
+	cout << endl;
+
+	cout << "Select operation: " << endl;
+	int handSize = currentPlayer->handSize();
+	for (int i = 1; i <= handSize; i++) {
+		cout << i << ") Lay card " << i << endl;
+	}
+	cout << handSize+1 << ") Undo" << endl;
+	cout << handSize+2 << ") Return to menu" << endl;
+
+	int answer = getInt(cin, 1, handSize+2);
+	if (checkRange(answer, 1, handSize)) {
+		cout << "Ok, lay " << answer << " card" << endl;
+		return new GameController();
+	} else {
+		do {			
+			switch (answer-handSize) {
+				
+				case 1 : {
+					cout << "Ok, do undo" << endl;
+					return new GameController();
+				} 
+				case 2 : {
+					return new MenuController();
+				} 
+				default : {
+					continue;
+				}
 			}
-		}
-	} while (1);
+		} while (1);
+	}
+	
 	return new GameController();
 }
-void EvolveController::printGameModel() {
-	GameModel* model = GameModel::getInstance();
-	auto deck = model->getCardDeck();
-	while(!deck->isEmpty()) {
-		Card* card = deck->getCard();
-		cout << "Card in deck:" << card->getAbilityCard()->getAbility() << endl;
-	}
-}
+// void EvolveController::printGameModel() {
+// 	GameModel* model = GameModel::getInstance();
+// 	auto deck = model->getCardDeck();
+// 	while(!deck->isEmpty()) {
+// 		Card* card = deck->getCard();
+// 		cout << "Card in deck:" << card->getAbilityCard()->getAbility() << endl;
+// 	}
+// }

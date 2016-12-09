@@ -2,12 +2,11 @@
 #define EVOLVE_CONTROLLER_H
 
 #include "controllers/AbstractController.h"
+#include "ModelView.h"
 
 // Aimed to let player make evolve move
-class EvolveController : public AbstractController {
+class EvolveController : public AbstractController, public ModelView {
 public:
 	AbstractController* run();
-private:
-	void printGameModel();
 };
 #endif
