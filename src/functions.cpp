@@ -1,5 +1,7 @@
 #include <iostream>
 #include <climits>
+#include "exceptions/Exception.h"
+#include "model/cards/abilities/Ability.h"
 
 using namespace std;
 
@@ -28,4 +30,40 @@ int getInt(istream& stream, int min=INT_MIN, int max=INT_MAX) {
 
 bool checkRange(int check, int min, int max) {
 	return (check <= max && check >= min);
+}
+
+int abilityToInt(Ability::AbilityType ability) {
+	int result = -1;
+	switch (ability) {
+		case Ability::FAT : {
+			result = 1;
+			break;
+		}
+		case Ability::FAST : {
+			result = 2;
+			break;
+		}
+		default : {
+			throw Exception("Unsupported ability type");
+		}
+	}
+	return result;
+}
+
+string abilityToString(Ability::AbilityType ability) {
+	string result = "";
+	switch (ability) {
+		case Ability::FAT : {
+			result = "FAT";
+			break;
+		}
+		case Ability::FAST : {
+			result = "FAST";
+			break;
+		}
+		default : {
+			throw Exception("Unsupported ability type");
+		}
+	}
+	return result;
 }

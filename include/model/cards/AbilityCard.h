@@ -4,20 +4,16 @@
 #include <string>
 #include <iostream>
 #include "model/cards/Card.h"
+#include "model/cards/abilities/Ability.h"
+#include "exceptions/Exception.h"
+#include "functions.h"
 using namespace std;
 
 class AbilityCard : public Card {
-public:
-
-	enum Ability {
-		FAST, FAT
-	};
-	
-private:
-Ability ability;
+Ability::AbilityType ability;
 
 public:
-	Ability getAbility() {
+	Ability::AbilityType getAbility() {
 		return ability;
 	}
 	AbilityCard* getAbilityCard() {
@@ -25,10 +21,10 @@ public:
 	}
 	string getDescription() {
 		string desc = "Ability card: type: ";
-		desc += std::to_string(ability);;
+		desc += abilityToString(ability);
 		return desc;
 	}
-	AbilityCard(Ability _ability) : ability(_ability) {};
+	AbilityCard(Ability::AbilityType _ability) : ability(_ability) {};
 	~AbilityCard() {	};
 
 	ostream& write(ostream& stream)  {
