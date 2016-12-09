@@ -13,16 +13,19 @@ Here is main utilites:
 
 ##Installation and compiling
 You should have Unix system with GNU toolchain installed to compile this program. 
-1) Dowload this repository
-2) Go to repo root folder
-3) Write the following line in your console:
-```
-make -f makefile.am
-```
-4) Launch app by
-```
-./build/evolive
-```
+
+1. Dowload this repository
+2. Go to repo root folder
+3. Write the following line in your console:
+
+  ```
+  make -f makefile.am
+  ```
+4. Launch app by
+
+  ```
+  ./build/evolive
+  ```
 
 ##Contribution
 Feel free to discover this code, send pull request or make any comments.
