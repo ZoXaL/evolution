@@ -3,8 +3,8 @@
 
 #include <string>
 #include <iostream>
+#include "model/cards/Card.h"
 using namespace std;
-class Card;
 
 class AbilityCard : public Card {
 public:

@@ -3,6 +3,8 @@
 #include "model/cards/AbilityCard.h"
 #include "model/cards/Card.h"
 #include "model/deck/Deck.h"
+
+#include "controllers/commands/GiveCardToPlayerCommand.h"
 #include "memory"
 using namespace std;
 
@@ -33,7 +35,9 @@ GameModel* GameManager::buildGame(const char* firstPlayerName, const char* secon
 // 	player1->setName(firstName);
 // 	// Hand initializing
 	for (int i = 0; i < GameModel::CARDS_ON_START; i++) {
-		player1->addCardToHand(cardDeck->pop_front());
+		GiveCardToPlayerCommand giveCard(0);
+		giveCard.execute();
+		//player1->addCardToHand(cardDeck->pop_front());
 	}
 	
 // 	// Name initializing
@@ -44,7 +48,9 @@ GameModel* GameManager::buildGame(const char* firstPlayerName, const char* secon
 // 	player2->setName(secondName);
 // 	// Hand initializing
 	for (int i = 0; i < GameModel::CARDS_ON_START; i++) {
-		player2->addCardToHand(cardDeck->pop_front());
+		GiveCardToPlayerCommand giveCard(1);
+		giveCard.execute();
+		//player2->addCardToHand(cardDeck->pop_front());
 	}
 	return model;
 }

@@ -3,7 +3,7 @@
 
 using namespace std;
 
-class TwoAbilityCard : public Card{
+class TwoAbilityCard : public Card {
 AbilityCard secondAbilityCard;
 public:
 	AbilityCard getsecondAbilityCard() {

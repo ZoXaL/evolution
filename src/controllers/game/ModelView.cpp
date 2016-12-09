@@ -34,7 +34,7 @@ void ModelView::displayModel() {
 	cout << "--------------------------------------------------------------------------------" << endl;	
 	//Player hand
 	for (int i = 0; i < currentPlayer->handSize(); i++) {
-		cout << i+1 << ") " << currentPlayer->getCard(i)->getDescription() << endl;
+		cout << i+1 << ") " << currentPlayer->getCardFromHand(i)->getDescription() << endl;
 	}
 }
 void ModelView::displayStatistic() {
