@@ -9,7 +9,7 @@ public:
 	AbstractController* run();
 	StartGameController(bool newGame = false);
 private:	
-	void initPlayers();
-	void initGameModel();
+	// void initPlayers();
+	// void initGameModel();
 };
 #endif

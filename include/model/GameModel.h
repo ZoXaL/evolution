@@ -10,7 +10,7 @@ using namespace std;
 
 class GameModel {
 	FoodStore foodStore;
-	Deck<Card*> cardDeck;
+	Deck<shared_ptr<Card>> cardDeck;
 	Player players[2];
 	Player* currentPlayer;
 	
@@ -27,7 +27,7 @@ public:
 	Player* getCurrentPlayer();
 	Player* switchPlayer();
 
-	Deck<Card*>* getCardDeck();
+	Deck<shared_ptr<Card>>* getCardDeck();
 
 };
 

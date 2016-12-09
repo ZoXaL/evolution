@@ -27,7 +27,7 @@ GameModel* GameModel::getInstance() {
 	return instance;
 }
 
-Deck<Card*>* GameModel::getCardDeck() {
+Deck<shared_ptr<Card>>* GameModel::getCardDeck() {
 	return &cardDeck;
 }
 

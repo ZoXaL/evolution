@@ -15,7 +15,7 @@ void Player::setName(const char* name) {
 	strcpy(this->name, name);
 }
 
-void Player::addCardToHand(Card* card) {
+void Player::addCardToHand(shared_ptr<Card> card) {
 	this->hand.push_back(card);
 }
 
@@ -23,16 +23,16 @@ int Player::handSize() {
 	return hand.size();
 }
 
-Card* Player::removeCardFromHand(int cardNum) {
+shared_ptr<Card> Player::removeCardFromHand(int cardNum) {
 	if(!checkRange(cardNum, 0, hand.size())) {
 		return nullptr;
 	}
-	Card* returnCard = hand[cardNum];
+	shared_ptr<Card> returnCard = hand[cardNum];
 	hand.erase(hand.begin() + cardNum);
 	return returnCard;
 }
 
-Card* Player::getCard(int cardNum) {
+shared_ptr<Card> Player::getCard(int cardNum) {
 	if(!checkRange(cardNum, 0, hand.size())) {
 		return nullptr;
 	}
