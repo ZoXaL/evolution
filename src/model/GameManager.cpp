@@ -2,7 +2,7 @@
 #include "model/GameModel.h"
 #include "model/cards/AbilityCard.h"
 #include "model/cards/Card.h"
-#include "model/cards/abilities/Ability.h"
+#include "model/cards/abilities/Fat.h"
 #include "model/deck/Deck.h"
 #include "controllers/commands/GiveCardToPlayerCommand.h"
 #include "memory"
@@ -21,10 +21,10 @@ GameModel* GameManager::buildGame(const char* firstPlayerName, const char* secon
 	// Create all cards and fill the cardDeck
 	for (int i = 0; i < 20; i++) {
 		if (i%2) {
-			shared_ptr<Card> newCard(new AbilityCard(Ability::FAT));
+			shared_ptr<Card> newCard(new Fat());
 			cardDeck->push_back(newCard);
 		} else {
-			shared_ptr<Card> newCard(new AbilityCard(Ability::FAST));
+			shared_ptr<Card> newCard(new Fat());
 			cardDeck->push_back(newCard);
 		}	
 	}

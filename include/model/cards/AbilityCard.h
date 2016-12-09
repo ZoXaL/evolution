@@ -5,36 +5,22 @@
 #include <iostream>
 #include "model/cards/Card.h"
 #include "model/cards/abilities/Ability.h"
-#include "exceptions/Exception.h"
 #include "functions.h"
 using namespace std;
 
 class AbilityCard : public Card {
+protected:
 Ability::AbilityType ability;
-
 public:
-	Ability::AbilityType getAbility() {
-		return ability;
-	}
-	AbilityCard* getAbilityCard() {
-		return this;
-	}
-	string getDescription() {
-		string desc = "Ability card: type: ";
-		desc += abilityToString(ability);
-		return desc;
-	}
-	AbilityCard(Ability::AbilityType _ability) : ability(_ability) {};
-	~AbilityCard() {	};
+	AbilityCard(Ability::AbilityType);
 
-	ostream& write(ostream& stream)  {
-		stream << getDescription() << endl;
-		return stream;
-	}
-	istream& read(istream& stream) {
-		cout << "Writing to stream: " << getDescription() << endl;
-		return stream;
-	}
+	Ability::AbilityType getAbility();	
+
+	string getDescription();
+	virtual ostream& write(ostream&) = 0;
+	virtual istream& read(istream&) = 0;
+
+	// virtual string getStatus();
 };
 
 #endif

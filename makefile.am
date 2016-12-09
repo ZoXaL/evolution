@@ -1,7 +1,7 @@
 buildFolder := ./build
 dependenciesFolder := ${buildFolder}/depencencies
 
-srcFolders := ./main.cpp ./src/*.cpp ./src/*/*.cpp ./src/*/*/*.cpp
+srcFolders := ./main.cpp ./src/*.cpp ./src/*/*.cpp ./src/*/*/*.cpp ./src/*/*/*/*.cpp
 srcFiles := ${wildcard ${srcFolders}}
 osrcFiles := ${patsubst %.cpp,%.o,${srcFiles}}
 
