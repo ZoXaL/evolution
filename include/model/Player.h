@@ -22,6 +22,7 @@ public:
 	void clearPassed();
 
 	shared_ptr<AnimalCard> getAnimal(int animalId);
+	vector<shared_ptr<AnimalCard>>* getAnimals();
 
 	shared_ptr<Card> getCardFromHand(int cardId);
 	void pushCardToHand(shared_ptr<Card>);

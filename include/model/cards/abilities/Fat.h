@@ -3,18 +3,19 @@
 
 #include <string>
 #include "model/cards/AbilityCard.h"
+#include "model/cards/interfaces/FoodModification.h"
 #include <iostream>
 #include <string>
 
-class Fat : public AbilityCard {
+class Fat : public AbilityCard, public FoodModification {
 bool reserve;
 public:
 	Fat();
 	virtual ~Fat() {};
 
-	bool hasReserve();
-	void useReserve();
-	void fillReserve();
+	bool needFood();
+	void giveFood();
+	void resetFood();
 
 	std::string getStatus();
 

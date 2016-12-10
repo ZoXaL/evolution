@@ -57,6 +57,7 @@ shared_ptr<AnimalCard> Player::getAnimal(int animalNum) {
 	}
 	return animals[animalNum];
 }
+
 int Player::animalsCount() {
 	return animals.size();
 }

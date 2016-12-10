@@ -9,15 +9,15 @@ using namespace std;
 
 Fat::Fat() : AbilityCard(Ability::FAT, true, false) {};
 
-bool Fat::hasReserve() {
-	return reserve;
+bool Fat::needFood() {
+	return !reserve;
 }
 
-void Fat::useReserve() {
+void Fat::resetFood() {
 	reserve = false;
 }
 
-void Fat::fillReserve() {
+void Fat::giveFood() {
 	if (reserve) {
 		throw Exception("Cannot fill full reserve for Fat ability");
 	}

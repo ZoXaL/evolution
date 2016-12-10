@@ -3,12 +3,14 @@
 #include "model/Player.h"
 #include "model/deck/Deck.h"
 #include "model/cards/Card.h"
+#include "model/cards/AnimalCard.h"
 
 #include "functions.h"
 #include <iomanip>
+#include <memory>
 using namespace std;
 
-void ModelView::displayModel() {
+void ModelView::displayModel(bool showHand) {
 	GameModel* model = GameModel::getInstance();
 	Player* currentPlayer = model->getCurrentPlayer();
 	Player* opponent = (model->getPlayer(1) == currentPlayer) ? model->getPlayer(0) : model->getPlayer(1);
@@ -19,17 +21,17 @@ void ModelView::displayModel() {
 	Player* lessCardPlayer = (currentPlayer->animalsCount() < opponent->animalsCount()) ? currentPlayer : opponent;
 	int i = 0;
 	for (; i < lessCardPlayer->animalsCount(); i++) {
-		cout << i+1 << ") " << left << setw (36) << currentPlayer->getAnimal(i)->getStatus() << '|'
-		 			<< i+1 << ") " << left << setw (37) << opponent->getAnimal(i)->getStatus() << endl;
+		cout << i+1 << ") " << left << setw (36) << displayAnimal(currentPlayer->getAnimal(i)) << '|'
+		 			<< i+1 << ") " << left << setw (37) << displayAnimal(opponent->getAnimal(i)) << endl;
 	}
 	if (lessCardPlayer == currentPlayer) {
 		for (; i < opponent->animalsCount(); i++) {
-			cout << left << setw (39) << " " << '|' << i+1 << ") " << left << setw (37) << opponent->getAnimal(i)->getStatus() << endl;
+			cout << left << setw (39) << " " << '|' << i+1 << ") " << left << setw (37) << displayAnimal(opponent->getAnimal(i)) << endl;
 		}
 		
 	} else {
 		for (; i < currentPlayer->animalsCount(); i++) {
-			cout << i+1 << ") " << setw (36) << left << currentPlayer->getAnimal(i)->getStatus() << '|' << endl;
+			cout << i+1 << ") " << setw (36) << left << displayAnimal(currentPlayer->getAnimal(i)) << '|' << endl;
 		}
 	}
 	cout << endl;
@@ -40,12 +42,22 @@ void ModelView::displayModel() {
 	cout << "Current phaze: " << phazeToString(model->getPhaze()) << endl;
 	displayStatistic();
 	cout << "--------------------------------------------------------------------------------" << endl;	
+	displayAlert();
 	//Player hand
-	cout << "Your cards:" << endl;
-	for (int i = 0; i < currentPlayer->handSize(); i++) {
-		cout << i+1 << ") " << currentPlayer->getCardFromHand(i)->getDescription() << endl;
-	}
+	if (showHand) {
+		cout << "Your cards:" << endl;
+		for (int i = 0; i < currentPlayer->handSize(); i++) {
+			cout << i+1 << ") " << currentPlayer->getCardFromHand(i)->getDescription() << endl;
+		}
+	}	
 }
 void ModelView::displayStatistic() {
 	//cout << "" << endl;
+}
+
+string ModelView::displayAnimal(shared_ptr<AnimalCard> animal) {
+	return animal->getStatus();
+}
+void ModelView::displayAlert() {
+
 }
