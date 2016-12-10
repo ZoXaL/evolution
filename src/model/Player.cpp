@@ -48,6 +48,12 @@ int Player::handSize() {
 void Player::addAnimal(shared_ptr<AnimalCard> newAnimal) {
 	animals.push_back(newAnimal);
 }
+shared_ptr<AnimalCard> Player::delteAnimal(int animalNum) {
+	if(!checkRange(animalNum, 0, animals.size())) {
+		return nullptr;
+	}
+	return *(animals.erase(animals.begin()+animalNum));
+}
 
 shared_ptr<AnimalCard> Player::getAnimal(int animalNum) {
 	if(!checkRange(animalNum, 0, animals.size())) {

@@ -31,6 +31,7 @@ public:
 
 
 	void addAnimal(shared_ptr<AnimalCard>);
+	shared_ptr<AnimalCard> delteAnimal(int);
 
 	int handSize();
 	int animalsCount();
