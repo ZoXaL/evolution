@@ -9,7 +9,7 @@ using namespace std;
 
 class Player {
 	vector<shared_ptr<Card>> hand;
-	vector<AnimalCard> animals;
+	vector<shared_ptr<AnimalCard>> animals;
 	char name[80];
 public:
 	Player(const char* name = "NoName");
@@ -23,7 +23,11 @@ public:
 	shared_ptr<Card> popCardFromHand();
 	shared_ptr<Card> removeCardFromHand(int cardId);
 
+
+	void addAnimal(shared_ptr<AnimalCard>);
+
 	int handSize();
+	int animalsCount();
 };
 
 #endif

@@ -1,11 +1,12 @@
 #include "model/GameModel.h"
+#include "exceptions/Exception.h"
 #include "functions.h"
 
 template<typename T>
 class Deck;
 
 GameModel* GameModel::instance = nullptr;
-const int GameModel::CARDS_ON_START = 6;
+const int GameModel::CARDS_ON_START = 2;
 
 GameModel::GameModel() {
 	//init game
@@ -45,4 +46,18 @@ Player* GameModel::getCurrentPlayer() {
 Player* GameModel::switchPlayer() {
 	currentPlayer = (currentPlayer == &players[1]) ? &players[0] : &players[1];
 	return currentPlayer;
+}
+int GameModel::getMove() {
+	return moveNum;
+}
+void GameModel::increaseMove() {
+	moveNum++;
+}
+void GameModel::decreaseMove() {
+	if (moveNum < 0) {
+		Exception illegalModelState("Cannot decrease moveNum below zero");
+		illegalModelState.log();
+		throw illegalModelState;
+	}
+	moveNum--;
 }

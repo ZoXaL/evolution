@@ -13,6 +13,7 @@ class GameModel {
 	Deck<shared_ptr<Card>> cardDeck;
 	Player players[2];
 	Player* currentPlayer;
+	int moveNum;
 	
 	static GameModel* instance;
 	GameModel();
@@ -26,6 +27,10 @@ public:
 	Player* getPlayer(int);
 	Player* getCurrentPlayer();
 	Player* switchPlayer();
+
+	int getMove();
+	void increaseMove();
+	void decreaseMove();
 
 	Deck<shared_ptr<Card>>* getCardDeck();
 

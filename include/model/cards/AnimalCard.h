@@ -1,6 +1,7 @@
 #ifndef ANIMAL_CARD_H
 #define ANIMAL_CARD_H
 #include <vector>
+#include <string>
 #include <memory>
 using namespace std;
 
@@ -10,11 +11,12 @@ using namespace std;
 
 class AnimalCard {
 	shared_ptr<Card> createdFrom;
-	vector<shared_ptr<AbilityCard>> abilities;
+	vector<shared_ptr<Card>> abilities;
 public:
 	AnimalCard(shared_ptr<Card> createdFrom);
-	vector<shared_ptr<AbilityCard>>* getAbilities();
-	void addAbility(shared_ptr<AbilityCard> newAbility);
+	vector<shared_ptr<Card>>* getAbilities();
+	void addAbility(shared_ptr<Card> newAbility);
+	string getStatus();
 };
 
 #endif

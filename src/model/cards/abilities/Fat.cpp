@@ -7,7 +7,7 @@
 #include <string>
 using namespace std;
 
-Fat::Fat() : AbilityCard(Ability::FAT) {};
+Fat::Fat() : AbilityCard(Ability::FAT, true, false) {};
 
 bool Fat::hasReserve() {
 	return reserve;
@@ -28,7 +28,7 @@ string Fat::getStatus() {
 	string status = abilityToString(ability);
 	status += "(";
 	status += (reserve)? "full" : "empty";
-	status += "(";
+	status += ")";
 	return status;
 }
 

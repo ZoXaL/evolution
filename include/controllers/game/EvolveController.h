@@ -8,5 +8,8 @@
 class EvolveController : public AbstractController, public ModelView {
 public:
 	AbstractController* run();
+private:
+	void createNewAnimal();
+	void useAbility();
 };
 #endif

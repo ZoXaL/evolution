@@ -1,5 +1,6 @@
 #include "model/Player.h"
 #include "model/cards/Card.h"
+#include "exceptions/Exception.h"
 #include <string.h>
 #include "functions.h"
 
@@ -43,5 +44,19 @@ int Player::handSize() {
 	return hand.size();
 }
 
+void Player::addAnimal(shared_ptr<AnimalCard> newAnimal) {
+	animals.push_back(newAnimal);
+}
 
+shared_ptr<AnimalCard> Player::getAnimal(int animalNum) {
+	if(!checkRange(animalNum, 0, animals.size())) {
+		Exception noSuchPos("Cannot get animal from player: no animal with num "+to_string(animalNum));
+		noSuchPos.log();
+		throw noSuchPos;
+	}
+	return animals[animalNum];
+}
+int Player::animalsCount() {
+	return animals.size();
+}
 

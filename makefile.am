@@ -4,6 +4,7 @@ dependenciesFolder := ${buildFolder}/depencencies
 srcFolders := ./main.cpp ./src/*.cpp ./src/*/*.cpp ./src/*/*/*.cpp ./src/*/*/*/*.cpp
 srcFiles := ${wildcard ${srcFolders}}
 osrcFiles := ${patsubst %.cpp,%.o,${srcFiles}}
+osrcFolders := ${subst src,obj,${osrcFiles}}
 
 
 evolive: evolive-debug
@@ -12,7 +13,11 @@ evolive: evolive-debug
 evolive-debug: $(osrcFiles)
 	@g++ -std=c++11 -g -Iinclude -Wall -o $(buildFolder)/$@ $(addprefix $(buildFolder)/,$(subst src,obj,$(osrcFiles)))
 
-%.o: %.cpp 
-	@g++ -std=c++11 -g -Iinclude -c -MMD -MF $(dependenciesFolder)/$(patsubst %.cpp,%.d,$(notdir $^)) -o $(buildFolder)/$(subst src,obj,$@) $^
+%.o: %.cpp createDependencyFolder 
+	@mkdir -p ${buildFolder}/$(subst src,obj,${dir $<})
+	@g++ -std=c++11 -g -Iinclude -c -MMD -MF $(dependenciesFolder)/$(patsubst %.cpp,%.d,$(notdir $<)) -o $(buildFolder)/$(subst src,obj,$@) $<
 
 include $(wildcard $(dependenciesFolder)/*.d)
+
+createDependencyFolder:
+	@mkdir -p ${dependenciesFolder}

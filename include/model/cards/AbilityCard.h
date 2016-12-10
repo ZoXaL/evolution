@@ -11,16 +11,23 @@ using namespace std;
 class AbilityCard : public Card {
 protected:
 Ability::AbilityType ability;
+bool duplicated;
+bool passive;
 public:
-	AbilityCard(Ability::AbilityType);
+	AbilityCard(Ability::AbilityType, bool duplicated, bool passive);
 
 	Ability::AbilityType getAbility();	
 
 	string getDescription();
+	AbilityCard* getAbilityCard();
+
 	virtual ostream& write(ostream&) = 0;
 	virtual istream& read(istream&) = 0;
 
-	// virtual string getStatus();
+	bool isDuplicated();
+	bool isPassive();
+
+	virtual string getStatus() = 0;
 };
 
 #endif
