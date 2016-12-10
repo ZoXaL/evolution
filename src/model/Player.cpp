@@ -60,3 +60,12 @@ int Player::animalsCount() {
 	return animals.size();
 }
 
+void Player::pass() {
+	passed = true;
+}
+bool Player::isPassed() {
+	return passed;
+}
+void Player::clearPassed() {
+	passed = false;
+}

@@ -11,10 +11,15 @@ class Player {
 	vector<shared_ptr<Card>> hand;
 	vector<shared_ptr<AnimalCard>> animals;
 	char name[80];
+	bool passed;
 public:
 	Player(const char* name = "NoName");
 	const char* getName();
 	void setName(const char*);
+	
+	void pass();
+	bool isPassed();
+	void clearPassed();
 
 	shared_ptr<AnimalCard> getAnimal(int animalId);
 
