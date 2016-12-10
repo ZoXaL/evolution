@@ -40,6 +40,10 @@ bool AnimalCard::needFood() {
 bool AnimalCard::isHungry() {
 	return _isHungry;
 }
+void AnimalCard::clearHungry() {
+	this->_isHungry = true;
+	this->_needFood = true;
+}
 
 int AnimalCard::feed() {
 	bool abilitiesNeedFood = false;

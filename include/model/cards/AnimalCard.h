@@ -23,6 +23,7 @@ public:
 	bool needFood();	// if yes, you can feed it
 	bool isHungry();	// if no, animal dies
 	int feed();
+	void clearHungry();
 };
 
 #endif
