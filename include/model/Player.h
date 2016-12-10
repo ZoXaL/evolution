@@ -19,19 +19,17 @@ public:
 	
 	void pass();
 	bool isPassed();
-	void clearPassed();
-
-	shared_ptr<AnimalCard> getAnimal(int animalId);
-	vector<shared_ptr<AnimalCard>>* getAnimals();
+	void clearPassed();	
 
 	shared_ptr<Card> getCardFromHand(int cardId);
 	void pushCardToHand(shared_ptr<Card>);
 	shared_ptr<Card> popCardFromHand();
 	shared_ptr<Card> removeCardFromHand(int cardId);
 
-
+	shared_ptr<AnimalCard> getAnimal(int animalId);
+	vector<shared_ptr<AnimalCard>>* getAnimals();
 	void addAnimal(shared_ptr<AnimalCard>);
-	shared_ptr<AnimalCard> delteAnimal(int);
+	shared_ptr<AnimalCard> deleteAnimal(int);
 
 	int handSize();
 	int animalsCount();

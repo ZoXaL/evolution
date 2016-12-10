@@ -7,5 +7,7 @@
 class GameController : public AbstractController {
 public:
 	AbstractController* run();
+private:
+	void deathPhaze();
 };
 #endif

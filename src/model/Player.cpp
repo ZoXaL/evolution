@@ -44,11 +44,13 @@ shared_ptr<Card> Player::getCardFromHand(int cardNum) {
 int Player::handSize() {
 	return hand.size();
 }
-
+vector<shared_ptr<AnimalCard>>* Player::getAnimals() {
+	return &animals;
+}
 void Player::addAnimal(shared_ptr<AnimalCard> newAnimal) {
 	animals.push_back(newAnimal);
 }
-shared_ptr<AnimalCard> Player::delteAnimal(int animalNum) {
+shared_ptr<AnimalCard> Player::deleteAnimal(int animalNum) {
 	if(!checkRange(animalNum, 0, animals.size())) {
 		return nullptr;
 	}

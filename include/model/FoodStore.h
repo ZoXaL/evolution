@@ -3,7 +3,7 @@
 
 class FoodStore {
 	int capacity;
-	const int MAX_FOOD = 8;
+	const int MAX_FOOD = 7;
 	const int MIN_FOOD = 3;
 public:
 	FoodStore();

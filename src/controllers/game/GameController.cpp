@@ -6,6 +6,8 @@
 
 #include "controllers/commands/PassCommand.h"
 #include "controllers/commands/SwitchPhazeCommand.h"
+#include "controllers/commands/KillAnimalCommand.h"
+#include "controllers/commands/ClearAnimalFoodCommand.h"
 
 #include "model/GameModel.h"
 #include "model/GamePhaze.h"
@@ -49,6 +51,9 @@ AbstractController* GameController::run() {
 				SwitchPhazeCommand switchPhaze(GamePhaze::EVOLVE);
 				switchPhaze.execute();
 
+				//Time to kill and clear animals
+				deathPhaze();
+
 				nextController = new EvolveController();
 				break;
 			}
@@ -62,4 +67,35 @@ AbstractController* GameController::run() {
 		}
 	}
 	return nextController;
+}
+
+void GameController::deathPhaze() {
+	GameModel* model = GameModel::getInstance();
+	Player* player1 = model->getPlayer(0);
+	Player* player2 = model->getPlayer(1);
+
+	vector<shared_ptr<AnimalCard>>* animals1 = player1->getAnimals();
+	for (auto i = animals1->begin(); i != animals1->end(); i++) {
+		if ((*i)->isHungry()) {
+			i--;
+			KillAnimalCommand kill(player1, i+1-animals1->begin());
+			kill.execute();
+		} else {
+			ClearAnimalFoodCommand clear(player1, i-animals1->begin());
+			clear.execute();
+		}
+	}
+
+	vector<shared_ptr<AnimalCard>>* animals2 = player2->getAnimals();
+	for (auto i = animals2->begin(); i != animals2->end(); i++) {
+		if ((*i)->isHungry()) {
+			i--;
+			KillAnimalCommand kill(player2, i+1-animals2->begin());
+			kill.execute();
+		} else {
+			ClearAnimalFoodCommand clear(player2, i-animals2->begin());
+			clear.execute();
+		}
+	}
+
 }

@@ -19,7 +19,7 @@ void KillAnimalCommand::execute() {
 	shared_ptr<AnimalCard> animal = player->getAnimal(animalId);
 
 	// TODO: save all abilities
-	player->delteAnimal(animalId);
+	player->deleteAnimal(animalId);
 }
 
 void KillAnimalCommand::undo() {
