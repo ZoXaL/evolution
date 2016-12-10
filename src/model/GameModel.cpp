@@ -1,5 +1,6 @@
 #include "model/GameModel.h"
 #include "model/GamePhaze.h"
+#include "model/FoodStore.h"
 #include "exceptions/Exception.h"
 #include "functions.h"
 
@@ -33,6 +34,10 @@ Deck<shared_ptr<Card>>* GameModel::getCardDeck() {
 	return &cardDeck;
 }
 
+FoodStore* GameModel::getFoodStore() {
+	return &foodStore;
+}
+
 Player* GameModel::getPlayer(int playerNum) {
 	if (!checkRange(playerNum, 0, 1)) {
 		throw 1;
@@ -45,7 +50,10 @@ Player* GameModel::getCurrentPlayer() {
 }
 
 Player* GameModel::switchPlayer() {
-	currentPlayer = (currentPlayer == &players[1]) ? &players[0] : &players[1];
+	Player* next = (currentPlayer == &players[1]) ? &players[0] : &players[1];
+	if (!next->isPassed()) {
+		currentPlayer = next;
+	}
 	return currentPlayer;
 }
 int GameModel::getMove() {
@@ -62,6 +70,10 @@ void GameModel::decreaseMove() {
 	}
 	moveNum--;
 }
-GamePhaze::Phaze GameModel::switchPhaze() {
-	phaze = (phaze == GamePhaze::EVOLVE) ? GamePhaze::FEED : GamePhaze::EVOLVE;
+GamePhaze::Phaze GameModel::switchPhaze(GamePhaze::Phaze newPhaze) {
+	phaze = newPhaze;
+	return phaze;
+}
+GamePhaze::Phaze GameModel::getPhaze() {
+	return phaze;
 }

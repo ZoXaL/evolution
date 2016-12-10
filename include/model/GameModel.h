@@ -34,9 +34,11 @@ public:
 	int getMove();
 	void increaseMove();
 	void decreaseMove();
-	GamePhaze::Phaze switchPhaze();
+	GamePhaze::Phaze switchPhaze(GamePhaze::Phaze newPhaze);
+	GamePhaze::Phaze getPhaze();
 
 	Deck<shared_ptr<Card>>* getCardDeck();
+	FoodStore* getFoodStore();
 
 };
 

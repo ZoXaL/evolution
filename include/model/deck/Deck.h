@@ -39,8 +39,7 @@ public:
 	T pop_back();
 	T pop_front();
 
-	Card* getCard() {return nullptr;}
-	bool isEmpty() {return true;}
+	bool isEmpty();
 
 	ostream& write(ostream&);
 	istream& read(istream&);
@@ -157,5 +156,10 @@ istream& Deck<T>::read(istream& stream) {
 	// fill out the deck
 	cout << "kk read deck from file" << endl;
 	return stream;
+}
+
+template<typename T> 
+bool Deck<T>::isEmpty() {
+	return (size == 0);
 }
 #endif

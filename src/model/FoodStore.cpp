@@ -21,3 +21,6 @@ int FoodStore::generateFood() {
 	capacity = rand() % (MAX_FOOD - MIN_FOOD) + MIN_FOOD;
 	return false;
 }
+int FoodStore::getCapacity() {
+	return capacity;
+}

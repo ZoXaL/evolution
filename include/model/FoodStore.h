@@ -10,6 +10,7 @@ public:
 	int generateFood();
 	bool isEmpty();
 	bool getFood();
+	int getCapacity();
 };
 
 #endif

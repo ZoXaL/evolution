@@ -5,9 +5,10 @@
 
 class PassCommand: public AbstractCommand {
 	int playerId;
+	bool pass;
 public:
-	PassCommand(int playerId);
-	PassCommand(Player* player);
+	PassCommand(int playerId, bool pass = true);
+	PassCommand(Player* player, bool pass = true);
 	void execute();
 	void undo();
 };

@@ -6,6 +6,7 @@
 
 Player::Player(const char* name) {
 	strcpy(this->name, name);
+	passed = false;
 }
 
 const char* Player::getName() {

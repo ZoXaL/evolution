@@ -29,7 +29,7 @@ void ModelView::displayModel() {
 		
 	} else {
 		for (; i < currentPlayer->animalsCount(); i++) {
-			cout << i+1 << ") " << left << setw (36) << '|' << currentPlayer->getAnimal(i)->getStatus() << endl;
+			cout << i+1 << ") " << setw (36) << left << currentPlayer->getAnimal(i)->getStatus() << '|' << endl;
 		}
 	}
 	cout << endl;
@@ -37,6 +37,7 @@ void ModelView::displayModel() {
 	cout << "Game statistic:" << endl;
 	cout << "Current player: " << currentPlayer->getName() << endl;
 	cout << "Current move: " << model->getMove() << endl;
+	cout << "Current phaze: " << phazeToString(model->getPhaze()) << endl;
 	displayStatistic();
 	cout << "--------------------------------------------------------------------------------" << endl;	
 	//Player hand

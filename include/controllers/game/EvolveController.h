@@ -5,7 +5,7 @@
 #include "ModelView.h"
 
 // Aimed to let player make evolve move
-class EvolveController : public AbstractController, public ModelView {
+class EvolveController : public AbstractController, protected ModelView {
 public:
 	AbstractController* run();
 private:

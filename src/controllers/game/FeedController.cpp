@@ -1,5 +1,5 @@
 #include "controllers/game/GameController.h"
-#include "controllers/game/EvolveController.h"
+#include "controllers/game/FeedController.h"
 #include "controllers/menu/MenuController.h"
 #include "controllers/AbstractController.h"
 #include "controllers/commands/AbstractCommand.h"
@@ -18,13 +18,8 @@
 #include <list>
 #include <memory>
 using namespace std;
-/*
-	TODO:
-		* Get move
-		* Dialog for move
-		* Create command
- */
-AbstractController* EvolveController::run() {
+
+AbstractController* FeedController::run() {
 	system("clear");
 	GameModel* model = GameModel::getInstance();
 	Player* currentPlayer = model->getCurrentPlayer();
@@ -32,8 +27,8 @@ AbstractController* EvolveController::run() {
 
 	displayModel();
 	cout << endl;
-
 	cout << "Select operation: " << endl;
+
 	if (currentPlayer->handSize() <= 0) {
 		cout << 1 << ") Pass" << endl;
 		cout << 2 << ") Undo" << endl;
@@ -59,7 +54,7 @@ AbstractController* EvolveController::run() {
 		}
 		return nextController;
 	} else {
-		cout << 1 << ") Create animal" << endl;
+		cout << 1 << ") Feed animal" << endl;
 		cout << 2 << ") Use ability" << endl;
 		cout << 3 << ") Pass" << endl;
 		cout << 4 << ") Undo" << endl;
@@ -69,12 +64,12 @@ AbstractController* EvolveController::run() {
 		AbstractController* nextController = nullptr;
 		switch (answer) {
 			case 1 : {
-				createNewAnimal();
+				feedAnimal();
 				nextController = new GameController();
 				break;
 			} 
 			case 2 : {
-				useAbility();
+				useAnimalAbility();
 				nextController = new GameController();
 				break;
 			} 
@@ -95,60 +90,34 @@ AbstractController* EvolveController::run() {
 		}
 		return nextController;
 	}
-}
-void EvolveController::createNewAnimal() {
-	GameModel* model = GameModel::getInstance();
-	Player* currentPlayer = model->getCurrentPlayer();
-	int handSize = currentPlayer->handSize();
+	cout << "Go feed" << endl;
+	int answer = getInt(cin);
+
+	Player* player1 = model->getPlayer(0);
+	Player* player2 = model->getPlayer(1);
+
+	PassCommand pass1(player1, true);
+	pass1.execute();
+	PassCommand pass2(player2, true);
+	pass2.execute();
 	
-	cout << "Create animal from: " << endl;
-	int i = 1;
-	for (; i <= handSize; i++) {
-		cout << i << ")" << currentPlayer->getCardFromHand(i-1)->getDescription() << endl;
-	}
-	cout << i << ") Cancel" << endl;
-	int answer = getInt(cin, 1, i);
-	if (answer == i) {
-		return;
-	}
-	CreateAnimalCommand createAnimal(currentPlayer, answer-1);
-	createAnimal.execute();
-	EndMoveCommand endMove;
-	endMove.execute();
-	return;
+	AbstractController* nextController = new GameController();
+
+	return nextController;
 }
 
-void EvolveController::useAbility() {	
-	GameModel* model = GameModel::getInstance();
-	Player* currentPlayer = model->getCurrentPlayer();
-	int handSize = currentPlayer->handSize();
-	int animalsCount = currentPlayer->animalsCount();
-	
-	cout << "Select ability to use: " << endl;
-	int i = 1;
-	for (; i <= handSize; i++) {
-		cout << i << ") " << currentPlayer->getCardFromHand(i-1)->getDescription() << endl;
-	}
-	int abilityId = getInt(cin, 1, handSize);
+void FeedController::feedAnimal() {
 
-	cout << "Select animal to evolve: " << endl;
-	i = 1;
-	for (; i <= animalsCount; i++) {
-		cout << i << ") " << currentPlayer->getAnimal(i-1)->getStatus() << endl;
-	}
-	cout << i << ") Cancel" << endl;
-	int animalId = getInt(cin, 1, i);
-	if (animalId == i) {
-		return;
-	}
+}
+void FeedController::useAnimalAbility() {
 
-	AddAbilityCommand addAbility(currentPlayer, abilityId-1, animalId-1);
-	addAbility.execute();
-	EndMoveCommand endMove;
-	endMove.execute();
+}
+void FeedController::displayStatistic() {
+	FoodStore* foodStore = GameModel::getInstance()->getFoodStore();
+	cout << "Food Store capacity: " << foodStore->getCapacity() << endl;
 }
 
-void EvolveController::pass() {
+void FeedController::pass() {
 	GameModel* model = GameModel::getInstance();
 	Player* currentPlayer = model->getCurrentPlayer();
 

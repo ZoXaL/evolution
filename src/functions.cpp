@@ -2,6 +2,7 @@
 #include <climits>
 #include "exceptions/Exception.h"
 #include "model/cards/abilities/Ability.h"
+#include "model/GamePhaze.h"
 
 using namespace std;
 
@@ -63,6 +64,23 @@ string abilityToString(Ability::AbilityType ability) {
 		}
 		default : {
 			throw Exception("Unsupported ability type");
+		}
+	}
+	return result;
+}
+string phazeToString(GamePhaze::Phaze phaze) {
+	string result = "";
+	switch (phaze) {
+		case GamePhaze::FEED : {
+			result = "FEED";
+			break;
+		}
+		case GamePhaze::EVOLVE : {
+			result = "EVOLVE";
+			break;
+		}
+		default : {
+			throw Exception("Unsupported phaze type");
 		}
 	}
 	return result;
