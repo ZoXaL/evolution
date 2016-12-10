@@ -6,6 +6,7 @@
 #include "controllers/commands/CreateAnimalCommand.h"
 #include "controllers/commands/AddAbilityCommand.h"
 #include "controllers/commands/EndMoveCommand.h"
+#include "controllers/commands/PassCommand.h"
 
 #include "model/GameModel.h"
 #include "model/Player.h"
@@ -42,7 +43,7 @@ AbstractController* EvolveController::run() {
 		AbstractController* nextController = nullptr;
 		switch (answer) {
 			case 1 : {
-				cout << "Pass" << endl;
+				pass();
 				nextController = new GameController();
 				break;
 			} 
@@ -78,7 +79,7 @@ AbstractController* EvolveController::run() {
 				break;
 			} 
 			case 3 : {
-				cout << "Pass" << endl;
+				pass();
 				nextController = new GameController();
 				break;
 			} 
@@ -139,6 +140,16 @@ void EvolveController::useAbility() {
 
 	AddAbilityCommand addAbility(currentPlayer, abilityId-1, animalId-1);
 	addAbility.execute();
+	EndMoveCommand endMove;
+	endMove.execute();
+}
+
+void EvolveController::pass() {
+	GameModel* model = GameModel::getInstance();
+	Player* currentPlayer = model->getCurrentPlayer();
+
+	PassCommand pass(currentPlayer);
+	pass.execute();
 	EndMoveCommand endMove;
 	endMove.execute();
 }
