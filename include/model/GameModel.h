@@ -4,6 +4,7 @@
 #include "model/FoodStore.h"
 #include "model/Player.h"
 #include "model/deck/Deck.h"
+#include "model/GamePhaze.h"
 #include <vector> 
 #include <memory> 
 using namespace std;
@@ -12,8 +13,10 @@ class GameModel {
 	FoodStore foodStore;
 	Deck<shared_ptr<Card>> cardDeck;
 	Player players[2];
+
 	Player* currentPlayer;
 	int moveNum;
+	GamePhaze::Phaze phaze;
 	
 	static GameModel* instance;
 	GameModel();
@@ -31,6 +34,7 @@ public:
 	int getMove();
 	void increaseMove();
 	void decreaseMove();
+	GamePhaze::Phaze switchPhaze();
 
 	Deck<shared_ptr<Card>>* getCardDeck();
 

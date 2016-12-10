@@ -1,4 +1,5 @@
 #include "model/GameModel.h"
+#include "model/GamePhaze.h"
 #include "exceptions/Exception.h"
 #include "functions.h"
 
@@ -60,4 +61,7 @@ void GameModel::decreaseMove() {
 		throw illegalModelState;
 	}
 	moveNum--;
+}
+GamePhaze::Phaze GameModel::switchPhaze() {
+	phaze = (phaze == GamePhaze::EVOLVE) ? GamePhaze::FEED : GamePhaze::EVOLVE;
 }
