@@ -3,6 +3,7 @@
 #include "controllers/commands/AbstractCommand.h"
 #include "model/Player.h"
 #include "model/cards/AnimalCard.h"
+#include <iostream>
 
 class FeedCommand: public AbstractCommand {
 int playerId;
@@ -13,5 +14,7 @@ public:
 	FeedCommand(Player* player, int animalId);
 	void execute();
 	void undo();
+	std::ostream& write(std::ostream& stream){};
+	std::istream& read(std::istream& stream){};
 };
 #endif

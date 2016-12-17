@@ -4,7 +4,7 @@
 
 class Serializable {
 public:
-	virtual ostream& write(ostream&) = 0;
-	virtual istream& read(istream&) = 0;
+	virtual std::ostream& write(std::ostream&) = 0;
+	virtual std::istream& read(std::istream&) = 0;
 };
 #endif

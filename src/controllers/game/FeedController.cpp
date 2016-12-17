@@ -9,6 +9,7 @@
 #include "controllers/commands/PassCommand.h"
 #include "controllers/commands/FeedCommand.h"
 #include "controllers/commands/PopFoodCommand.h"
+#include "controllers/commands/CommandHolder.h"
 
 #include "model/GameModel.h"
 #include "model/Player.h"
@@ -44,22 +45,31 @@ AbstractController* FeedController::run() {
 	AbstractController* nextController = nullptr;
 	switch (answer) {
 		case 1 : {
-			feedAnimal();
 			nextController = new GameController();
+			if (currentPlayer->animalsCount() <= 0) {
+				alert = "You have no animals";				
+				break;
+			}
+			feedAnimal();
 			break;
 		} 
 		case 2 : {
-			useAnimalAbility();
 			nextController = new GameController();
+			if (currentPlayer->animalsCount() <= 0) {
+				alert = "You have no animals";
+				break;
+			}
+			shared_ptr<AnimalCard> animalToUse = selectAnimalToUse();
+			useAnimalAbility(animalToUse);
 			break;
-		} 
+		}
 		case 3 : {
 			pass();
 			nextController = new GameController();
 			break;
-		} 
+		}
 		case 4 : {
-			cout << "Ok, do undo" << endl;
+			alert = "Ok, do undo";
 			nextController = new GameController();
 			break;
 		} 
@@ -96,20 +106,64 @@ void FeedController::feedAnimal() {
 	if (answer == cancelOption) {
 		return;
 	}
-	FeedCommand feed(currentPlayer, hungryAnimals[answer-1]);
-	feed.execute();
-	PopFoodCommand popFood(1);
-	popFood.execute();
-	EndMoveCommand endMove;
-	endMove.execute();
 
+	CommandHolder* holder = CommandHolder::getInstance();
+	holder->openTransaction();
+	holder->addCommand(new FeedCommand(currentPlayer, hungryAnimals[answer-1]));
+	holder->addCommand(new PopFoodCommand(1));
+	holder->addCommand(new EndMoveCommand());
+	holder->commit();
 }
-void FeedController::useAnimalAbility() {
+shared_ptr<AnimalCard> FeedController::selectAnimalToUse() {
+	//Todo:
+	//Check every animal ability
+	//Let player choose
+	//USE IT!!!
+	GameModel* model = GameModel::getInstance();
+	Player* currentPlayer = model->getCurrentPlayer();
 
+	cout << "Select animal to use it's ability:" << endl;
+	vector<shared_ptr<AnimalCard>>* animals = currentPlayer->getAnimals();
+	for (auto i = animals->begin(); i != animals->end(); i++) {
+		cout << (i-animals->begin()+1) << ") " << (*i)->getStatus() << endl;
+	}
+	cout << (animals->size()+1) << ") Cancel" << endl;
+	int answer = getInt(cin, 1, animals->size()+1);
+	if (answer == (animals->size()+1)) {
+		return nullptr;
+	}
+	return animals->at(answer-1);
 }
+
+void FeedController::useAnimalAbility(shared_ptr<AnimalCard> animal) {
+	if (animal == nullptr) {
+		return;
+	}
+	cout << "Select animal ability to use:" << endl;
+	vector<shared_ptr<Card>>* abilities = animal->getAbilities();
+	for (auto i = abilities->begin(); i != abilities->end(); i++) {
+		cout << (i-abilities->begin()+1) << ") " << (*i)->getDescription() << endl;
+	}
+	cout << (abilities->size()+1) << ") Cancel" << endl;
+	int answer = getInt(cin, 1, abilities->size()+1);
+	if (answer == (abilities->size()+1)) {
+		return;
+	}
+	shared_ptr<Card> cardToUse = abilities->at(answer-1);
+	AnimalCard* animalToUse = (AnimalCard*)(cardToUse.get());
+	cout << "got it: " << animalToUse->getStatus() << endl;
+	return;
+}
+
+
+
 void FeedController::displayStatistic() {
 	FoodStore* foodStore = GameModel::getInstance()->getFoodStore();
 	cout << "Food Store capacity: " << foodStore->getCapacity() << endl;
+	if (alert != "") {
+		cout << "Alert: " << alert << endl;
+		alert = "";
+	}
 }
 
 string FeedController::displayAnimal(shared_ptr<AnimalCard> animal) {
@@ -123,20 +177,15 @@ string FeedController::displayAnimal(shared_ptr<AnimalCard> animal) {
 	return animalStatus;
 }
 
-void FeedController::displayAlert() {
-	if (alert != "") {
-		cout << alert << endl;
-	}
-	alert = "";
-}
 
 void FeedController::pass() {
 	GameModel* model = GameModel::getInstance();
 	Player* currentPlayer = model->getCurrentPlayer();
 
-	PassCommand pass(currentPlayer);
-	pass.execute();
-	EndMoveCommand endMove;
-	endMove.execute();
+	CommandHolder* holder = CommandHolder::getInstance();
+	holder->openTransaction();
+	holder->addCommand(new PassCommand(currentPlayer));
+	holder->addCommand(new EndMoveCommand());
+	holder->commit();
 }
 

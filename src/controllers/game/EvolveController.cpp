@@ -7,6 +7,8 @@
 #include "controllers/commands/AddAbilityCommand.h"
 #include "controllers/commands/EndMoveCommand.h"
 #include "controllers/commands/PassCommand.h"
+#include "controllers/commands/TransactionCommand.h"
+#include "controllers/commands/CommandHolder.h"
 
 #include "model/GameModel.h"
 #include "model/Player.h"
@@ -74,6 +76,11 @@ AbstractController* EvolveController::run() {
 				break;
 			} 
 			case 2 : {
+				if (currentPlayer->animalsCount() <= 0) {
+					alert = "You have no animals";
+					nextController = new GameController();
+					break;
+				}
 				useAbility();
 				nextController = new GameController();
 				break;
@@ -111,10 +118,11 @@ void EvolveController::createNewAnimal() {
 	if (answer == i) {
 		return;
 	}
-	CreateAnimalCommand createAnimal(currentPlayer, answer-1);
-	createAnimal.execute();
-	EndMoveCommand endMove;
-	endMove.execute();
+	CommandHolder* holder = CommandHolder::getInstance();
+	holder->openTransaction();
+	holder->addCommand(new CreateAnimalCommand(currentPlayer, answer-1));
+	holder->addCommand(new EndMoveCommand());
+	holder->commit();
 	return;
 }
 
@@ -141,19 +149,20 @@ void EvolveController::useAbility() {
 	if (animalId == i) {
 		return;
 	}
-
-	AddAbilityCommand addAbility(currentPlayer, abilityId-1, animalId-1);
-	addAbility.execute();
-	EndMoveCommand endMove;
-	endMove.execute();
+	CommandHolder* holder = CommandHolder::getInstance();
+	holder->openTransaction();
+	holder->addCommand(new AddAbilityCommand(currentPlayer, abilityId-1, animalId-1));
+	holder->addCommand(new EndMoveCommand());
+	holder->commit();
 }
 
 void EvolveController::pass() {
 	GameModel* model = GameModel::getInstance();
 	Player* currentPlayer = model->getCurrentPlayer();
 
-	PassCommand pass(currentPlayer);
-	pass.execute();
-	EndMoveCommand endMove;
-	endMove.execute();
+	CommandHolder* holder = CommandHolder::getInstance();
+	holder->openTransaction();
+	holder->addCommand(new PassCommand(currentPlayer));
+	holder->addCommand(new EndMoveCommand());
+	holder->commit();
 }

@@ -7,16 +7,21 @@
 KillAnimalCommand::KillAnimalCommand(int playerId, int animalId){
 	this->playerId = playerId;
 	this->animalId = animalId;
+
+	GameModel* model = GameModel::getInstance();
+	Player* player = model->getPlayer(playerId);
+	animal = player->getAnimal(animalId);
 }
 KillAnimalCommand::KillAnimalCommand(Player* player,int animalId) {
 	this->playerId = (GameModel::getInstance()->getPlayer(0) == player) ? 0 : 1;
 	this->animalId = animalId;
+	
+	animal = player->getAnimal(animalId);
 }
 
 void KillAnimalCommand::execute() {
 	GameModel* model = GameModel::getInstance();
 	Player* player = model->getPlayer(playerId);
-	shared_ptr<AnimalCard> animal = player->getAnimal(animalId);
 
 	// TODO: save all abilities
 	player->deleteAnimal(animalId);

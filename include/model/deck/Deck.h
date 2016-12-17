@@ -40,6 +40,7 @@ public:
 	T pop_front();
 
 	bool isEmpty();
+	int getSize();
 
 	ostream& write(ostream&);
 	istream& read(istream&);
@@ -161,5 +162,10 @@ istream& Deck<T>::read(istream& stream) {
 template<typename T> 
 bool Deck<T>::isEmpty() {
 	return (size == 0);
+}
+
+template<typename T> 
+int Deck<T>::getSize() {
+	return size;
 }
 #endif

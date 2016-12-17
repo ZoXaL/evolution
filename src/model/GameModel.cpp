@@ -15,8 +15,9 @@ GameModel::GameModel() {
 	currentPlayer = &players[0];
 }
 
+
 GameModel* GameModel::initialize() {
-	if (instance == nullptr) {
+	if (instance != nullptr) {
 		delete instance;
 	} 
 	instance = new GameModel();
@@ -28,6 +29,9 @@ GameModel* GameModel::getInstance() {
 		return initialize();
 	}
 	return instance;
+}
+void GameModel::deleteInstance() {
+	delete instance;
 }
 
 Deck<shared_ptr<Card>>* GameModel::getCardDeck() {

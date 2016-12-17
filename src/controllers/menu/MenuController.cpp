@@ -1,5 +1,6 @@
 #include "controllers/menu/MenuController.h"
 #include "controllers/menu/StartGameController.h"
+#include "controllers/menu/ExitGameController.h"
 #include "controllers/AbstractController.h"
 
 #include <iostream>
@@ -47,7 +48,7 @@ AbstractController* MenuController::showMainMenu() {
 			}
 			case 6 : {
 				cout << "Good bye!" << endl;
-				return nullptr;
+				return new ExitGameController();
 			} 
 			default : {
 				continue;

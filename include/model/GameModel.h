@@ -23,9 +23,9 @@ class GameModel {
 public:
 	static const int CARDS_ON_START;
 
-
 	static GameModel* getInstance();
 	static GameModel* initialize();
+	static void deleteInstance();
 	
 	Player* getPlayer(int);
 	Player* getCurrentPlayer();
