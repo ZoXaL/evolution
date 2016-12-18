@@ -73,7 +73,9 @@ AbstractController* FeedController::run() {
 			break;
 		}
 		case 4 : {
-			alert = "Ok, do undo";
+			if (holder->canUndo()) {
+				CommandHolder::getInstance()->undo();	
+			}
 			nextController = new GameController();
 			break;
 		} 

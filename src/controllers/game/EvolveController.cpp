@@ -56,6 +56,9 @@ AbstractController* EvolveController::run() {
 			} 
 			case 2 : {
 				cout << "Ok, do undo" << endl;
+				if (holder->canUndo()) {
+					CommandHolder::getInstance()->undo();	
+				}				
 				nextController = new GameController();
 				break;
 			} 
@@ -97,6 +100,9 @@ AbstractController* EvolveController::run() {
 			} 
 			case 4 : {
 				cout << "Ok, do undo" << endl;
+				if (holder->canUndo()) {
+					CommandHolder::getInstance()->undo();	
+				}
 				nextController = new GameController();
 				break;
 			} 

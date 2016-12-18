@@ -72,4 +72,10 @@ void CommandHolder::undo() {
 	}
 	AbstractCommand* commandToUndo = deck.pop_back();
 	commandToUndo->undo();
+	commandToUndo = deck.pop_back();
+	commandToUndo->undo();
+}
+
+bool CommandHolder::canUndo() {
+	return deck.getSize() >= 2;
 }
