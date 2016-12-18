@@ -5,6 +5,8 @@
 #include "model/Player.h"
 #include "model/deck/Deck.h"
 #include "model/GamePhaze.h"
+#include "model/cards/AbilityCard.h"
+
 #include <vector> 
 #include <memory> 
 #include <iostream>
@@ -12,7 +14,7 @@ using namespace std;
 
 class GameModel {
 	FoodStore foodStore;
-	Deck<shared_ptr<Card>> cardDeck;
+	Deck<shared_ptr<AbilityCard>> cardDeck;
 	Player players[2];
 
 	Player* currentPlayer;
@@ -39,7 +41,7 @@ public:
 	GamePhaze::Phaze switchPhaze(GamePhaze::Phaze newPhaze);
 	GamePhaze::Phaze getPhaze();
 
-	Deck<shared_ptr<Card>>* getCardDeck();
+	Deck<shared_ptr<AbilityCard>>* getCardDeck();
 	FoodStore* getFoodStore();
 
 };

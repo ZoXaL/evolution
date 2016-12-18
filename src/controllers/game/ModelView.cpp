@@ -2,7 +2,7 @@
 #include "model/GameModel.h"
 #include "model/Player.h"
 #include "model/deck/Deck.h"
-#include "model/cards/Card.h"
+#include "model/cards/AbilityCard.h"
 #include "model/cards/AnimalCard.h"
 
 #include "functions.h"
@@ -14,7 +14,7 @@ void ModelView::displayModel(bool showHand) {
 	GameModel* model = GameModel::getInstance();
 	Player* currentPlayer = model->getCurrentPlayer();
 	Player* opponent = (model->getPlayer(1) == currentPlayer) ? model->getPlayer(0) : model->getPlayer(1);
-	Deck<shared_ptr<Card>>* cardDeck = model->getCardDeck();
+	Deck<shared_ptr<AbilityCard>>* cardDeck = model->getCardDeck();
 	// 80
 	cout << "--------------------------------------------------------------------------------" <<  endl;
 	cout << left << setw(40) << currentPlayer->getName() << left << setw(40) << opponent->getName();

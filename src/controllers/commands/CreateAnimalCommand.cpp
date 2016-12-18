@@ -22,7 +22,7 @@ void CreateAnimalCommand::execute() {
 	// 3) Add animalCard to cards
 	shared_ptr<Card> createFrom = player->getCardFromHand(cardId);
 	player->removeCardFromHand(cardId);
-	shared_ptr<AnimalCard> newAnimal(new AnimalCard(createFrom));
+	shared_ptr<AnimalCard> newAnimal(new AnimalCard(createFrom, player));
 	player->addAnimal(newAnimal);
 }
 

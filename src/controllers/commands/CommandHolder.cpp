@@ -1,6 +1,7 @@
 #include "controllers/commands/CommandHolder.h"
 #include "controllers/commands/AbstractCommand.h"
 #include "controllers/commands/TransactionCommand.h"
+#include "exceptions/Exception.h"
 #include "model/deck/Deck.h"
 #include <iostream>
 
@@ -28,39 +29,47 @@ CommandHolder::~CommandHolder() {
 }
 void CommandHolder::addCommand(AbstractCommand* command) {
 	if (currentTransaction == nullptr) {
-		command->execute();
-		deck.push_back(command);
+		throw Exception("Transaction is not opened");
 	} else {
 		currentTransaction->addCommand(command);
+		command->execute();
 	}	
 }
 TransactionCommand* CommandHolder::openTransaction() {
 	if (currentTransaction != nullptr) {
-		// TODO: throw exception
-		return nullptr;
+		throw Exception("Transaction is already opened");
 	}
 	currentTransaction = new TransactionCommand();
 	return currentTransaction;
 }
 void CommandHolder::commit() {
 	if (currentTransaction == nullptr) {
-		// TODO: throw exception
-		return;
+		throw Exception("Transaction is not opened");
 	}
-	currentTransaction->execute();
-	deck.push_back(currentTransaction);
+	if (currentTransaction->getSize() > 0) {
+		deck.push_back(currentTransaction);
+	} else {
+		delete currentTransaction;
+	}	
 	currentTransaction = nullptr;
 }
 
 void CommandHolder::rollback() {
 	if (currentTransaction == nullptr) {
-		// TODO: throw exception
-		return;
+		throw Exception("Transaction is not opened");
 	}
+	currentTransaction->undo();
 	delete currentTransaction;
 }
 
+bool CommandHolder::isTransactionOpened() {
+	return currentTransaction != nullptr;
+}
+
 void CommandHolder::undo() {
+	if (currentTransaction != nullptr) {
+		throw Exception("Cannot undo because there is opened transaction");
+	}
 	AbstractCommand* commandToUndo = deck.pop_back();
 	commandToUndo->undo();
 }

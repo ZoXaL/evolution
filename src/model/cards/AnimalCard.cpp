@@ -2,23 +2,35 @@
 #include "model/cards/abilities/Fat.h"
 #include "model/cards/abilities/Ability.h"
 #include "model/cards/interfaces/FoodModification.h"
+#include "exceptions/Exception.h"
 #include <memory>
 #include <string>
 #include <typeinfo>
 
 using namespace std;
 
-AnimalCard::AnimalCard(shared_ptr<Card> createdFrom) {
+AnimalCard::AnimalCard(shared_ptr<Card> createdFrom, Player* owner) {
 	this->createdFrom = createdFrom;
 	this->_isHungry = true;
 	this->_needFood = true;
+	this->owner = owner;
 }
-vector<shared_ptr<Card>>* AnimalCard::getAbilities() {
+vector<shared_ptr<AbilityCard>>* AnimalCard::getAbilities() {
 	return &abilities;
 }
+Player* AnimalCard::getOwner() {
+	return owner;
+}
 
-void AnimalCard::addAbility(shared_ptr<Card> newAbility) {
+void AnimalCard::addAbility(shared_ptr<AbilityCard> newAbility) {
+	newAbility->setOwner(this);
 	abilities.push_back(newAbility);
+}
+AbilityCard* AnimalCard::getAbility(int index) {
+	if (index >= abilities.size() || index < 0) {
+		throw Exception("Cannot get ability on illegal index");
+	}
+	return abilities[index].get();
 }
 
 string AnimalCard::getStatus() {
@@ -27,8 +39,7 @@ string AnimalCard::getStatus() {
 	}
 	string status;
 	for (auto ibegin = abilities.begin(); ibegin != abilities.end(); ibegin++) {
-		shared_ptr<Card> card = (*ibegin);
-		AbilityCard* ability = card->getAbilityCard();
+		AbilityCard* ability = (*ibegin).get();
 		status += ability->getStatus();
 		status += " ";
 	}
@@ -57,8 +68,7 @@ int AnimalCard::feed() {
 	bool abilitiesNeedFood = false;
 	int abilityToFeed = -1;
 	for (int i = 0; i < abilities.size(); i++) {
-		shared_ptr<Card> card = abilities[i];
-		AbilityCard* ability = card->getAbilityCard();
+		AbilityCard* ability = abilities[i].get();
 		// 2) check if ability needs food
 		switch (ability->getAbility()) {
 			case (Ability::FAT) : {

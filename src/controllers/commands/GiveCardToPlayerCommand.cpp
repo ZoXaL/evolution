@@ -14,7 +14,7 @@ GiveCardToPlayerCommand::GiveCardToPlayerCommand(Player* player) {
 void GiveCardToPlayerCommand::execute() {
 	GameModel* model = GameModel::getInstance();
 	Player* player = model->getPlayer(playerId);
-	Deck<shared_ptr<Card>>* cardDeck = model->getCardDeck();
+	Deck<shared_ptr<AbilityCard>>* cardDeck = model->getCardDeck();
 
 	player->pushCardToHand(cardDeck->pop_back());
 }

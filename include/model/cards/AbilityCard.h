@@ -4,15 +4,17 @@
 #include <string>
 #include <iostream>
 #include "model/cards/Card.h"
+#include "model/cards/AnimalCard.h"
 #include "model/cards/abilities/Ability.h"
 #include "functions.h"
 using namespace std;
 
 class AbilityCard : public Card {
 protected:
-Ability::AbilityType ability;
-bool duplicated;
-bool passive;
+	Ability::AbilityType ability;
+	bool duplicated;
+	bool passive;
+	AnimalCard* owner;
 public:
 	AbilityCard(Ability::AbilityType, bool duplicated, bool passive);
 
@@ -26,8 +28,11 @@ public:
 
 	bool isDuplicated();
 	bool isPassive();
+	
+	void setOwner(AnimalCard* owner);
 
 	virtual string getStatus() = 0;
+	virtual void use() = 0;
 	
 };
 

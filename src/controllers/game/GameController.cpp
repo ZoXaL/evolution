@@ -30,36 +30,33 @@ AbstractController* GameController::run() {
 		
 		switch (model->getPhaze()) {
 			case GamePhaze::EVOLVE : {				
-
-				PassCommand pass1(player1, false);
-				pass1.execute();
-				PassCommand pass2(player2, false);
-				pass2.execute();
-				SwitchPhazeCommand switchPhaze(GamePhaze::FEED);
-				switchPhaze.execute();
+				CommandHolder* holder = CommandHolder::getInstance();
+				holder->addCommand(new PassCommand(player1, false));
+				holder->addCommand(new PassCommand(player2, false));
+				holder->addCommand(new SwitchPhazeCommand(GamePhaze::FEED));
 
 				nextController = new FeedController();
 				break;
 			};
 			case GamePhaze::FEED : {
-
-				PassCommand pass1(player1, false);
-				pass1.execute();
-				PassCommand pass2(player2, false);
-				pass2.execute();
-				SwitchPhazeCommand switchPhaze(GamePhaze::EVOLVE);
-				switchPhaze.execute();
-
 				//Time to kill and clear animals
 				deathPhaze();
 
-				if (deckSize == 0 && model->getPhaze() == GamePhaze::FEED ) {	
+				if (deckSize == 0) {	
 					// game ends
 					cout << "Game over, thanks" << endl;
 					cout << player1->getName() << " score: " << player1->getScore() << endl;
 					cout << player2->getName() << " score: " << player2->getScore() << endl;
+
 					return new MenuController();
 				}
+				
+				CommandHolder* holder = CommandHolder::getInstance();
+				holder->addCommand(new PassCommand(player1, false));
+				holder->addCommand(new PassCommand(player2, false));
+				holder->addCommand(new SwitchPhazeCommand(GamePhaze::EVOLVE));
+
+								
 
 				// Time to give more cards to players
 				int firstPlayerCardsToGive = player1->animalsCount();
@@ -82,8 +79,6 @@ AbstractController* GameController::run() {
 					maxCardsGive = firstPlayerCardsToGive;
 				}
 				int tmpDeckSize = deckSize;
-				CommandHolder* holder = CommandHolder::getInstance();
-				holder->openTransaction();
 				for (int i = 0; i < minCardsGive; i++) {
 					if (tmpDeckSize <= 0) break;					
 					holder->addCommand(new GiveCardToPlayerCommand(minCardsPlayer));
@@ -98,8 +93,6 @@ AbstractController* GameController::run() {
 					holder->addCommand(new GiveCardToPlayerCommand(maxCardsPlayer));
 					tmpDeckSize--;
 				}
-				holder->commit();
-
 				nextController = new EvolveController();
 				break;
 			}
@@ -119,16 +112,15 @@ void GameController::deathPhaze() {
 	GameModel* model = GameModel::getInstance();
 	Player* player1 = model->getPlayer(0);
 	Player* player2 = model->getPlayer(1);
+	CommandHolder* holder = CommandHolder::getInstance();
 
 	vector<shared_ptr<AnimalCard>>* animals1 = player1->getAnimals();
 	for (auto i = animals1->begin(); i != animals1->end(); i++) {
 		if ((*i)->isHungry()) {
 			i--;
-			KillAnimalCommand kill(player1, i+1-animals1->begin());
-			kill.execute();
+			holder->addCommand(new KillAnimalCommand(player1, i+1-animals1->begin()));
 		} else {
-			ClearAnimalFoodCommand clear(player1, i-animals1->begin());
-			clear.execute();
+			holder->addCommand(new ClearAnimalFoodCommand(player1, i-animals1->begin()));
 		}
 	}
 
@@ -136,11 +128,9 @@ void GameController::deathPhaze() {
 	for (auto i = animals2->begin(); i != animals2->end(); i++) {
 		if ((*i)->isHungry()) {
 			i--;
-			KillAnimalCommand kill(player2, i+1-animals2->begin());
-			kill.execute();
+			holder->addCommand(new KillAnimalCommand(player2, i+1-animals2->begin()));
 		} else {
-			ClearAnimalFoodCommand clear(player2, i-animals2->begin());
-			clear.execute();
+			holder->addCommand(new ClearAnimalFoodCommand(player2, i-animals2->begin()));
 		}
 	}
 

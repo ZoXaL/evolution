@@ -20,6 +20,7 @@ public:
 	TransactionCommand* openTransaction();
 	void commit();
 	void rollback();
+	bool isTransactionOpened();
 	void undo();
 	std::ostream& write(std::ostream& stream){};
 	std::istream& read(std::istream& stream){};

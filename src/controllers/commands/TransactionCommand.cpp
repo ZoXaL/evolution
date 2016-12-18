@@ -29,3 +29,7 @@ void TransactionCommand::undo() {
 		delete lastCommand;
 	}
 }
+
+int TransactionCommand::getSize() {
+	return deck.getSize();
+}

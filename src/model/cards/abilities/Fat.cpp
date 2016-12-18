@@ -1,6 +1,8 @@
 #include "model/cards/abilities/Fat.h"
 #include "model/cards/abilities/Ability.h"
 #include "model/cards/AbilityCard.h"
+#include "controllers/commands/CommandHolder.h"
+#include "controllers/commands/UseFatCommand.h"
 #include "exceptions/Exception.h"
 #include "functions.h"
 #include <iostream>
@@ -34,6 +36,13 @@ string Fat::getStatus() {
 
 int Fat::getCost() {
 	return (reserve) ? 2 : 1;
+}
+
+void Fat::use() {
+	if (!reserve) {
+		return;
+	}
+	CommandHolder::getInstance()->addCommand(new UseFatCommand(owner->getOwner(), owner, this));
 }
 
 ostream& Fat::write(ostream& stream)  {

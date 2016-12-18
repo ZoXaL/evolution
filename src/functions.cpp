@@ -1,12 +1,15 @@
 #include <iostream>
 #include <climits>
-#include "exceptions/Exception.h"
 #include "model/cards/abilities/Ability.h"
+#include "model/cards/AnimalCard.h"
+#include "model/cards/AbilityCard.h"
 #include "model/GamePhaze.h"
+#include "model/GameModel.h"
+#include "model/Player.h"
 
 using namespace std;
 
-int getInt(istream& stream, int min=INT_MIN, int max=INT_MAX) {
+int getInt(istream& stream, int min, int max) {
 	int result = 0;	
 	bool correctInput;
 	do {
@@ -84,4 +87,27 @@ string phazeToString(GamePhaze::Phaze phaze) {
 		}
 	}
 	return result;
+}
+
+int getPlayerId(Player* player) {
+	return (GameModel::getInstance()->getPlayer(0) == player) ? 0 : 1;
+}
+
+int getAnimalId(Player* player, AnimalCard* animal) {
+	vector<shared_ptr<AnimalCard>>* animals = player->getAnimals();
+	for (auto i = animals->begin(); i != animals->end(); i++) {
+		if (i->get() == animal) {
+			return distance(animals->begin(), i);
+		}
+	}
+	return -1;
+}
+int getAbilityId(AnimalCard* animal, AbilityCard* ability) {
+	vector<shared_ptr<AbilityCard>>* abilities = animal->getAbilities();
+	for (auto i = abilities->begin(); i != abilities->end(); i++) {
+		if (i->get() == ability) {
+			return distance(abilities->begin(), i);
+		}
+	}
+	return -1;
 }

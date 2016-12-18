@@ -21,7 +21,7 @@ void AddAbilityCommand::execute() {
 	// TODO:
 	// 1) Take abilityCard and delete from hand
 	// 2) Add abilityCard to animal abilities
-	shared_ptr<Card> newAbility = player->getCardFromHand(abilityId);
+	shared_ptr<AbilityCard> newAbility = player->getCardFromHand(abilityId);
 	player->removeCardFromHand(abilityId);
 	shared_ptr<AnimalCard> animal = player->getAnimal(animalId);
 	animal->addAbility(newAbility);

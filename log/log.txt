@@ -1,2 +1,4 @@
 9-12-2016 17:37:6    just little test exception
 9-12-2016 17:37:19    just little test exception
+18-12-2016 11:50:33    Transaction is not opened
+18-12-2016 13:51:18    Transaction is not opened

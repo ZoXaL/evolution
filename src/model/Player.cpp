@@ -17,24 +17,24 @@ void Player::setName(const char* name) {
 	strcpy(this->name, name);
 }
 
-void Player::pushCardToHand(shared_ptr<Card> card) {
+void Player::pushCardToHand(shared_ptr<AbilityCard> card) {
 	this->hand.push_back(card);
 }
-shared_ptr<Card> Player::removeCardFromHand(int cardNum) {
+shared_ptr<AbilityCard> Player::removeCardFromHand(int cardNum) {
 	if(!checkRange(cardNum, 0, hand.size())) {
 		return nullptr;
 	}
-	shared_ptr<Card> returnCard = hand[cardNum];
+	shared_ptr<AbilityCard> returnCard = hand[cardNum];
 	hand.erase(hand.begin() + cardNum);
 	return returnCard;
 }
-shared_ptr<Card> Player::popCardFromHand() {
+shared_ptr<AbilityCard> Player::popCardFromHand() {
 	if(hand.size() == 0) {
 		return nullptr;
 	}
 	return *(hand.erase(hand.begin()+hand.size()-1));
 }
-shared_ptr<Card> Player::getCardFromHand(int cardNum) {
+shared_ptr<AbilityCard> Player::getCardFromHand(int cardNum) {
 	if(!checkRange(cardNum, 0, hand.size())) {
 		return nullptr;
 	}

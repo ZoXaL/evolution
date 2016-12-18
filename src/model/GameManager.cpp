@@ -18,24 +18,25 @@ GameModel* GameManager::buildGame(const char* firstPlayerName, const char* secon
 	player1->setName(firstPlayerName);
 	player2->setName(secondPlayerName);
 
-	Deck<shared_ptr<Card>>* cardDeck = model->getCardDeck();
+	Deck<shared_ptr<AbilityCard>>* cardDeck = model->getCardDeck();
 	// Create all cards and fill the cardDeck
 	for (int i = 0; i < 10; i++) {
 		if (i%2) {
-			shared_ptr<Card> newCard(new Fat());
+			shared_ptr<AbilityCard> newCard(new Fat());
 			cardDeck->push_back(newCard);
 		} else {
-			shared_ptr<Card> newCard(new Fat());
+			shared_ptr<AbilityCard> newCard(new Fat());
 			cardDeck->push_back(newCard);
 		}	
 	}
-
 	for (int i = 0; i < GameModel::CARDS_ON_START; i++) {
-		CommandHolder::getInstance()->addCommand(new GiveCardToPlayerCommand(0));
+		GiveCardToPlayerCommand giveCard(0);
+		giveCard.execute();
 	}
 
 	for (int i = 0; i < GameModel::CARDS_ON_START; i++) {
-		CommandHolder::getInstance()->addCommand(new GiveCardToPlayerCommand(1));
+		GiveCardToPlayerCommand giveCard(1);
+		giveCard.execute();
 	}
 	return model;
 }

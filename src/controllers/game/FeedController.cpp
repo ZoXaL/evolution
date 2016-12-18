@@ -26,6 +26,10 @@ using namespace std;
 string FeedController::alert = "";
 
 AbstractController* FeedController::run() {
+	CommandHolder* holder = CommandHolder::getInstance();
+	if (holder->isTransactionOpened()) {
+		holder->commit();
+	}
 	system("clear");
 	GameModel* model = GameModel::getInstance();
 	Player* currentPlayer = model->getCurrentPlayer();
@@ -112,7 +116,6 @@ void FeedController::feedAnimal() {
 	holder->addCommand(new FeedCommand(currentPlayer, hungryAnimals[answer-1]));
 	holder->addCommand(new PopFoodCommand(1));
 	holder->addCommand(new EndMoveCommand());
-	holder->commit();
 }
 shared_ptr<AnimalCard> FeedController::selectAnimalToUse() {
 	//Todo:
@@ -140,7 +143,7 @@ void FeedController::useAnimalAbility(shared_ptr<AnimalCard> animal) {
 		return;
 	}
 	cout << "Select animal ability to use:" << endl;
-	vector<shared_ptr<Card>>* abilities = animal->getAbilities();
+	vector<shared_ptr<AbilityCard>>* abilities = animal->getAbilities();
 	for (auto i = abilities->begin(); i != abilities->end(); i++) {
 		cout << (i-abilities->begin()+1) << ") " << (*i)->getDescription() << endl;
 	}
@@ -149,9 +152,11 @@ void FeedController::useAnimalAbility(shared_ptr<AnimalCard> animal) {
 	if (answer == (abilities->size()+1)) {
 		return;
 	}
-	shared_ptr<Card> cardToUse = abilities->at(answer-1);
-	AnimalCard* animalToUse = (AnimalCard*)(cardToUse.get());
-	cout << "got it: " << animalToUse->getStatus() << endl;
+	shared_ptr<AbilityCard> abilityToUse = abilities->at(answer-1);
+	CommandHolder* holder = CommandHolder::getInstance();
+	holder->openTransaction();
+	abilityToUse->use();
+	cout << "got it: " << abilityToUse->getStatus() << endl;
 	return;
 }
 
@@ -186,6 +191,5 @@ void FeedController::pass() {
 	holder->openTransaction();
 	holder->addCommand(new PassCommand(currentPlayer));
 	holder->addCommand(new EndMoveCommand());
-	holder->commit();
 }
 

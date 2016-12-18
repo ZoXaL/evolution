@@ -27,6 +27,11 @@ using namespace std;
 		* Create command
  */
 AbstractController* EvolveController::run() {
+	//Здесь закончился предыдущий ход
+	CommandHolder* holder = CommandHolder::getInstance();
+	if (holder->isTransactionOpened()) {
+		holder->commit();
+	}
 	system("clear");
 	GameModel* model = GameModel::getInstance();
 	Player* currentPlayer = model->getCurrentPlayer();
@@ -122,7 +127,6 @@ void EvolveController::createNewAnimal() {
 	holder->openTransaction();
 	holder->addCommand(new CreateAnimalCommand(currentPlayer, answer-1));
 	holder->addCommand(new EndMoveCommand());
-	holder->commit();
 	return;
 }
 
@@ -153,7 +157,6 @@ void EvolveController::useAbility() {
 	holder->openTransaction();
 	holder->addCommand(new AddAbilityCommand(currentPlayer, abilityId-1, animalId-1));
 	holder->addCommand(new EndMoveCommand());
-	holder->commit();
 }
 
 void EvolveController::pass() {
@@ -164,5 +167,4 @@ void EvolveController::pass() {
 	holder->openTransaction();
 	holder->addCommand(new PassCommand(currentPlayer));
 	holder->addCommand(new EndMoveCommand());
-	holder->commit();
 }

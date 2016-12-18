@@ -6,8 +6,6 @@
 #include "interfaces/Serializable.h"
 #include "DeckIterator.h"
 
-class Card;
-
 using namespace std;
 
 template<typename T>

@@ -38,7 +38,7 @@ void GameModel::deleteInstance() {
 	} 
 }
 
-Deck<shared_ptr<Card>>* GameModel::getCardDeck() {
+Deck<shared_ptr<AbilityCard>>* GameModel::getCardDeck() {
 	return &cardDeck;
 }
 

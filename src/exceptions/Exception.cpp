@@ -7,14 +7,17 @@
 
 Exception::Exception() {
 	strcpy(logPath, "log/log.txt");
+	message = "No message";
 	time_t tmp = time(nullptr);
 	eTime = localtime(&tmp);
+	log();
 }
 Exception::Exception(string message) {
 	strcpy(logPath, "log/log.txt");
 	this->message = message;
 	time_t tmp = time(nullptr);
 	eTime = localtime(&tmp);
+	log();
 }
 
 void Exception::log() {

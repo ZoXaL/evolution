@@ -13,6 +13,7 @@ public:
 	void addCommand(AbstractCommand*);
 	void execute();
 	void undo();
+	int getSize();
 	std::ostream& write(std::ostream& stream){};
 	std::istream& read(std::istream& stream){};
 };
