@@ -23,5 +23,16 @@ void SwitchPhazeCommand::execute() {
 }
 
 void SwitchPhazeCommand::undo() {
+	GameModel* model = GameModel::getInstance();
+	switch (newPhaze) {
+		case GamePhaze::EVOLVE : {
+			model->switchPhaze(GamePhaze::FEED);
+			break;
+		}
+		case GamePhaze::FEED : {
+			model->switchPhaze(GamePhaze::EVOLVE);
+			break;
+		}
+	}
 	
 }

@@ -10,6 +10,7 @@ class UseFatCommand: public AbstractCommand {
 	int playerId;	
 	int animalId;
 	int fatAbilityId;
+	int fedAbilityId;
 public:
 	UseFatCommand(Player*, AnimalCard*, AbilityCard*);
 	void execute();

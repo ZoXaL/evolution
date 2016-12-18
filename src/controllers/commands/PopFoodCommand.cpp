@@ -15,7 +15,6 @@ void PopFoodCommand::execute() {
 			throw emptyFoodStore;
 		}
 	}	
-	undo();
 }
 
 void PopFoodCommand::undo() {

@@ -25,10 +25,12 @@ void TransactionCommand::execute() {
 	}	
 }
 void TransactionCommand::undo() {
-	AbstractCommand* lastCommand = deck.pop_back();
-	if (lastCommand != nullptr) {
-		lastCommand->undo();
-		delete lastCommand;
+	if (deck.getSize() > 0) {
+		auto i = deck.begin();
+		for (; i != deck.end(); i++) {
+			(*i)->undo();
+		}
+		(*i)->undo();
 	}
 }
 
