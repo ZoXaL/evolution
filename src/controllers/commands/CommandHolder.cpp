@@ -85,3 +85,12 @@ void CommandHolder::undo() {
 bool CommandHolder::canUndo() {
 	return deck.getSize() >= 2;
 }
+
+ostream& CommandHolder::write(ostream& stream) {
+	deck.write(stream);
+	return stream;
+}
+
+istream& CommandHolder::read(istream& stream) {
+	cout << "Reading commands from file" << endl;
+}

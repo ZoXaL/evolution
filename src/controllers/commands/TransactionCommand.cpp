@@ -1,7 +1,8 @@
 #include "controllers/commands/TransactionCommand.h"
+#include "controllers/commands/CommandType.h"
 
 TransactionCommand::TransactionCommand() {
-
+	type = Command::TRANSACTION;
 }
 TransactionCommand::~TransactionCommand() {
 	if (deck.getSize() > 0) {
@@ -36,4 +37,10 @@ void TransactionCommand::undo() {
 
 int TransactionCommand::getSize() {
 	return deck.getSize();
+}
+
+ostream& TransactionCommand::write(ostream& stream) {
+	stream << type << endl;
+	deck.write(stream);
+	return stream;
 }

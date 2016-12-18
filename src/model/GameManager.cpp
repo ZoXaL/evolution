@@ -6,10 +6,16 @@
 #include "model/deck/Deck.h"
 #include "controllers/commands/GiveCardToPlayerCommand.h"
 #include "controllers/commands/CommandHolder.h"
-#include "memory"
+#include "exceptions/Exception.h"
+#include <memory>
+#include <fstream>
+#include <string.h>
 using namespace std;
 
+bool GameManager::gameInitialized = false;
+
 GameModel* GameManager::buildGame(const char* firstPlayerName, const char* secondPlayerName) {
+	gameInitialized = true;
 	GameModel* model = GameModel::initialize();
 
 	Player* player1 = model->getPlayer(0);
@@ -39,4 +45,25 @@ GameModel* GameManager::buildGame(const char* firstPlayerName, const char* secon
 		giveCard.execute();
 	}
 	return model;
+}
+
+void GameManager::saveGame(std::fstream& stream) {
+	if (!gameInitialized) {
+		throw Exception("Game is not initialized");
+	}
+	GameModel* model = GameModel::getInstance();
+	Player* player1 = model->getPlayer(0);
+	Player* player2 = model->getPlayer(1);
+	Deck<shared_ptr<AbilityCard>>* cardDeck = model->getCardDeck();
+
+	stream << player1->getName() << ' ';
+	stream << player2->getName() << endl;
+	cardDeck->write(stream) << endl;
+	CommandHolder::getInstance()->write(stream);
+	// Колода карт
+	// Список команд
+}
+
+bool GameManager::isGameInitilized() {
+	return gameInitialized;
 }

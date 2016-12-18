@@ -164,8 +164,6 @@ void FeedController::useAnimalAbility(shared_ptr<AnimalCard> animal) {
 	return;
 }
 
-
-
 void FeedController::displayStatistic() {
 	FoodStore* foodStore = GameModel::getInstance()->getFoodStore();
 	cout << "Food Store capacity: " << foodStore->getCapacity() << endl;

@@ -13,7 +13,7 @@ public:
 	AddAbilityCommand(Player* player, int abilityId, int animalId);
 	void execute();
 	void undo();
-	std::ostream& write(std::ostream& stream){};
+	std::ostream& write(std::ostream& stream);
 	std::istream& read(std::istream& stream){};
 };
 #endif

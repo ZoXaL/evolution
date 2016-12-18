@@ -8,6 +8,7 @@
 #include "model/cards/AbilityCard.h"
 #include "model/GamePhaze.h"
 #include "model/Player.h"
+#include "controllers/commands/CommandType.h"
 
 int getInt(std::istream&, int min=INT_MIN, int max=INT_MAX);
 bool checkRange(int, int, int);

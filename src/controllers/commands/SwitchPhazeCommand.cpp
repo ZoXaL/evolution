@@ -1,10 +1,12 @@
 #include "controllers/commands/SwitchPhazeCommand.h"
 #include "model/GameModel.h"
 #include "model/GamePhaze.h"
+#include "controllers/commands/CommandType.h"
 
 SwitchPhazeCommand::SwitchPhazeCommand(GamePhaze::Phaze newPhaze) {
 	this->newPhaze = newPhaze;
 	this->foodCount = 0;
+	type = Command::SWITCH_PHAZE;
 }
 
 void SwitchPhazeCommand::execute() {
@@ -50,5 +52,10 @@ void SwitchPhazeCommand::undo() {
 			break;
 		}
 	}
-	
+}
+
+ostream& SwitchPhazeCommand::write(ostream& stream) {
+	stream << type << endl;
+	stream << newPhaze << ' ' << foodCount << ' ' << playerSwitched << endl;
+	return stream;
 }

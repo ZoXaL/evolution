@@ -3,10 +3,12 @@
 #include "model/cards/AnimalCard.h"
 #include "model/GameModel.h"
 #include "model/Player.h"
+#include "controllers/commands/CommandType.h"
 
 KillAnimalCommand::KillAnimalCommand(int playerId, int animalId){
 	this->playerId = playerId;
 	this->animalId = animalId;
+	type = Command::KILL_ANIMAL;
 
 	GameModel* model = GameModel::getInstance();
 	Player* player = model->getPlayer(playerId);
@@ -15,6 +17,7 @@ KillAnimalCommand::KillAnimalCommand(int playerId, int animalId){
 KillAnimalCommand::KillAnimalCommand(Player* player,int animalId) {
 	this->playerId = (GameModel::getInstance()->getPlayer(0) == player) ? 0 : 1;
 	this->animalId = animalId;
+	type = Command::KILL_ANIMAL;
 	
 	animal = player->getAnimal(animalId);
 }
@@ -32,4 +35,10 @@ void KillAnimalCommand::undo() {
 
 	// TODO: save all abilities
 	player->addAnimal(animal, animalId);	
+}
+
+ostream& KillAnimalCommand::write(ostream& stream) {
+	stream << type << endl;
+	stream << playerId << ' ' << animalId << endl;
+	return stream;
 }

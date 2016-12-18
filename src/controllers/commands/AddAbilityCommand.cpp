@@ -3,16 +3,19 @@
 #include "model/cards/AnimalCard.h"
 #include "model/GameModel.h"
 #include "model/Player.h"
+#include "controllers/commands/CommandType.h"
 
 AddAbilityCommand::AddAbilityCommand(int playerId, int abilityId, int animalId){
 	this->playerId = playerId;
 	this->abilityId = abilityId;
 	this->animalId = animalId;
+	type = Command::ADD_ABILITY;
 }
 AddAbilityCommand::AddAbilityCommand(Player* player, int abilityId, int animalId) {
 	this->playerId = (GameModel::getInstance()->getPlayer(0) == player) ? 0 : 1;
 	this->abilityId = abilityId;
 	this->animalId = animalId;
+	type = Command::ADD_ABILITY;
 }
 
 void AddAbilityCommand::execute() {
@@ -34,4 +37,9 @@ void AddAbilityCommand::undo() {
 
 	shared_ptr<AbilityCard> ability = animal->popAbility();
 	player->addCardToHand(ability, abilityId);	
+}
+ostream& AddAbilityCommand::write(ostream& stream) {
+	stream << type << endl;
+	stream << playerId << ' ' << animalId << ' ' << abilityId << endl;
+	return stream;
 }

@@ -5,12 +5,14 @@
 #include "functions.h"
 #include <vector>
 #include <memory>
+#include "controllers/commands/CommandType.h"
 using namespace std;
 
 UseFatCommand::UseFatCommand(Player* player, AnimalCard* animal, AbilityCard* ability) {
 	this->playerId = getPlayerId(player);
 	this->animalId = getAnimalId(player, animal);
 	this->fatAbilityId = getAbilityId(animal, ability);
+	type = Command::USE_FAT;
 }
 
 void UseFatCommand::execute() {
@@ -35,4 +37,10 @@ void UseFatCommand::undo() {
 		FoodModification* abilityFed = (FoodModification*)(animal->getAbility(fedAbilityId));
 		abilityFed->resetFood();
 	}	
+}
+
+ostream& UseFatCommand::write(ostream& stream) {
+	stream << type << endl;
+	stream << playerId << ' ' << animalId << ' ' << fatAbilityId << ' ' << fedAbilityId << endl;
+	return stream;
 }

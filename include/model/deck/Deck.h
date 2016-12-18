@@ -135,17 +135,19 @@ typename Deck<T>::iterator_t Deck<T>::end() {
 }
 template<typename T>
 ostream& operator<<(ostream& stream, Deck<T> deck) {
-	stream << "kk";
+	cout << "kk" << endl;
 }
 
 template<typename T>
 ostream& Deck<T>::write(ostream& stream) {	
-	stream << "kk write deck to file" << endl;
-	iterator_t it = begin();
-	for (; it != end(); it++) {
+	stream << size << endl;
+	if (size > 0) {
+		iterator_t it = begin();
+		for (; it != end(); it++) {
+			(*it)->write(stream);
+		}
 		(*it)->write(stream);
-	}
-	(*it)->write(stream);
+	}	
 	return stream;
 }
 

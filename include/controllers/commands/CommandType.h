@@ -1,0 +1,19 @@
+#ifndef COMMAND_TYPE_H
+#define COMMAND_TYPE_H
+namespace Command {
+	enum CommandType {
+		ADD_ABILITY=1,
+		CLEAR_ANIMAL_FOOD,
+		CREATE_ANIMAL,
+		END_MOVE,
+		FEED,
+		GIVE_CARD_TO_PLAYER,
+		KILL_ANIMAL,
+		PASS,
+		POP_FOOD,
+		SWITCH_PHAZE,
+		USE_FAT,
+		TRANSACTION
+	};
+}
+#endif

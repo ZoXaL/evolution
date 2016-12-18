@@ -23,7 +23,7 @@ public:
 	bool isTransactionOpened();
 	void undo();
 	bool canUndo();
-	std::ostream& write(std::ostream& stream){};
-	std::istream& read(std::istream& stream){};
+	std::ostream& write(std::ostream& stream);
+	std::istream& read(std::istream& stream);
 };
 #endif

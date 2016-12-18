@@ -46,7 +46,7 @@ void Fat::use() {
 }
 
 ostream& Fat::write(ostream& stream)  {
-	stream << abilityToString(ability) << endl;
+	stream << ability << endl;
 	return stream;
 }
 istream& Fat::read(istream& stream) {

@@ -4,7 +4,7 @@
 #include "model/GameModel.h"
 #include "model/Player.h"
 #include "model/cards/interfaces/FoodModification.h"
-
+#include "controllers/commands/CommandType.h"
 #include <memory>
 
 using namespace std;
@@ -14,11 +14,13 @@ FeedCommand::FeedCommand(int playerId, int animalId){
 	this->playerId = playerId;
 	this->animalId = animalId;
 	this->abilityId = abilityId;
+	type = Command::FEED;
 }
 FeedCommand::FeedCommand(Player* player, int animalId) {
 	this->playerId = (GameModel::getInstance()->getPlayer(0) == player) ? 0 : 1;
 	this->animalId = animalId;
 	this->abilityId = abilityId;
+	type = Command::FEED;
 }
 
 void FeedCommand::execute() {
@@ -39,4 +41,9 @@ void FeedCommand::undo() {
 		abilityFed->resetFood();
 		animal->setNeedFood(true);
 	}	
+}
+ostream& FeedCommand::write(ostream& stream) {
+	stream << type << endl;
+	stream << playerId << ' ' << animalId << ' ' << abilityId << endl;
+	return stream;
 }

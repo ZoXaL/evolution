@@ -11,7 +11,7 @@ public:
 	PopFoodCommand(int count);
 	void execute();
 	void undo();
-	std::ostream& write(std::ostream& stream){};
+	std::ostream& write(std::ostream& stream);
 	std::istream& read(std::istream& stream){};
 };
 #endif
