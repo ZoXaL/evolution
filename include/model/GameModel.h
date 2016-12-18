@@ -18,6 +18,7 @@ class GameModel {
 	Player players[2];
 
 	Player* currentPlayer;
+	Player* firstPlayer;
 	int moveNum;
 	GamePhaze::Phaze phaze;
 	
@@ -33,7 +34,9 @@ public:
 	
 	Player* getPlayer(int);
 	Player* getCurrentPlayer();
+	Player* getFirstPlayer();
 	Player* switchPlayer();
+	Player* switchFirstPlayer();
 
 	int getMove();
 	void increaseMove();

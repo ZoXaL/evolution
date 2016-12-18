@@ -11,8 +11,9 @@ GameModel* GameModel::instance = nullptr;
 const int GameModel::CARDS_ON_START = 2;
 
 GameModel::GameModel() {
-	//init game
-	currentPlayer = &players[0];
+	//init game	
+	firstPlayer = &players[0];
+	currentPlayer = firstPlayer;
 	moveNum = 1;
 	phaze = GamePhaze::EVOLVE;
 }
@@ -56,6 +57,9 @@ Player* GameModel::getPlayer(int playerNum) {
 Player* GameModel::getCurrentPlayer() {
 	return currentPlayer;
 }
+Player* GameModel::getFirstPlayer() {
+	return firstPlayer;
+}
 
 Player* GameModel::switchPlayer() {
 	Player* next = (currentPlayer == &players[1]) ? &players[0] : &players[1];
@@ -63,6 +67,12 @@ Player* GameModel::switchPlayer() {
 		currentPlayer = next;
 	}
 	return currentPlayer;
+}
+
+Player* GameModel::switchFirstPlayer() {
+	Player* next = (firstPlayer == &players[1]) ? &players[0] : &players[1];
+	firstPlayer = next;
+	return firstPlayer;
 }
 int GameModel::getMove() {
 	return moveNum;

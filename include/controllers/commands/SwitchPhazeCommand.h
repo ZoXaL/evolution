@@ -7,6 +7,7 @@
 class SwitchPhazeCommand: public AbstractCommand {
 	GamePhaze::Phaze newPhaze;
 	int foodCount;
+	bool playerSwitched;
 public:
 	SwitchPhazeCommand(GamePhaze::Phaze newPhaze);
 	void execute();

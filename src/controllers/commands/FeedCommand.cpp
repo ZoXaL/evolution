@@ -35,7 +35,8 @@ void FeedCommand::undo() {
 	if (abilityId == -1) {
 		animal->setHungry(true);
 	} else {
-		FoodModification* abilityFed = (FoodModification*)(animal->getAbility(abilityId));
+		FoodModification* abilityFed = dynamic_cast<FoodModification*>(animal->getAbility(abilityId));
 		abilityFed->resetFood();
+		animal->setNeedFood(true);
 	}	
 }

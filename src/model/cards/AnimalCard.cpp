@@ -115,5 +115,5 @@ int AnimalCard::feed() {
 	if (!abilitiesNeedFood) {
 		_needFood = false;
 	}
-	return -1;
+	return abilityToFeed;
 }

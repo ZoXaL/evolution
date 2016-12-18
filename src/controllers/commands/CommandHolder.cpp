@@ -3,6 +3,8 @@
 #include "controllers/commands/TransactionCommand.h"
 #include "exceptions/Exception.h"
 #include "model/deck/Deck.h"
+#include "model/GameModel.h"
+#include "model/Player.h"
 #include <iostream>
 
 CommandHolder* CommandHolder::instance = new CommandHolder();
@@ -70,8 +72,12 @@ void CommandHolder::undo() {
 	if (currentTransaction != nullptr) {
 		throw Exception("Cannot undo because there is opened transaction");
 	}
+	Player* undoPlayer = GameModel::getInstance()->getCurrentPlayer();
 	AbstractCommand* commandToUndo = deck.pop_back();
 	commandToUndo->undo();
+	if (undoPlayer == GameModel::getInstance()->getCurrentPlayer()) {
+		return;
+	}
 	commandToUndo = deck.pop_back();
 	commandToUndo->undo();
 }

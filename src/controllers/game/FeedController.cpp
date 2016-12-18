@@ -75,6 +75,8 @@ AbstractController* FeedController::run() {
 		case 4 : {
 			if (holder->canUndo()) {
 				CommandHolder::getInstance()->undo();	
+			} else {
+				alert = "Cannot undo";
 			}
 			nextController = new GameController();
 			break;
@@ -158,7 +160,7 @@ void FeedController::useAnimalAbility(shared_ptr<AnimalCard> animal) {
 	CommandHolder* holder = CommandHolder::getInstance();
 	holder->openTransaction();
 	abilityToUse->use();
-	cout << "got it: " << abilityToUse->getStatus() << endl;
+	holder->addCommand(new EndMoveCommand());
 	return;
 }
 
@@ -191,7 +193,7 @@ void FeedController::pass() {
 
 	CommandHolder* holder = CommandHolder::getInstance();
 	holder->openTransaction();
-	holder->addCommand(new PassCommand(currentPlayer));
 	holder->addCommand(new EndMoveCommand());
+	holder->addCommand(new PassCommand(currentPlayer));
 }
 

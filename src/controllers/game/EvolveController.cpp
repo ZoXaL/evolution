@@ -55,10 +55,11 @@ AbstractController* EvolveController::run() {
 				break;
 			} 
 			case 2 : {
-				cout << "Ok, do undo" << endl;
 				if (holder->canUndo()) {
 					CommandHolder::getInstance()->undo();	
-				}				
+				} else {
+					alert = "Cannot undo";
+				}			
 				nextController = new GameController();
 				break;
 			} 
@@ -99,9 +100,10 @@ AbstractController* EvolveController::run() {
 				break;
 			} 
 			case 4 : {
-				cout << "Ok, do undo" << endl;
 				if (holder->canUndo()) {
 					CommandHolder::getInstance()->undo();	
+				} else {
+					alert = "Cannot undo";
 				}
 				nextController = new GameController();
 				break;
@@ -170,7 +172,7 @@ void EvolveController::pass() {
 	Player* currentPlayer = model->getCurrentPlayer();
 
 	CommandHolder* holder = CommandHolder::getInstance();
-	holder->openTransaction();
-	holder->addCommand(new PassCommand(currentPlayer));
+	holder->openTransaction();	
 	holder->addCommand(new EndMoveCommand());
+	holder->addCommand(new PassCommand(currentPlayer));
 }

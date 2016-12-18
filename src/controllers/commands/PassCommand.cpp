@@ -25,5 +25,9 @@ void PassCommand::execute() {
 void PassCommand::undo() {
 	GameModel* model = GameModel::getInstance();
 	Player* player = model->getPlayer(playerId);
-	player->clearPassed();
+	if (!pass) {
+		player->pass();
+	} else {
+		player->clearPassed();
+	}
 }
