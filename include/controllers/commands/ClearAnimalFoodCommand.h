@@ -7,6 +7,8 @@
 class ClearAnimalFoodCommand: public AbstractCommand {
 int playerId;
 int animalId;
+bool wasHungry;
+bool neededFood;
 public:
 	ClearAnimalFoodCommand(int playerId, int animalId);
 	ClearAnimalFoodCommand(Player* player, int animalId);

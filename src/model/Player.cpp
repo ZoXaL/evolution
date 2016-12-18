@@ -21,18 +21,26 @@ void Player::pushCardToHand(shared_ptr<AbilityCard> card) {
 	this->hand.push_back(card);
 }
 shared_ptr<AbilityCard> Player::removeCardFromHand(int cardNum) {
-	if(!checkRange(cardNum, 0, hand.size())) {
+	if(!checkRange(cardNum, 0, hand.size()-1)) {
 		return nullptr;
 	}
 	shared_ptr<AbilityCard> returnCard = hand[cardNum];
 	hand.erase(hand.begin() + cardNum);
 	return returnCard;
 }
+void Player::addCardToHand(shared_ptr<AbilityCard> ability, int index) {
+	hand.insert(hand.begin()+index, ability);
+}
+
+
 shared_ptr<AbilityCard> Player::popCardFromHand() {
 	if(hand.size() == 0) {
 		return nullptr;
 	}
-	return *(hand.erase(hand.begin()+hand.size()-1));
+	auto returnCardIt = hand.begin()+hand.size()-1;
+	shared_ptr<AbilityCard> returnCard = *returnCardIt;
+	hand.pop_back();
+	return returnCard;
 }
 shared_ptr<AbilityCard> Player::getCardFromHand(int cardNum) {
 	if(!checkRange(cardNum, 0, hand.size())) {
@@ -50,11 +58,17 @@ vector<shared_ptr<AnimalCard>>* Player::getAnimals() {
 void Player::addAnimal(shared_ptr<AnimalCard> newAnimal) {
 	animals.push_back(newAnimal);
 }
+void Player::addAnimal(shared_ptr<AnimalCard> animal, int index) {
+	animals.insert(animals.begin()+index, animal);
+}
 shared_ptr<AnimalCard> Player::deleteAnimal(int animalNum) {
 	if(!checkRange(animalNum, 0, animals.size())) {
 		return nullptr;
 	}
-	return *(animals.erase(animals.begin()+animalNum));
+	auto returnAnimalIt = animals.begin()+animals.size()-1;
+	shared_ptr<AnimalCard> returnAnimal = *returnAnimalIt;
+	animals.pop_back();
+	return returnAnimal;
 }
 
 shared_ptr<AnimalCard> Player::getAnimal(int animalNum) {

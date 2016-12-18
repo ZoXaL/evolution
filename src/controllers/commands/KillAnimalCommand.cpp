@@ -23,10 +23,13 @@ void KillAnimalCommand::execute() {
 	GameModel* model = GameModel::getInstance();
 	Player* player = model->getPlayer(playerId);
 
-	// TODO: save all abilities
-	player->deleteAnimal(animalId);
+	animal = player->deleteAnimal(animalId);
 }
 
 void KillAnimalCommand::undo() {
-	
+	GameModel* model = GameModel::getInstance();
+	Player* player = model->getPlayer(playerId);
+
+	// TODO: save all abilities
+	player->addAnimal(animal, animalId);	
 }

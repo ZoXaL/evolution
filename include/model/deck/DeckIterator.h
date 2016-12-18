@@ -67,7 +67,7 @@ DeckIterator<T> DeckIterator<T>::operator--(int a) {
 template<typename T>
 T DeckIterator<T>::operator*() {
 	if (current == nullptr) {
-		throw Exception("jojo");
+		throw Exception("Cannot * iterator because it points to nullptr");
 	}
 	return current->data;	
 }

@@ -5,29 +5,31 @@
 #include <memory>
 using namespace std;
 
-#include "model/cards/Card.h"
 #include "model/Player.h"
 #include "model/cards/AbilityCard.h"
 
 
 class AnimalCard {
-	shared_ptr<Card> createdFrom;
+	shared_ptr<AbilityCard> createdFrom;
 	vector<shared_ptr<AbilityCard>> abilities;
 	bool _isHungry;
 	bool _needFood;
 	Player* owner;
 public:
-	AnimalCard(shared_ptr<Card> createdFrom, Player* owner);
+	AnimalCard(shared_ptr<AbilityCard> createdFrom, Player* owner);
 	vector<shared_ptr<AbilityCard>>* getAbilities();
-	void addAbility(shared_ptr<AbilityCard> newAbility);
+	void pushAbility(shared_ptr<AbilityCard> newAbility);
+	shared_ptr<AbilityCard> popAbility();
 	AbilityCard* getAbility(int index);
 	string getStatus();
 	int getCost();
+	shared_ptr<AbilityCard> getCreatedFrom();
 
 	bool needFood();	// if yes, you can feed it
 	bool isHungry();	// if no, animal dies
 	int feed();
-	void clearHungry();
+	void setHungry(bool);
+	void setNeedFood(bool);
 	Player* getOwner();
 };
 

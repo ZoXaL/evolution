@@ -9,7 +9,7 @@
 
 using namespace std;
 
-AnimalCard::AnimalCard(shared_ptr<Card> createdFrom, Player* owner) {
+AnimalCard::AnimalCard(shared_ptr<AbilityCard> createdFrom, Player* owner) {
 	this->createdFrom = createdFrom;
 	this->_isHungry = true;
 	this->_needFood = true;
@@ -21,11 +21,23 @@ vector<shared_ptr<AbilityCard>>* AnimalCard::getAbilities() {
 Player* AnimalCard::getOwner() {
 	return owner;
 }
+shared_ptr<AbilityCard> AnimalCard::getCreatedFrom() {
+	return createdFrom;
+}
 
-void AnimalCard::addAbility(shared_ptr<AbilityCard> newAbility) {
+void AnimalCard::pushAbility(shared_ptr<AbilityCard> newAbility) {
 	newAbility->setOwner(this);
 	abilities.push_back(newAbility);
 }
+shared_ptr<AbilityCard> AnimalCard::popAbility() {
+	if (abilities.size() == 0) {
+		throw Exception("Cannot pop animal ability because there is no one");
+	}
+	shared_ptr<AbilityCard> abilityToReturn = abilities[abilities.size()-1];
+	abilities.pop_back();
+	return abilityToReturn;
+}
+
 AbilityCard* AnimalCard::getAbility(int index) {
 	if (index >= abilities.size() || index < 0) {
 		throw Exception("Cannot get ability on illegal index");
@@ -59,9 +71,14 @@ bool AnimalCard::needFood() {
 bool AnimalCard::isHungry() {
 	return _isHungry;
 }
-void AnimalCard::clearHungry() {
-	this->_isHungry = true;
-	this->_needFood = true;
+void AnimalCard::setHungry(bool hungry) {
+	this->_isHungry = hungry;
+	if (hungry) {
+		this->_needFood = true;
+	}	
+}
+void AnimalCard::setNeedFood(bool needFood) {
+	this->_needFood = needFood;
 }
 
 int AnimalCard::feed() {

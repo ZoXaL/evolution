@@ -23,6 +23,7 @@ public:
 	void clearPassed();	
 
 	shared_ptr<AbilityCard> getCardFromHand(int cardId);
+	void addCardToHand(shared_ptr<AbilityCard> ability, int index);
 	void pushCardToHand(shared_ptr<AbilityCard>);
 	shared_ptr<AbilityCard> popCardFromHand();
 	shared_ptr<AbilityCard> removeCardFromHand(int cardId);
@@ -30,6 +31,7 @@ public:
 	shared_ptr<AnimalCard> getAnimal(int animalId);
 	vector<shared_ptr<AnimalCard>>* getAnimals();
 	void addAnimal(shared_ptr<AnimalCard>);
+	void addAnimal(shared_ptr<AnimalCard>, int index);
 	shared_ptr<AnimalCard> deleteAnimal(int);
 
 	int handSize();

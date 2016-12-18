@@ -11,6 +11,7 @@ public:
 	bool isEmpty();
 	bool getFood();
 	int getCapacity();
+	void addFood();
 };
 
 #endif

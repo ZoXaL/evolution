@@ -24,9 +24,14 @@ void AddAbilityCommand::execute() {
 	shared_ptr<AbilityCard> newAbility = player->getCardFromHand(abilityId);
 	player->removeCardFromHand(abilityId);
 	shared_ptr<AnimalCard> animal = player->getAnimal(animalId);
-	animal->addAbility(newAbility);
+	animal->pushAbility(newAbility);
 }
 
 void AddAbilityCommand::undo() {
-	
+	GameModel* model = GameModel::getInstance();
+	Player* player = model->getPlayer(playerId);
+	shared_ptr<AnimalCard> animal = player->getAnimal(animalId);
+
+	shared_ptr<AbilityCard> ability = animal->popAbility();
+	player->addCardToHand(ability, abilityId);	
 }

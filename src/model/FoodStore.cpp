@@ -12,6 +12,9 @@ bool FoodStore::getFood() {
 	}
 	return false;
 }
+void FoodStore::addFood() {
+	capacity++;
+}
 
 bool FoodStore::isEmpty() {
 	return capacity > 0;

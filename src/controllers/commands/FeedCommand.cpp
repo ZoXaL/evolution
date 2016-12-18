@@ -3,6 +3,7 @@
 #include "model/cards/AnimalCard.h"
 #include "model/GameModel.h"
 #include "model/Player.h"
+#include "model/cards/interfaces/FoodModification.h"
 
 #include <memory>
 
@@ -25,15 +26,16 @@ void FeedCommand::execute() {
 	Player* player = model->getPlayer(playerId);
 	shared_ptr<AnimalCard> animal = player->getAnimal(animalId);
 	abilityId = animal->feed();
-	// TODO:
-	// 1) Take food
-	// 2) Feed animal
-	// shared_ptr<Card> newAbility = player->getCardFromHand(abilityId);
-	// player->removeCardFromHand(abilityId);
-	// shared_ptr<AnimalCard> animal = player->getAnimal(animalId);
-	// animal->addAbility(newAbility);
 }
 
 void FeedCommand::undo() {
-	
+	GameModel* model = GameModel::getInstance();
+	Player* player = model->getPlayer(playerId);
+	shared_ptr<AnimalCard> animal = player->getAnimal(animalId);
+	if (abilityId == -1) {
+		animal->setHungry(true);
+	} else {
+		FoodModification* abilityFed = (FoodModification*)(animal->getAbility(abilityId));
+		abilityFed->resetFood();
+	}	
 }

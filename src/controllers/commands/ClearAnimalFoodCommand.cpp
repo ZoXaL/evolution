@@ -17,37 +17,15 @@ void ClearAnimalFoodCommand::execute() {
 	GameModel* model = GameModel::getInstance();
 	Player* player = model->getPlayer(playerId);
 	shared_ptr<AnimalCard> animal = player->getAnimal(animalId);
-
-	// vector<shared_ptr<Card>>* abilities = animal->getAbilities();
-
-	// for (int i = 0; i < abilities->size(); i++) {
-	// 	shared_ptr<Card> card = abilities->[i];
-	// 	AbilityCard* ability = card->getAbilityCard();
-	// 	// 2) check if ability needs food
-	// 	switch (ability->getAbility()) {
-	// 		case (Ability::FAT) : {
-	// 			// feed fat only if animal is not hungry				
-	// 			Fat* fatCard = (Fat*)ability;
-	// 			// feed only if fat is empty
-	// 			if (fatCard->needFood()) {
-	// 				if (!this->_isHungry) {	// if animal is hungry, you cannot fill fat
-	// 					if (abilityToFeed != -1) {	// some fat has been filled earlier
-	// 						abilitiesNeedFood = true;	// mark that there is empty fat
-	// 						break;
-	// 					}
-	// 					fatCard->giveFood();
-	// 					abilityToFeed = i;
-	// 				} else {
-	// 					abilitiesNeedFood = true;//mark that there is empty fat
-	// 				}		
-	// 			}
-	// 			break;
-	// 		}
-	// 	}		
-	// }
-	animal->clearHungry();
+	wasHungry = animal->isHungry();
+	neededFood = animal->needFood();
+	animal->setHungry(true);
 }
 
 void ClearAnimalFoodCommand::undo() {
-	
+	GameModel* model = GameModel::getInstance();
+	Player* player = model->getPlayer(playerId);
+	shared_ptr<AnimalCard> animal = player->getAnimal(animalId);
+	animal->setHungry(wasHungry);
+	animal->setNeedFood(neededFood);
 }

@@ -1,5 +1,5 @@
 #include "controllers/commands/CreateAnimalCommand.h"
-#include "model/cards/Card.h"
+#include "model/cards/AbilityCard.h"
 #include "model/cards/AnimalCard.h"
 #include "model/GameModel.h"
 #include "model/Player.h"
@@ -20,12 +20,17 @@ void CreateAnimalCommand::execute() {
 	// 1) Take abilityCard and delete from hand
 	// 2) Convert to AnimalCard
 	// 3) Add animalCard to cards
-	shared_ptr<Card> createFrom = player->getCardFromHand(cardId);
+	shared_ptr<AbilityCard> createFrom = player->getCardFromHand(cardId);
 	player->removeCardFromHand(cardId);
 	shared_ptr<AnimalCard> newAnimal(new AnimalCard(createFrom, player));
 	player->addAnimal(newAnimal);
 }
 
 void CreateAnimalCommand::undo() {
-	
+	GameModel* model = GameModel::getInstance();
+	Player* player = model->getPlayer(playerId);
+
+	shared_ptr<AnimalCard> animal = player->deleteAnimal(player->animalsCount()-1);
+	shared_ptr<AbilityCard> createdFrom = animal->getCreatedFrom();
+	player->addCardToHand(createdFrom, cardId);
 }

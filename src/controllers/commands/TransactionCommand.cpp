@@ -4,10 +4,12 @@ TransactionCommand::TransactionCommand() {
 
 }
 TransactionCommand::~TransactionCommand() {
-	for (auto i = deck.begin(); i != deck.end(); i++) {
-		delete *i;
+	if (deck.getSize() > 0) {
+		for (auto i = deck.begin(); i != deck.end(); i++) {
+			delete *i;
+		}
+		delete *(deck.end());
 	}
-	delete *(deck.end());
 }
 
 void TransactionCommand::addCommand(AbstractCommand* newCommand) {
