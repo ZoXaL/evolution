@@ -79,3 +79,10 @@ bool Player::isPassed() {
 void Player::clearPassed() {
 	passed = false;
 }
+int Player::getScore() {
+	int totalScore = 0;
+	for (auto ibegin = animals.begin(); ibegin != animals.end(); ibegin++) {
+		totalScore += (*ibegin)->getCost();
+	}
+	return totalScore;
+}

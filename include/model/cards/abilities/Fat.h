@@ -18,6 +18,7 @@ public:
 	void resetFood();
 
 	std::string getStatus();
+	int getCost();
 
 	std::ostream& write(std::ostream&);
 	std::istream& read(std::istream&);

@@ -15,6 +15,7 @@ public:
 	virtual AbilityCard* getAbilityCard() = 0;
 	virtual ostream& write(ostream&) = 0;
 	virtual istream& read(istream&) = 0;
+	virtual int getCost() = 0;
 };
 
 #endif

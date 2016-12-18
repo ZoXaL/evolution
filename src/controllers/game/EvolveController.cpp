@@ -111,7 +111,7 @@ void EvolveController::createNewAnimal() {
 	cout << "Create animal from: " << endl;
 	int i = 1;
 	for (; i <= handSize; i++) {
-		cout << i << ")" << currentPlayer->getCardFromHand(i-1)->getDescription() << endl;
+		cout << i << ") " << currentPlayer->getCardFromHand(i-1)->getDescription() << endl;
 	}
 	cout << i << ") Cancel" << endl;
 	int answer = getInt(cin, 1, i);

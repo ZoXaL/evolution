@@ -33,6 +33,7 @@ public:
 
 	int handSize();
 	int animalsCount();
+	int getScore();
 };
 
 #endif

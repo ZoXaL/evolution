@@ -13,25 +13,29 @@ const int GameModel::CARDS_ON_START = 2;
 GameModel::GameModel() {
 	//init game
 	currentPlayer = &players[0];
+	moveNum = 1;
+	phaze = GamePhaze::EVOLVE;
 }
 
 
 GameModel* GameModel::initialize() {
 	if (instance != nullptr) {
-		delete instance;
+		delete GameModel::instance;
 	} 
-	instance = new GameModel();
-	return instance;
+	GameModel::instance = new GameModel();
+	return GameModel::instance;
 }
 
 GameModel* GameModel::getInstance() {
-	if(instance == nullptr) {
+	if(GameModel::instance == nullptr) {
 		return initialize();
 	}
-	return instance;
+	return GameModel::instance;
 }
 void GameModel::deleteInstance() {
-	delete instance;
+	if (instance != nullptr) {
+		delete GameModel::instance;
+	} 
 }
 
 Deck<shared_ptr<Card>>* GameModel::getCardDeck() {

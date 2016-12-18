@@ -7,6 +7,9 @@
 GiveCardToPlayerCommand::GiveCardToPlayerCommand(int playerId) {
 	this->playerId = playerId;
 }
+GiveCardToPlayerCommand::GiveCardToPlayerCommand(Player* player) {
+	this->playerId = (GameModel::getInstance()->getPlayer(0) == player) ? 0 : 1;
+}
 
 void GiveCardToPlayerCommand::execute() {
 	GameModel* model = GameModel::getInstance();

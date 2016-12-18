@@ -32,6 +32,10 @@ string Fat::getStatus() {
 	return status;
 }
 
+int Fat::getCost() {
+	return (reserve) ? 2 : 1;
+}
+
 ostream& Fat::write(ostream& stream)  {
 	stream << abilityToString(ability) << endl;
 	return stream;

@@ -7,6 +7,7 @@
 #include "model/GamePhaze.h"
 #include <vector> 
 #include <memory> 
+#include <iostream>
 using namespace std;
 
 class GameModel {
@@ -20,6 +21,7 @@ class GameModel {
 	
 	static GameModel* instance;
 	GameModel();
+	~GameModel() {};
 public:
 	static const int CARDS_ON_START;
 

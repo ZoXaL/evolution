@@ -19,6 +19,7 @@ public:
 	vector<shared_ptr<Card>>* getAbilities();
 	void addAbility(shared_ptr<Card> newAbility);
 	string getStatus();
+	int getCost();
 
 	bool needFood();	// if yes, you can feed it
 	bool isHungry();	// if no, animal dies

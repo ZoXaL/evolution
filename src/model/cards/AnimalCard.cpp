@@ -30,8 +30,16 @@ string AnimalCard::getStatus() {
 		shared_ptr<Card> card = (*ibegin);
 		AbilityCard* ability = card->getAbilityCard();
 		status += ability->getStatus();
+		status += " ";
 	}
 	return status;
+}
+int AnimalCard::getCost() {
+	int totalCost = 3;
+	for (auto ibegin = abilities.begin(); ibegin != abilities.end(); ibegin++) {
+		totalCost += (*ibegin)->getCost();
+	}
+	return totalCost;
 }
 
 bool AnimalCard::needFood() {

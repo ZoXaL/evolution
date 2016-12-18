@@ -5,6 +5,7 @@
 #include "model/cards/abilities/Fat.h"
 #include "model/deck/Deck.h"
 #include "controllers/commands/GiveCardToPlayerCommand.h"
+#include "controllers/commands/CommandHolder.h"
 #include "memory"
 using namespace std;
 
@@ -19,7 +20,7 @@ GameModel* GameManager::buildGame(const char* firstPlayerName, const char* secon
 
 	Deck<shared_ptr<Card>>* cardDeck = model->getCardDeck();
 	// Create all cards and fill the cardDeck
-	for (int i = 0; i < 20; i++) {
+	for (int i = 0; i < 10; i++) {
 		if (i%2) {
 			shared_ptr<Card> newCard(new Fat());
 			cardDeck->push_back(newCard);
@@ -30,13 +31,11 @@ GameModel* GameManager::buildGame(const char* firstPlayerName, const char* secon
 	}
 
 	for (int i = 0; i < GameModel::CARDS_ON_START; i++) {
-		GiveCardToPlayerCommand giveCard(0);
-		giveCard.execute();
+		CommandHolder::getInstance()->addCommand(new GiveCardToPlayerCommand(0));
 	}
 
 	for (int i = 0; i < GameModel::CARDS_ON_START; i++) {
-		GiveCardToPlayerCommand giveCard(1);
-		giveCard.execute();
+		CommandHolder::getInstance()->addCommand(new GiveCardToPlayerCommand(1));
 	}
 	return model;
 }

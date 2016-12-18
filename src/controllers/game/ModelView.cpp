@@ -40,6 +40,7 @@ void ModelView::displayModel(bool showHand) {
 	cout << "Current player: " << currentPlayer->getName() << endl;
 	cout << "Current move: " << model->getMove() << endl;
 	cout << "Current phaze: " << phazeToString(model->getPhaze()) << endl;
+	cout << "Deck size: " << cardDeck->getSize() << endl;
 	displayStatistic();
 	cout << "--------------------------------------------------------------------------------" << endl;	
 	displayAlert();

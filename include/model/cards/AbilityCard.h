@@ -28,6 +28,7 @@ public:
 	bool isPassive();
 
 	virtual string getStatus() = 0;
+	
 };
 
 #endif
