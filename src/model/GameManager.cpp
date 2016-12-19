@@ -47,7 +47,7 @@ GameModel* GameManager::buildGame(const char* firstPlayerName, const char* secon
 	return model;
 }
 
-void GameManager::saveGame(std::fstream& stream) {
+void GameManager::saveGame(fstream& stream) {
 	if (!gameInitialized) {
 		throw Exception("Game is not initialized");
 	}
@@ -60,8 +60,24 @@ void GameManager::saveGame(std::fstream& stream) {
 	stream << player2->getName() << endl;
 	cardDeck->write(stream) << endl;
 	CommandHolder::getInstance()->write(stream);
-	// Колода карт
-	// Список команд
+}
+
+GameModel* GameManager::loadGame(fstream& stream) {
+	GameModel* model = GameModel::initialize();	
+	Player* player1 = model->getPlayer(0);
+	Player* player2 = model->getPlayer(1);
+	Deck<shared_ptr<AbilityCard>>* cardDeck = model->getCardDeck();
+
+	char firstPlayerName[80];
+	char secondPlayerName[80];
+	stream >> firstPlayerName;
+	stream >> secondPlayerName;
+	player1->setName(firstPlayerName);
+	player2->setName(secondPlayerName);
+	// cardDeck->read(stream);
+	// CommandHolder::getInstance()->read(stream);
+	gameInitialized = true;
+	return model;
 }
 
 bool GameManager::isGameInitilized() {

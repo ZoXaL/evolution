@@ -44,3 +44,7 @@ ostream& TransactionCommand::write(ostream& stream) {
 	deck.write(stream);
 	return stream;
 }
+istream& TransactionCommand::read(istream& stream) {
+	// deck.read(stream);
+	return stream;
+}

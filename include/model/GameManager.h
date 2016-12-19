@@ -9,6 +9,6 @@ public:
 	static GameModel* buildGame(const char* firstPlayerName, const char* secondPlayerName);
 	static void saveGame(std::fstream&);
 	static bool isGameInitilized();
-	// GameModel* loadGame(const char* filePath);
+	static GameModel* loadGame(std::fstream&);
 };
 #endif

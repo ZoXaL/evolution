@@ -15,6 +15,6 @@ public:
 	void undo();
 	int getSize();
 	std::ostream& write(std::ostream& stream);
-	std::istream& read(std::istream& stream){};
+	std::istream& read(std::istream& stream);
 };
 #endif

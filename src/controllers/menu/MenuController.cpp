@@ -1,6 +1,7 @@
 #include "controllers/menu/MenuController.h"
 #include "controllers/menu/StartGameController.h"
 #include "controllers/menu/SaveGameController.h"
+#include "controllers/menu/LoadGameController.h"
 #include "controllers/menu/ExitGameController.h"
 #include "controllers/AbstractController.h"
 #include "model/GameManager.h"
@@ -37,8 +38,7 @@ AbstractController* MenuController::showMainMenu() {
 					return new StartGameController(false);
 				}
 				case 3 : {
-					cout << "Ok, go load game" << endl;
-					return new MenuController();
+					return new LoadGameController();
 				}
 				case 4 : {
 					return new SaveGameController();
@@ -64,10 +64,9 @@ AbstractController* MenuController::showMainMenu() {
 					return new StartGameController(true);
 				} 
 				case 2 : {
-					cout << "Ok, go load game" << endl;
-					return new MenuController();
+					return new LoadGameController();
 				}
-				case 4 : {
+				case 3 : {
 					cout << "Good bye!" << endl;
 					return new ExitGameController();
 				} 

@@ -92,5 +92,6 @@ ostream& CommandHolder::write(ostream& stream) {
 }
 
 istream& CommandHolder::read(istream& stream) {
-	cout << "Reading commands from file" << endl;
+	//deck.read(stream);
+	return stream;
 }

@@ -3,6 +3,7 @@
 
 #include <string>
 #include <iostream>
+#include <memory>
 #include "model/cards/Card.h"
 #include "model/cards/AnimalCard.h"
 #include "model/cards/abilities/Ability.h"
@@ -33,7 +34,7 @@ public:
 
 	virtual string getStatus() = 0;
 	virtual void use() = 0;
-	
+	static shared_ptr<AbilityCard> readFromFile(istream&);
 };
 
 #endif

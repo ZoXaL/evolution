@@ -4,12 +4,14 @@
 #include <memory>
 #include "exceptions/Exception.h"
 #include "interfaces/Serializable.h"
+#include "controllers/commands/AbstractCommand.h"
+#include "model/cards/AbilityCard.h"
 #include "DeckIterator.h"
 
 using namespace std;
 
 template<typename T>
-class Deck : public Serializable {
+class Deck {
 	struct Node {
 		T data;
 		Node* previous;
@@ -41,7 +43,6 @@ public:
 	int getSize();
 
 	ostream& write(ostream&);
-	istream& read(istream&);
 
 	template<typename T1>
 	friend ostream& operator<<(ostream& stream, Deck<T1> deck);
@@ -150,15 +151,6 @@ ostream& Deck<T>::write(ostream& stream) {
 	}	
 	return stream;
 }
-
-template<typename T>
-istream& Deck<T>::read(istream& stream) {
-	// TODO: read number of elements
-	// fill out the deck
-	cout << "kk read deck from file" << endl;
-	return stream;
-}
-
 template<typename T> 
 bool Deck<T>::isEmpty() {
 	return (size == 0);

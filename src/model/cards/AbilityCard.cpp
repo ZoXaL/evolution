@@ -1,4 +1,5 @@
 #include "model/cards/AbilityCard.h"
+#include "model/cards/abilities/Fat.h"
 #include "model/cards/abilities/Ability.h"
 
 AbilityCard::AbilityCard(Ability::AbilityType _ability, bool _duplicated, bool _passive) : ability(_ability) {
@@ -24,4 +25,8 @@ AbilityCard* AbilityCard::getAbilityCard() {
 }
 void AbilityCard::setOwner(AnimalCard* owner) {
 	this->owner = owner;
+}
+
+shared_ptr<AbilityCard> AbilityCard::readFromFile(istream&) {
+	return shared_ptr<AbilityCard>(new Fat());
 }
