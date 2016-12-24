@@ -7,11 +7,10 @@ template<typename T>
 class Deck;
 
 template<typename T>
-class DeckIterator {
-	typedef typename Deck<T>::Node* pointer_t;
-
-	pointer_t current;
+class DeckIterator {	
 public:
+	typedef typename Deck<T>::Node* pointer_t;
+	typedef T value_type;
 	DeckIterator(pointer_t);
 
 	DeckIterator<T> operator++();
@@ -22,6 +21,8 @@ public:
 	bool operator!=(const DeckIterator<T>&);
 	T operator*();
 	T* operator->();
+private:
+	pointer_t current;
 };
 
 template<typename T>

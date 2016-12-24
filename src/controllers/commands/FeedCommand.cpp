@@ -47,3 +47,9 @@ ostream& FeedCommand::write(ostream& stream) {
 	stream << playerId << ' ' << animalId << ' ' << abilityId << endl;
 	return stream;
 }
+istream& FeedCommand::read(istream& stream) {
+	stream >> playerId;
+	stream >> animalId;
+	stream >> abilityId;
+	return stream;
+}

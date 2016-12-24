@@ -43,3 +43,8 @@ ostream& CreateAnimalCommand::write(ostream& stream) {
 	stream << playerId << ' ' << cardId << ' ' << endl;
 	return stream;
 }
+istream& CreateAnimalCommand::read(istream& stream) {
+	stream >> playerId;
+	stream >> cardId;
+	return stream;
+}

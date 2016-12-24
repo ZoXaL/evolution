@@ -34,3 +34,7 @@ ostream& GiveCardToPlayerCommand::write(ostream& stream) {
 	stream << playerId << endl;
 	return stream;
 }
+istream& GiveCardToPlayerCommand::read(istream& stream) {
+	stream >> playerId;
+	return stream;
+}

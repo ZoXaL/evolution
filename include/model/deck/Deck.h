@@ -66,7 +66,7 @@ Deck<T>::~Deck() {
 }
 
 template<typename T> 
-void Deck<T>::push_back(const T& data) {
+void Deck<T>::push_front(const T& data) {
 	Node* newNode = new Node(data);
 	newNode->previous = nullptr;
 	newNode->next = first;
@@ -80,7 +80,7 @@ void Deck<T>::push_back(const T& data) {
 	size++;
 }
 template<typename T> 
-void Deck<T>::push_front(const T& data) {
+void Deck<T>::push_back(const T& data) {
 	Node* newNode = new Node(data);
 	newNode->previous = last;
 	newNode->next = nullptr;
@@ -95,7 +95,7 @@ void Deck<T>::push_front(const T& data) {
 }
 
 template<typename T> 
-T Deck<T>::pop_back() {
+T Deck<T>::pop_front() {
 	if (first == nullptr) {
 		throw Exception("Cannot pop_back from Deck: there is no elements");
 	}
@@ -111,7 +111,7 @@ T Deck<T>::pop_back() {
 	return returnData;
 }
 template<typename T> 
-T Deck<T>::pop_front() {
+T Deck<T>::pop_back() {
 	if (last == nullptr) {
 		throw Exception("Cannot pop_front from Deck: there is no elements");
 	}

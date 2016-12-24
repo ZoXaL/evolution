@@ -10,9 +10,11 @@
 #include <memory>
 #include <fstream>
 #include <string.h>
+#include <algorithm>
 using namespace std;
 
 bool GameManager::gameInitialized = false;
+list<shared_ptr<AbilityCard>> GameManager::startDeck;
 
 GameModel* GameManager::buildGame(const char* firstPlayerName, const char* secondPlayerName) {
 	gameInitialized = true;
@@ -25,25 +27,19 @@ GameModel* GameManager::buildGame(const char* firstPlayerName, const char* secon
 	player2->setName(secondPlayerName);
 
 	Deck<shared_ptr<AbilityCard>>* cardDeck = model->getCardDeck();
-	// Create all cards and fill the cardDeck
+	startDeck.clear();
 	for (int i = 0; i < 10; i++) {
 		if (i%2) {
 			shared_ptr<AbilityCard> newCard(new Fat());
 			cardDeck->push_back(newCard);
+			startDeck.push_back(newCard);
 		} else {
 			shared_ptr<AbilityCard> newCard(new Fat());
 			cardDeck->push_back(newCard);
+			startDeck.push_back(newCard);
 		}	
 	}
-	for (int i = 0; i < GameModel::CARDS_ON_START; i++) {
-		GiveCardToPlayerCommand giveCard(0);
-		giveCard.execute();
-	}
-
-	for (int i = 0; i < GameModel::CARDS_ON_START; i++) {
-		GiveCardToPlayerCommand giveCard(1);
-		giveCard.execute();
-	}
+	giveCardsToPlayers(model->getCardDeck());
 	return model;
 }
 
@@ -58,11 +54,16 @@ void GameManager::saveGame(fstream& stream) {
 
 	stream << player1->getName() << ' ';
 	stream << player2->getName() << endl;
-	cardDeck->write(stream) << endl;
+	stream << startDeck.size() << endl;
+	for (auto it = startDeck.begin(); it != startDeck.end(); it++) {
+		(*it)->write(stream);
+	}
 	CommandHolder::getInstance()->write(stream);
 }
 
 GameModel* GameManager::loadGame(fstream& stream) {
+	cout << "Loading game ..." << endl;
+
 	GameModel* model = GameModel::initialize();	
 	Player* player1 = model->getPlayer(0);
 	Player* player2 = model->getPlayer(1);
@@ -74,12 +75,31 @@ GameModel* GameManager::loadGame(fstream& stream) {
 	stream >> secondPlayerName;
 	player1->setName(firstPlayerName);
 	player2->setName(secondPlayerName);
+	//Reading card deck
+	int deckSize;
+	stream >> deckSize;
+	for (int i = 0; i< deckSize; i++) {
+		cardDeck->push_back(AbilityCard::readFromFile(stream));
+	}
+	giveCardsToPlayers(model->getCardDeck());
 	// cardDeck->read(stream);
-	// CommandHolder::getInstance()->read(stream);
+	CommandHolder::getInstance()->read(stream);
 	gameInitialized = true;
 	return model;
 }
 
 bool GameManager::isGameInitilized() {
 	return gameInitialized;
+}
+
+void GameManager::giveCardsToPlayers(Deck<shared_ptr<AbilityCard>>* cardDeck) {
+	for (int i = 0; i < GameModel::CARDS_ON_START; i++) {
+		GiveCardToPlayerCommand giveCard(0);
+		giveCard.execute();
+	}
+
+	for (int i = 0; i < GameModel::CARDS_ON_START; i++) {
+		GiveCardToPlayerCommand giveCard(1);
+		giveCard.execute();
+	}
 }

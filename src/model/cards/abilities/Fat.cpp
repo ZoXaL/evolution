@@ -46,10 +46,11 @@ void Fat::use() {
 }
 
 ostream& Fat::write(ostream& stream)  {
-	stream << ability << endl;
+	stream << ability << ' ' << reserve << endl;
 	return stream;
 }
 istream& Fat::read(istream& stream) {
 	cout << "Reading from stream: " << abilityToString(ability) << endl;
+	stream >> reserve;
 	return stream;
 }

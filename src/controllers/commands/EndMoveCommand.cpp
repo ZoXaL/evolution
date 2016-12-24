@@ -22,3 +22,7 @@ ostream& EndMoveCommand::write(ostream& stream) {
 	stream << type << endl;
 	return stream;
 }
+
+istream& EndMoveCommand::read(istream& stream) {
+	return stream;
+}

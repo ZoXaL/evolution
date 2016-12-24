@@ -43,3 +43,9 @@ ostream& AddAbilityCommand::write(ostream& stream) {
 	stream << playerId << ' ' << animalId << ' ' << abilityId << endl;
 	return stream;
 }
+istream& AddAbilityCommand::read(istream& stream) {
+	stream >> playerId;
+	stream >> animalId;
+	stream >> abilityId;
+	return stream;
+}

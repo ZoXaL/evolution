@@ -191,7 +191,7 @@ void FeedController::pass() {
 
 	CommandHolder* holder = CommandHolder::getInstance();
 	holder->openTransaction();
-	holder->addCommand(new EndMoveCommand());
 	holder->addCommand(new PassCommand(currentPlayer));
+	holder->addCommand(new EndMoveCommand());	
 }
 

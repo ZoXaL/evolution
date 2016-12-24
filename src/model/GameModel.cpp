@@ -16,8 +16,12 @@ GameModel::GameModel() {
 	currentPlayer = firstPlayer;
 	moveNum = 1;
 	phaze = GamePhaze::EVOLVE;
+	cardDeck = new Deck<shared_ptr<AbilityCard>>;
 }
 
+GameModel::~GameModel() {
+	delete cardDeck;
+}
 
 GameModel* GameModel::initialize() {
 	if (instance != nullptr) {
@@ -40,7 +44,7 @@ void GameModel::deleteInstance() {
 }
 
 Deck<shared_ptr<AbilityCard>>* GameModel::getCardDeck() {
-	return &cardDeck;
+	return cardDeck;
 }
 
 FoodStore* GameModel::getFoodStore() {
@@ -63,9 +67,7 @@ Player* GameModel::getFirstPlayer() {
 
 Player* GameModel::switchPlayer() {
 	Player* next = (currentPlayer == &players[1]) ? &players[0] : &players[1];
-	if (!next->isPassed()) {
-		currentPlayer = next;
-	}
+	currentPlayer = next;
 	return currentPlayer;
 }
 

@@ -14,7 +14,7 @@ using namespace std;
 
 class GameModel {
 	FoodStore foodStore;
-	Deck<shared_ptr<AbilityCard>> cardDeck;
+	Deck<shared_ptr<AbilityCard>>* cardDeck;
 	Player players[2];
 
 	Player* currentPlayer;
@@ -24,7 +24,7 @@ class GameModel {
 	
 	static GameModel* instance;
 	GameModel();
-	~GameModel() {};
+	~GameModel();
 public:
 	static const int CARDS_ON_START;
 

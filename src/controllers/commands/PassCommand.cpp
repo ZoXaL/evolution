@@ -40,3 +40,9 @@ ostream& PassCommand::write(ostream& stream) {
 	stream << playerId << ' ' << pass << endl;
 	return stream;
 }
+
+istream& PassCommand::read(istream& stream) {
+	stream >> playerId;
+	stream >> pass;
+	return stream;
+}

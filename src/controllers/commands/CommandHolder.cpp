@@ -6,6 +6,7 @@
 #include "model/GameModel.h"
 #include "model/Player.h"
 #include <iostream>
+#include "Logger.h"
 
 CommandHolder* CommandHolder::instance = new CommandHolder();
 
@@ -31,7 +32,7 @@ CommandHolder::~CommandHolder() {
 }
 void CommandHolder::addCommand(AbstractCommand* command) {
 	if (currentTransaction == nullptr) {
-		throw Exception("Transaction is not opened");
+		throw Exception("Exception during adding command: Transaction is not opened");
 	} else {
 		currentTransaction->addCommand(command);
 		command->execute();
@@ -39,14 +40,14 @@ void CommandHolder::addCommand(AbstractCommand* command) {
 }
 TransactionCommand* CommandHolder::openTransaction() {
 	if (currentTransaction != nullptr) {
-		throw Exception("Transaction is already opened");
+		throw Exception("Exception during opening transaction: Transaction is already opened");
 	}
 	currentTransaction = new TransactionCommand();
 	return currentTransaction;
 }
 void CommandHolder::commit() {
 	if (currentTransaction == nullptr) {
-		throw Exception("Transaction is not opened");
+		throw Exception("Exception during commit: Transaction is not opened");
 	}
 	if (currentTransaction->getSize() > 0) {
 		deck.push_back(currentTransaction);
@@ -58,7 +59,7 @@ void CommandHolder::commit() {
 
 void CommandHolder::rollback() {
 	if (currentTransaction == nullptr) {
-		throw Exception("Transaction is not opened");
+		throw Exception("Exception during rollback: Transaction is not opened");
 	}
 	currentTransaction->undo();
 	delete currentTransaction;
@@ -73,13 +74,19 @@ void CommandHolder::undo() {
 		throw Exception("Cannot undo because there is opened transaction");
 	}
 	Player* undoPlayer = GameModel::getInstance()->getCurrentPlayer();
-	AbstractCommand* commandToUndo = deck.pop_back();
-	commandToUndo->undo();
-	if (undoPlayer == GameModel::getInstance()->getCurrentPlayer()) {
-		return;
-	}
-	commandToUndo = deck.pop_back();
-	commandToUndo->undo();
+	AbstractCommand* commandToUndo;
+	do {
+		try {
+			commandToUndo = deck.pop_back();
+		} catch (Exception& e) {
+			Logger::warn("CommandHolder: " + e.getMessage());
+			throw e;
+		}
+		commandToUndo->undo();
+	} while(GameModel::getInstance()->getCurrentPlayer() != undoPlayer);
+	// if (undoPlayer == GameModel::getInstance()->getCurrentPlayer()) {
+	// 	return;
+	// }	
 }
 
 bool CommandHolder::canUndo() {
@@ -92,6 +99,24 @@ ostream& CommandHolder::write(ostream& stream) {
 }
 
 istream& CommandHolder::read(istream& stream) {
-	//deck.read(stream);
+	int commandsNum;
+	stream >> commandsNum;
+	for (int i = 0; i < commandsNum; i++) {
+		int commandType;
+		stream >> commandType;
+		switch (commandType) {
+			case (Command::TRANSACTION) : {
+				Logger::trace("CommandHolder::Reading Transaction from file");
+				AbstractCommand* transaction = new TransactionCommand();
+				transaction->read(stream);
+				deck.push_back(transaction);
+				transaction->execute();
+				break;
+			}
+			default : {
+				throw Exception("Unexpected command type during reading CommandHolder from file");
+			}
+		}
+	}
 	return stream;
 }

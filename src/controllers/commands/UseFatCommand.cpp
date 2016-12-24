@@ -44,3 +44,11 @@ ostream& UseFatCommand::write(ostream& stream) {
 	stream << playerId << ' ' << animalId << ' ' << fatAbilityId << ' ' << fedAbilityId << endl;
 	return stream;
 }
+
+istream& UseFatCommand::read(istream& stream) {
+	stream >> playerId;
+	stream >> animalId;
+	stream >> fatAbilityId;
+	stream >> fedAbilityId;
+	return stream;
+}

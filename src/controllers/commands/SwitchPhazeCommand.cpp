@@ -59,3 +59,12 @@ ostream& SwitchPhazeCommand::write(ostream& stream) {
 	stream << newPhaze << ' ' << foodCount << ' ' << playerSwitched << endl;
 	return stream;
 }
+
+istream& SwitchPhazeCommand::read(istream& stream) {
+	int nextPhaze;
+	stream >> nextPhaze;
+	newPhaze = static_cast<GamePhaze::Phaze>(nextPhaze);
+	stream >> foodCount;
+	stream >> playerSwitched;
+	return stream;
+}

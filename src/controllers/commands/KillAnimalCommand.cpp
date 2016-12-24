@@ -42,3 +42,8 @@ ostream& KillAnimalCommand::write(ostream& stream) {
 	stream << playerId << ' ' << animalId << endl;
 	return stream;
 }
+istream& KillAnimalCommand::read(istream& stream) {
+	stream >> playerId;
+	stream >> animalId;
+	return stream;
+}

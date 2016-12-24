@@ -1,5 +1,22 @@
-9-12-2016 17:37:6    just little test exception
-9-12-2016 17:37:19    just little test exception
-18-12-2016 11:50:33    Transaction is not opened
-18-12-2016 13:51:18    Transaction is not opened
-18-12-2016 21:49:0    Cannot * iterator because it points to nullptr
+24-12-2016 11:23:47 : [TRACE]    Game start
+24-12-2016 11:23:49 : [WARN]    AbilityCard::readFromFile -- unexpected ability type
+24-12-2016 11:24:8 : [TRACE]    Game start
+24-12-2016 11:24:11 : [WARN]    AbilityCard::readFromFile -- unexpected ability type
+24-12-2016 11:25:11 : [TRACE]    Game start
+24-12-2016 11:25:14 : [WARN]    Unexpected command type during reading CommandHolder from file
+24-12-2016 11:25:40 : [TRACE]    Game start
+24-12-2016 11:25:44 : [WARN]    Unexpected command type during reading CommandHolder from file
+24-12-2016 11:26:33 : [TRACE]    Game start
+24-12-2016 11:26:54 : [TRACE]    Game start
+24-12-2016 11:26:56 : [TRACE]    CommandHolder::Reading Transaction from file
+24-12-2016 11:26:56 : [TRACE]    CommandHolder::Reading Transaction from file
+24-12-2016 11:26:56 : [TRACE]    CommandHolder::Reading Transaction from file
+24-12-2016 11:26:56 : [TRACE]    CommandHolder::Reading Transaction from file
+24-12-2016 11:26:56 : [TRACE]    CommandHolder::Reading Transaction from file
+24-12-2016 11:26:56 : [TRACE]    CommandHolder::Reading Transaction from file
+24-12-2016 11:26:56 : [TRACE]    CommandHolder::Reading Transaction from file
+24-12-2016 11:26:56 : [TRACE]    CommandHolder::Reading Transaction from file
+24-12-2016 11:26:56 : [TRACE]    CommandHolder::Reading Transaction from file
+24-12-2016 11:26:56 : [TRACE]    CommandHolder::Reading Transaction from file
+24-12-2016 11:26:56 : [TRACE]    CommandHolder::Reading Transaction from file
+24-12-2016 11:26:56 : [TRACE]    CommandHolder::Reading Transaction from file

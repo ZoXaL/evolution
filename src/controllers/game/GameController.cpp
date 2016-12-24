@@ -9,7 +9,9 @@
 #include "controllers/commands/KillAnimalCommand.h"
 #include "controllers/commands/ClearAnimalFoodCommand.h"
 #include "controllers/commands/GiveCardToPlayerCommand.h"
+#include "controllers/commands/EndMoveCommand.h"
 #include "controllers/commands/CommandHolder.h"
+#include "Logger.h"
 
 #include "model/GameModel.h"
 #include "model/GamePhaze.h"
@@ -31,9 +33,14 @@ AbstractController* GameController::run() {
 		switch (model->getPhaze()) {
 			case GamePhaze::EVOLVE : {				
 				CommandHolder* holder = CommandHolder::getInstance();
-				holder->addCommand(new PassCommand(player1, false));
-				holder->addCommand(new PassCommand(player2, false));
-				holder->addCommand(new SwitchPhazeCommand(GamePhaze::FEED));
+				try {
+					holder->addCommand(new PassCommand(player1, false));
+					holder->addCommand(new PassCommand(player2, false));
+					holder->addCommand(new SwitchPhazeCommand(GamePhaze::FEED));
+				} catch (Exception& e) {
+					Logger::warn("GameController: "+e.getMessage());
+					throw e;
+				}			
 
 				nextController = new FeedController();
 				break;
@@ -52,11 +59,15 @@ AbstractController* GameController::run() {
 				}
 				
 				CommandHolder* holder = CommandHolder::getInstance();
-				holder->addCommand(new PassCommand(player1, false));
-				holder->addCommand(new PassCommand(player2, false));
-				holder->addCommand(new SwitchPhazeCommand(GamePhaze::EVOLVE));
-
-								
+				try {
+					holder->addCommand(new PassCommand(player1, false));
+					holder->addCommand(new PassCommand(player2, false));
+					holder->addCommand(new SwitchPhazeCommand(GamePhaze::EVOLVE));	
+				} catch (Exception& e) {
+					Logger::warn("GameController: "+e.getMessage());
+					throw e;
+				}	
+											
 
 				// Time to give more cards to players
 				int firstPlayerCardsToGive = player1->animalsCount();
@@ -97,14 +108,28 @@ AbstractController* GameController::run() {
 				break;
 			}
 		}
-	} else {
-		if (model->getPhaze() == GamePhaze::EVOLVE) {
+		return nextController;
+	} 
+	// Initiate pass event if player has passed
+	if (model->getCurrentPlayer()->isPassed()) {
+		CommandHolder* holder = CommandHolder::getInstance();
+		if (holder->isTransactionOpened()) {
+			holder->commit();
+		}
+		try {
+			holder->openTransaction();
+			holder->addCommand(new EndMoveCommand());
+		} catch (Exception& e) {
+			Logger::warn("Exception in passing");
+		}		
+	}	
+	if (model->getPhaze() == GamePhaze::EVOLVE) {
 		nextController = new EvolveController();
-		}
-		if (model->getPhaze() == GamePhaze::FEED) {
-			nextController = new FeedController();
-		}
 	}
+	if (model->getPhaze() == GamePhaze::FEED) {
+		nextController = new FeedController();
+	}
+	
 	return nextController;
 }
 

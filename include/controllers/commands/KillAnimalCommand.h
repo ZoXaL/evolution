@@ -18,6 +18,6 @@ public:
 	void execute();
 	void undo();
 	std::ostream& write(std::ostream& stream);
-	std::istream& read(std::istream& stream){};
+	std::istream& read(std::istream& stream);
 };
 #endif

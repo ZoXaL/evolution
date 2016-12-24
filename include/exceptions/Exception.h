@@ -3,17 +3,17 @@
 #include <ctime>
 #include <iostream>
 #include <string>
+#include "Logger.h"
 using namespace std;
 
 class Exception {
-tm* eTime;
 string message;
-char logPath[80];
 public:
-	Exception();
-	Exception(string message);
+	Exception(string message = "No message");
 	void log();
-	friend ofstream& operator<<(ofstream& stream, const Exception&);
+	void log(Logger::LogLevel level);
+	virtual string getMessage();
 	friend ostream& operator<<(ostream& stream, const Exception&);
+	virtual ~Exception() {};
 };
 #endif

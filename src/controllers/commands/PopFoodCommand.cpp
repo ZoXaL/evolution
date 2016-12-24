@@ -30,3 +30,7 @@ ostream& PopFoodCommand::write(ostream& stream) {
 	stream << count << endl;
 	return stream;
 }
+istream& PopFoodCommand::read(istream& stream) {
+	stream >> count;
+	return stream;
+}

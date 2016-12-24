@@ -172,7 +172,7 @@ void EvolveController::pass() {
 	Player* currentPlayer = model->getCurrentPlayer();
 
 	CommandHolder* holder = CommandHolder::getInstance();
-	holder->openTransaction();	
-	holder->addCommand(new EndMoveCommand());
+	holder->openTransaction();
 	holder->addCommand(new PassCommand(currentPlayer));
+	holder->addCommand(new EndMoveCommand());
 }

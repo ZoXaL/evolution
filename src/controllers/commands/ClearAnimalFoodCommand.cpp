@@ -38,3 +38,11 @@ ostream& ClearAnimalFoodCommand::write(ostream& stream) {
 	stream << playerId << ' ' << animalId << ' ' << wasHungry << ' ' << neededFood << endl;
 	return stream;
 }
+
+istream& ClearAnimalFoodCommand::read(istream& stream) {
+	stream >> playerId;
+	stream >> animalId;
+	stream >> wasHungry;
+	stream >> neededFood;
+	return stream;
+}
