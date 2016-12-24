@@ -19,7 +19,7 @@ string AbilityCard::getDescription() {
 	return abilityToString(ability);
 }
 
-bool AbilityCard::isDuplicated() {
+bool AbilityCard::canDuplicate() {
 	return this->duplicated;
 }
 

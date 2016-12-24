@@ -142,7 +142,6 @@ void EvolveController::useAbility() {
 	GameModel* model = GameModel::getInstance();
 	Player* currentPlayer = model->getCurrentPlayer();
 	int handSize = currentPlayer->handSize();
-	int animalsCount = currentPlayer->animalsCount();
 	
 	cout << "Select ability to use: " << endl;
 	int i = 1;
@@ -152,13 +151,13 @@ void EvolveController::useAbility() {
 	int abilityId = getInt(cin, 1, handSize);
 
 	cout << "Select animal to evolve: " << endl;
-	i = 1;
-	for (; i <= animalsCount; i++) {
-		cout << i << ") " << currentPlayer->getAnimal(i-1)->getStatus() << endl;
+	vector<shared_ptr<Animal>> animalsToEvolve = currentPlayer->getAnimalsToEvolve(currentPlayer->getCardFromHand(abilityId-1).get());
+	for (auto i = animalsToEvolve.begin(); i != animalsToEvolve.end(); i++) {
+		cout << i-animalsToEvolve.begin()+1 << ") " << (*i)->getStatus() << endl;
 	}
-	cout << i << ") Cancel" << endl;
-	int animalId = getInt(cin, 1, i);
-	if (animalId == i) {
+	cout << animalsToEvolve.size()+1 << ") Cancel" << endl;
+	int animalId = getInt(cin, 1, animalsToEvolve.size()+1);
+	if (animalId == animalsToEvolve.size()+1) {
 		return;
 	}
 	CommandHolder* holder = CommandHolder::getInstance();

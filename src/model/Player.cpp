@@ -55,6 +55,16 @@ int Player::handSize() {
 vector<shared_ptr<Animal>>* Player::getAnimals() {
 	return &animals;
 }
+vector<shared_ptr<Animal>> Player::getAnimalsToEvolve(AbilityCard* ability) {
+	vector<shared_ptr<Animal>> animalsToEvolve;
+	for (auto i = animals.begin(); i != animals.end(); i++) {
+		if ((*i)->hasAbility(ability->getAbility()) && !ability->canDuplicate()) {
+			continue;
+		}
+		animalsToEvolve.push_back(*i);
+	}
+	return animalsToEvolve;
+}
 void Player::addAnimal(shared_ptr<Animal> newAnimal) {
 	animals.push_back(newAnimal);
 }

@@ -27,7 +27,7 @@ public:
 	virtual ostream& write(ostream&) = 0;
 	virtual istream& read(istream&) = 0;
 
-	bool isDuplicated();
+	bool canDuplicate();
 	
 	void setOwner(Animal* owner);
 

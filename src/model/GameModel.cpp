@@ -8,7 +8,7 @@ template<typename T>
 class Deck;
 
 GameModel* GameModel::instance = nullptr;
-const int GameModel::CARDS_ON_START = 2;
+const int GameModel::CARDS_ON_START = 4;
 
 GameModel::GameModel() {
 	//init game	

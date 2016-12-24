@@ -8,6 +8,7 @@ using namespace std;
 
 #include "model/Player.h"
 #include "model/cards/AbilityCard.h"
+#include "model/cards/abilities/Ability.h"
 
 class Animal {
 	shared_ptr<AbilityCard> createdFrom;
@@ -18,6 +19,7 @@ public:
 	Animal(shared_ptr<AbilityCard> createdFrom, Player* owner);
 	vector<shared_ptr<AbilityCard>>* getAbilities();
 	vector<shared_ptr<AbilityCard>> getActiveAbilities();
+	bool hasAbility(Ability::AbilityType ability);
 	void pushAbility(shared_ptr<AbilityCard> newAbility);
 	shared_ptr<AbilityCard> popAbility();
 	AbilityCard* getAbility(int index);

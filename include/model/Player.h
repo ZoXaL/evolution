@@ -30,6 +30,7 @@ public:
 
 	shared_ptr<Animal> getAnimal(int animalId);
 	vector<shared_ptr<Animal>>* getAnimals();
+	vector<shared_ptr<Animal>> getAnimalsToEvolve(AbilityCard* ability);
 	void addAnimal(shared_ptr<Animal>);
 	void addAnimal(shared_ptr<Animal>, int index);
 	shared_ptr<Animal> deleteAnimal(int);

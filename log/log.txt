@@ -50,3 +50,8 @@
 24-12-2016 21:36:31 : [TRACE]    Game start
 24-12-2016 21:37:10 : [TRACE]    Game start
 24-12-2016 21:37:55 : [TRACE]    Game start
+24-12-2016 21:59:23 : [TRACE]    Game start
+24-12-2016 22:2:35 : [TRACE]    Game start
+24-12-2016 22:4:38 : [TRACE]    Game start
+24-12-2016 22:5:11 : [TRACE]    Game start
+24-12-2016 22:8:27 : [TRACE]    Game start

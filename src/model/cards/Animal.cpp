@@ -25,6 +25,14 @@ Player* Animal::getOwner() {
 shared_ptr<AbilityCard> Animal::getCreatedFrom() {
 	return createdFrom;
 }
+bool Animal::hasAbility(Ability::AbilityType ability) {
+	for (auto ibegin = abilities.begin(); ibegin != abilities.end(); ibegin++) {
+		if ((*ibegin)->getAbility() == ability) {
+			return true;
+		}		
+	}
+	return false;
+}
 
 void Animal::pushAbility(shared_ptr<AbilityCard> newAbility) {
 	newAbility->setOwner(this);
