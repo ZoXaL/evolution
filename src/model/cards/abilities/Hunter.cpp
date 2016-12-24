@@ -59,6 +59,7 @@ void Hunter::use() {
 		return;
 	} else {
 		CommandHolder::getInstance()->addCommand(new KillAnimalCommand(enemy, animalToKill-1));
+		//CommandHolder::getInstance()->addCommand(new FeedComman());
 	}	
 }
 

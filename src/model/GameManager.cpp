@@ -4,6 +4,7 @@
 #include "model/cards/Card.h"
 #include "model/cards/abilities/Fat.h"
 #include "model/cards/abilities/Waterfowl.h"
+#include "model/cards/abilities/Hunter.h"
 #include "model/cards/abilities/Ability.h"
 #include "model/deck/Deck.h"
 #include "controllers/commands/GiveCardToPlayerCommand.h"
@@ -36,6 +37,10 @@ GameModel* GameManager::buildGame(const char* firstPlayerName, const char* secon
 	}
 	for (int i = 0; i < 5; i++) {
 		shared_ptr<AbilityCard> newCard(new Waterfowl());
+		cardDeck->push_back(newCard);
+	}
+	for (int i = 0; i < 5; i++) {
+		shared_ptr<AbilityCard> newCard(new Hunter());
 		cardDeck->push_back(newCard);
 	}
 	cardDeck->shuffle();

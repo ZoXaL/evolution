@@ -111,7 +111,9 @@ T Deck<T>::pop_front() {
 	T returnData = first->data;
 	Node* tmp = first;
 	first = first->next;
-	first->next = nullptr;
+	if (first->next != nullptr) {
+		first->next = nullptr;
+	}	
 	delete tmp;
 	size--;
 	if (size == 0) {
@@ -128,7 +130,9 @@ T Deck<T>::pop_back() {
 	T returnData = last->data;
 	Node* tmp = last;
 	last = last->previous;
-	last->next = nullptr;
+	if (last != nullptr) {
+		last->next = nullptr;
+	}	
 	delete tmp;
 	size--;
 	if (size == 0) {
