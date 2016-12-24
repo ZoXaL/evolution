@@ -79,7 +79,9 @@ GameModel* GameManager::loadGame(fstream& stream) {
 	int deckSize;
 	stream >> deckSize;
 	for (int i = 0; i< deckSize; i++) {
-		cardDeck->push_back(AbilityCard::readFromFile(stream));
+		shared_ptr<AbilityCard> newCard = AbilityCard::readFromFile(stream);
+		cardDeck->push_back(newCard);
+		startDeck.push_back(newCard);
 	}
 	giveCardsToPlayers(model->getCardDeck());
 	// cardDeck->read(stream);

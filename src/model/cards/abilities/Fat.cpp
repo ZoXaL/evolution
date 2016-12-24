@@ -12,6 +12,9 @@ using namespace std;
 Fat::Fat() : AbilityCard(Ability::FAT, true, false) {};
 
 bool Fat::needFood() {
+	return false;
+}
+bool Fat::canGetFood() {
 	return !reserve;
 }
 

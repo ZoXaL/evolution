@@ -20,6 +20,7 @@
 #include <iostream>
 #include <list>
 #include <memory>
+#include <algorithm>
 #include <string>
 using namespace std;
 
@@ -102,7 +103,7 @@ void FeedController::feedAnimal() {
 
 	for (int i = 0; i < currentPlayer->animalsCount(); i++) {
 		shared_ptr<Animal> animal = currentPlayer->getAnimal(i);
-		if (animal->needFood()) {
+		if (animal->canGetFood()) {
 			hungryAnimals.push_back(i);
 			cout << hungryAnimals.size() << ") " << currentPlayer->getAnimal(i)->getStatus() << endl;
 		}		
@@ -115,9 +116,28 @@ void FeedController::feedAnimal() {
 		return;
 	}
 
+	// shared_ptr<Animal> hungryAnimal = currentPlayer->getAnimal(hungryAnimals[answer-1]);
+
+	// list<pair<int, shared_ptr<AbilityCard>>> abilitiesToFeed = hungryAnimal->getAbilitiesToFeed();
+	// for (auto i = abilitiesToFeed.begin(); i != abilitiesToFeed.end(); i++) {
+	// 	cout << distance(abilitiesToFeed.begin(), i)+1 << ") " << i->second->getDescription() << endl;
+	// }
+	// cancelOption = abilitiesToFeed.size()+1;
+	// cout << cancelOption << ") Cancel" << endl;
+	// answer = getInt(cin, 1, cancelOption);
+	// if (answer == cancelOption) {
+	// 	return;
+	// }
+
 	CommandHolder* holder = CommandHolder::getInstance();
 	holder->openTransaction();
-	holder->addCommand(new FeedCommand(currentPlayer, hungryAnimals[answer-1]));
+	try {
+		holder->addCommand(new FeedCommand(currentPlayer, hungryAnimals[answer-1]));
+	} catch (Exception& e) {
+		alert = e.getMessage();
+		holder->rollback();
+		return;
+	}	
 	holder->addCommand(new PopFoodCommand(1));
 	holder->addCommand(new EndMoveCommand());
 }

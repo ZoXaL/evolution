@@ -17,6 +17,7 @@ public:
 	bool needFood();
 	void giveFood();
 	void resetFood();
+	bool canGetFood();
 
 	void use();
 

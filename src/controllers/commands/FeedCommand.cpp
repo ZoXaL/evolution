@@ -5,6 +5,7 @@
 #include "model/Player.h"
 #include "model/cards/interfaces/FoodModification.h"
 #include "controllers/commands/CommandType.h"
+#include "exceptions/Exception.h"
 #include <memory>
 
 using namespace std;
@@ -13,13 +14,13 @@ using namespace std;
 FeedCommand::FeedCommand(int playerId, int animalId){
 	this->playerId = playerId;
 	this->animalId = animalId;
-	this->abilityId = abilityId;
+	this->abilityId = -3;
 	type = Command::FEED;
 }
 FeedCommand::FeedCommand(Player* player, int animalId) {
 	this->playerId = (GameModel::getInstance()->getPlayer(0) == player) ? 0 : 1;
 	this->animalId = animalId;
-	this->abilityId = abilityId;
+	this->abilityId = -3;
 	type = Command::FEED;
 }
 
@@ -27,7 +28,17 @@ void FeedCommand::execute() {
 	GameModel* model = GameModel::getInstance();
 	Player* player = model->getPlayer(playerId);
 	shared_ptr<Animal> animal = player->getAnimal(animalId);
-	abilityId = animal->feed();
+	if (abilityId == -3) {
+		abilityId = animal->feed();
+	} else {
+		if (abilityId == -1) {
+			animal->setFed(true);
+		} else {
+			FoodModification* abilityFed = dynamic_cast<FoodModification*>(animal->getAbility(abilityId));
+			abilityFed->resetFood();
+		}	
+	}	
+	if (abilityId == -2) throw Exception("Animal doesn't need food");
 }
 
 void FeedCommand::undo() {
@@ -35,11 +46,10 @@ void FeedCommand::undo() {
 	Player* player = model->getPlayer(playerId);
 	shared_ptr<Animal> animal = player->getAnimal(animalId);
 	if (abilityId == -1) {
-		animal->setHungry(true);
+		animal->setFed(false);
 	} else {
 		FoodModification* abilityFed = dynamic_cast<FoodModification*>(animal->getAbility(abilityId));
 		abilityFed->resetFood();
-		animal->setNeedFood(true);
 	}	
 }
 ostream& FeedCommand::write(ostream& stream) {

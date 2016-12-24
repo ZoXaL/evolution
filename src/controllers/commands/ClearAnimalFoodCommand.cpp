@@ -1,6 +1,8 @@
 #include "controllers/commands/ClearAnimalFoodCommand.h"
 #include "model/cards/Card.h"
 #include "model/cards/Animal.h"
+#include "model/cards/abilities/Fat.h"
+#include "model/cards/interfaces/FoodModification.h"
 #include "model/GameModel.h"
 #include "model/Player.h"
 #include "controllers/commands/CommandType.h"
@@ -20,29 +22,39 @@ void ClearAnimalFoodCommand::execute() {
 	GameModel* model = GameModel::getInstance();
 	Player* player = model->getPlayer(playerId);
 	shared_ptr<Animal> animal = player->getAnimal(animalId);
-	wasHungry = animal->isHungry();
-	neededFood = animal->needFood();
-	animal->setHungry(true);
+	animal->setFed(false);
+	for (auto i = animal->getAbilities()->begin(); i != animal->getAbilities()->end(); i++) {
+		FoodModification* foodModification = dynamic_cast<FoodModification*>(i->get());
+		if (foodModification && !dynamic_cast<Fat*>(foodModification)) {
+			foodModification->resetFood();
+		}			
+	}
 }
 
 void ClearAnimalFoodCommand::undo() {
 	GameModel* model = GameModel::getInstance();
 	Player* player = model->getPlayer(playerId);
 	shared_ptr<Animal> animal = player->getAnimal(animalId);
-	animal->setHungry(wasHungry);
-	animal->setNeedFood(neededFood);
+	animal->setFed(true);
+	for (auto i = animal->getAbilities()->begin(); i != animal->getAbilities()->end(); i++) {
+		FoodModification* foodModification = dynamic_cast<FoodModification*>(i->get());
+		if (foodModification && !dynamic_cast<Fat*>(foodModification)) {
+			while (foodModification->needFood()) {
+				foodModification->giveFood();
+			}			
+		}			
+	}
 }
 
 ostream& ClearAnimalFoodCommand::write(ostream& stream) {
 	stream << type << endl;
-	stream << playerId << ' ' << animalId << ' ' << wasHungry << ' ' << neededFood << endl;
+	stream << playerId << ' ' << animalId << ' ' << neededFood << endl;
 	return stream;
 }
 
 istream& ClearAnimalFoodCommand::read(istream& stream) {
 	stream >> playerId;
 	stream >> animalId;
-	stream >> wasHungry;
 	stream >> neededFood;
 	return stream;
 }

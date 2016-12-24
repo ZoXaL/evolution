@@ -9,13 +9,22 @@
 using namespace std;
 
 UseFatCommand::UseFatCommand(Player* player, Animal* animal, AbilityCard* ability) {
-	this->playerId = getPlayerId(player);
-	this->animalId = getAnimalId(player, animal);
-	this->fatAbilityId = getAbilityId(animal, ability);
+	if (player != nullptr && animal != nullptr && ability != nullptr) {
+		this->playerId = getPlayerId(player);
+		this->animalId = getAnimalId(player, animal);
+		this->fatAbilityId = getAbilityId(animal, ability);
+	} else {
+		this->playerId = -1;
+		this->animalId = -1;
+		this->fatAbilityId = -1;
+	}	
 	type = Command::USE_FAT;
 }
 
 void UseFatCommand::execute() {
+	if (playerId == -1 || animalId == -1 || fatAbilityId == -1) {
+		throw Exception("Fields have not been initialized");
+	}
 	GameModel* model = GameModel::getInstance();
 	Player* player = model->getPlayer(playerId);
 	shared_ptr<Animal> animal = player->getAnimal(animalId);
@@ -32,7 +41,7 @@ void UseFatCommand::undo() {
 	fatAbility->giveFood();
 
 	if (fedAbilityId == -1) {
-		animal->setHungry(true);
+		animal->setFed(false);
 	} else {
 		FoodModification* abilityFed = (FoodModification*)(animal->getAbility(fedAbilityId));
 		abilityFed->resetFood();

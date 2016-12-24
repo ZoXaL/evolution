@@ -11,8 +11,7 @@ using namespace std;
 
 Animal::Animal(shared_ptr<AbilityCard> createdFrom, Player* owner) {
 	this->createdFrom = createdFrom;
-	this->_isHungry = true;
-	this->_needFood = true;
+	this->fed = false;
 	this->owner = owner;
 }
 vector<shared_ptr<AbilityCard>>* Animal::getAbilities() {
@@ -65,55 +64,66 @@ int Animal::getCost() {
 	return totalCost;
 }
 
-bool Animal::needFood() {
-	return _needFood;
-}
 bool Animal::isHungry() {
-	return _isHungry;
+	if (!fed) return true;
+	for (int i = 0; i < abilities.size(); i++) {
+		FoodModification* foodModification = dynamic_cast<FoodModification*>(abilities[i].get());
+		if (foodModification && foodModification->needFood()) {
+			return true;
+		}			
+	}
+	return false;
 }
-void Animal::setHungry(bool hungry) {
-	this->_isHungry = hungry;
-	if (hungry) {
-		this->_needFood = true;
-	}	
+
+void Animal::setFed(bool newFed) {
+	fed = newFed;
 }
-void Animal::setNeedFood(bool needFood) {
-	this->_needFood = needFood;
+// list<pair<int, shared_ptr<AbilityCard>>> Animal::getAbilitiesToFeed() {
+// 	list<pair<int, shared_ptr<AbilityCard>>> foodModifications;
+// 	for (auto i = abilities.begin(); i != abilities.end(); i++) {
+// 		FoodModification* foodModification = dynamic_cast<FoodModification*>(i->get());
+// 		if (foodModification && foodModification->needFood()) {
+// 			foodModifications.push_back(make_pair(i - abilities.begin(), *i));
+// 		}
+// 		// try to cast
+// 		// check if need food
+// 	}
+// 	return foodModifications;
+// }
+
+bool Animal::canGetFood() {
+	if (!fed) return true;
+	for (int i = 0; i < abilities.size(); i++) {
+		FoodModification* foodModification = dynamic_cast<FoodModification*>(abilities[i].get());
+		if (foodModification && foodModification->canGetFood()) {
+			return true;
+		}			
+	}
+	return false;
 }
 
 int Animal::feed() {
-	bool abilitiesNeedFood = false;
-	int abilityToFeed = -1;
+	// -2 if no need food
+	// if index = -1, feed animal itself
+	// if index > 0, give food to ability
 	for (int i = 0; i < abilities.size(); i++) {
-		AbilityCard* ability = abilities[i].get();
-		// 2) check if ability needs food
-		switch (ability->getAbility()) {
-			case (Ability::FAT) : {
-				// feed fat only if animal is not hungry				
-				Fat* fatCard = (Fat*)ability;
-				// feed only if fat is empty
-				if (fatCard->needFood()) {
-					if (!this->_isHungry) {	// if animal is hungry, you cannot fill fat
-						if (abilityToFeed != -1) {	// some fat has been filled earlier
-							abilitiesNeedFood = true;	// mark that there is empty fat
-							break;
-						}
-						fatCard->giveFood();
-						abilityToFeed = i;
-					} else {
-						abilitiesNeedFood = true;//mark that there is empty fat
-					}		
-				}
-				break;
-			}
-		}		
+		FoodModification* foodModification = dynamic_cast<FoodModification*>(abilities[i].get());
+		if (foodModification && foodModification->needFood()) {
+			foodModification->giveFood();
+			return i;
+		}			
 	}
 	// no ability needs food
-	if (abilityToFeed == -1) {
-		_isHungry = false;
+	if (!fed) {
+		fed = true;
+		return -1;
 	} 
-	if (!abilitiesNeedFood) {
-		_needFood = false;
+	for (int i = 0; i < abilities.size(); i++) {
+		Fat* fat = dynamic_cast<Fat*>(abilities[i].get());
+		if (fat && fat->canGetFood()) {
+			fat->giveFood();
+			return i;
+		}	
 	}
-	return abilityToFeed;
+	return -2;
 }
