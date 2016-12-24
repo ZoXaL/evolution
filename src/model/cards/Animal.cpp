@@ -101,6 +101,9 @@ vector<shared_ptr<AbilityCard>> Animal::getActiveAbilities() {
 }
 
 bool Animal::defend(Animal* hunter) {
+	if (hunter->hasAbility(Ability::WATERFOWL) && !this->hasAbility(Ability::WATERFOWL)) {
+		return true;
+	}
 	for (int i = 0; i < abilities.size(); i++) {
 		DefendAbility* ability = dynamic_cast<DefendAbility*>(abilities[i].get());
 		if (ability && ability->defend(hunter)) {

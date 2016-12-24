@@ -75,9 +75,16 @@ shared_ptr<Animal> Player::deleteAnimal(int animalNum) {
 	if(!checkRange(animalNum, 0, animals.size())) {
 		return nullptr;
 	}
-	auto returnAnimalIt = animals.begin()+animals.size()-1;
-	shared_ptr<Animal> returnAnimal = *returnAnimalIt;
-	animals.pop_back();
+	shared_ptr<Animal> returnAnimal;
+	if (animalNum == 0) {
+		auto returnAnimalIt = animals.begin();
+		returnAnimal = *returnAnimalIt;
+		animals.erase(returnAnimalIt);
+	} else {
+		auto returnAnimalIt = animals.begin()+animalNum;
+		returnAnimal = *returnAnimalIt;
+		animals.erase(returnAnimalIt);		
+	}	
 	return returnAnimal;
 }
 

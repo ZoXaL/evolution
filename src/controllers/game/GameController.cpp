@@ -145,14 +145,14 @@ void GameController::deathPhaze() {
 	for (auto i = animals1->begin(); i != animals1->end(); i++) {
 		if ((*i)->isHungry()) {
 			i--;
-			holder->addCommand(new KillAnimalCommand(player1, i+1-animals1->begin()));
+			holder->addCommand(new KillAnimalCommand(player1, i-animals1->begin()));
 		} else {
 			holder->addCommand(new ClearAnimalFoodCommand(player1, i-animals1->begin()));
 		}
 		for (auto j = (*i)->getAbilities()->begin(); j != (*i)->getAbilities()->end(); j++) {
 			ActiveAbility* activeAbility = dynamic_cast<ActiveAbility*>(j->get());
 			if (activeAbility && !activeAbility->canUse()) {
-				holder->addCommand(new ResetUseCommand(player1, i+1-animals1->begin(), j-(*i)->getAbilities()->begin(), false));
+				holder->addCommand(new ResetUseCommand(player1, i-animals1->begin(), j-(*i)->getAbilities()->begin(), false));
 			}
 		}
 	}
@@ -161,14 +161,14 @@ void GameController::deathPhaze() {
 	for (auto i = animals2->begin(); i != animals2->end(); i++) {
 		if ((*i)->isHungry()) {
 			i--;
-			holder->addCommand(new KillAnimalCommand(player2, i+1-animals2->begin()));
+			holder->addCommand(new KillAnimalCommand(player2, i-animals2->begin()));
 		} else {
 			holder->addCommand(new ClearAnimalFoodCommand(player2, i-animals2->begin()));
 		}
 		for (auto j = (*i)->getAbilities()->begin(); j != (*i)->getAbilities()->end(); j++) {
 			ActiveAbility* activeAbility = dynamic_cast<ActiveAbility*>(j->get());
 			if (activeAbility && !activeAbility->canUse()) {
-				holder->addCommand(new ResetUseCommand(player2, i+1-animals2->begin(), j-(*i)->getAbilities()->begin(), false));
+				holder->addCommand(new ResetUseCommand(player2, i-animals2->begin(), j-(*i)->getAbilities()->begin(), false));
 			}
 		}
 	}
