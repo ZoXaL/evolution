@@ -106,7 +106,7 @@ istream& CommandHolder::read(istream& stream) {
 		stream >> commandType;
 		switch (commandType) {
 			case (Command::TRANSACTION) : {
-				Logger::trace("CommandHolder::Reading Transaction from file");
+				// Logger::trace("CommandHolder::Reading Transaction from file");
 				AbstractCommand* transaction = new TransactionCommand();
 				transaction->read(stream);
 				deck.push_back(transaction);

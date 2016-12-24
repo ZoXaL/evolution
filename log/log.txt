@@ -1,227 +1,31 @@
-24-12-2016 11:23:47 : [TRACE]    Game start
-24-12-2016 11:23:49 : [WARN]    AbilityCard::readFromFile -- unexpected ability type
-24-12-2016 11:24:8 : [TRACE]    Game start
-24-12-2016 11:24:11 : [WARN]    AbilityCard::readFromFile -- unexpected ability type
-24-12-2016 11:25:11 : [TRACE]    Game start
-24-12-2016 11:25:14 : [WARN]    Unexpected command type during reading CommandHolder from file
-24-12-2016 11:25:40 : [TRACE]    Game start
-24-12-2016 11:25:44 : [WARN]    Unexpected command type during reading CommandHolder from file
-24-12-2016 11:26:33 : [TRACE]    Game start
-24-12-2016 11:26:54 : [TRACE]    Game start
-24-12-2016 11:26:56 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 11:26:56 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 11:26:56 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 11:26:56 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 11:26:56 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 11:26:56 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 11:26:56 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 11:26:56 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 11:26:56 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 11:26:56 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 11:26:56 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 11:26:56 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 13:22:44 : [TRACE]    Game start
-24-12-2016 14:13:9 : [TRACE]    Game start
-24-12-2016 14:16:7 : [TRACE]    Game start
-24-12-2016 14:16:44 : [TRACE]    Game start
-24-12-2016 14:16:46 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:16:46 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:16:46 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:16:46 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:16:46 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:16:46 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:16:46 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:16:46 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:16:46 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:16:46 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:16:46 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:16:46 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:16:46 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:16:46 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:16:46 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:16:46 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:16:46 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:38:40 : [TRACE]    Game start
-24-12-2016 14:38:41 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:38:41 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:38:41 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:38:41 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:38:41 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:38:41 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:38:41 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:38:41 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:38:41 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:38:41 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:38:41 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:38:41 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:38:41 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:38:41 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:38:41 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:38:41 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:38:41 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:39:16 : [TRACE]    Game start
-24-12-2016 14:39:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:39:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:39:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:39:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:39:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:39:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:39:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:39:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:39:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:39:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:39:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:39:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:39:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:39:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:39:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:39:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:39:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:44:15 : [TRACE]    Game start
-24-12-2016 14:44:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:44:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:44:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:44:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:44:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:44:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:44:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:44:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:44:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:44:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:44:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:44:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:44:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:44:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:44:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:44:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:44:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:45:19 : [TRACE]    Game start
-24-12-2016 14:45:21 : [WARN]    Cannot pop_front from Deck: there is no elements
-24-12-2016 14:47:28 : [TRACE]    Game start
-24-12-2016 14:47:30 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:47:30 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:47:30 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:47:30 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:47:30 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:47:30 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:47:30 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:47:30 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:47:30 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:47:30 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:47:30 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:47:30 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:47:30 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:47:30 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:47:30 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:47:30 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:47:30 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:47:47 : [TRACE]    Game start
-24-12-2016 14:47:49 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:47:49 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:47:49 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:47:49 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:47:49 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:47:49 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:47:49 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:47:49 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:47:49 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 14:47:49 : [WARN]    Animal doesn't need food
-24-12-2016 15:2:3 : [TRACE]    Game start
-24-12-2016 15:2:5 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:5 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:5 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:5 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:5 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:5 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:5 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:5 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:5 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:5 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:5 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:5 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:5 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:5 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:5 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:5 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:5 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:5 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:5 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:5 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:5 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:5 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:51 : [TRACE]    Game start
-24-12-2016 15:2:53 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:53 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:53 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:53 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:53 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:53 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:53 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:53 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:53 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:53 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:53 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:53 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:53 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:53 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:53 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:53 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:53 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:53 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:53 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:53 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:53 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:53 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:53 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:53 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:53 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:2:53 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:14 : [TRACE]    Game start
-24-12-2016 15:3:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:17 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:44 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:44 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:44 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:44 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:44 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:44 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:44 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:44 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:44 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:44 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:44 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:44 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:44 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:44 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:44 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:44 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:44 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:44 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:44 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:44 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:44 : [TRACE]    CommandHolder::Reading Transaction from file
-24-12-2016 15:3:44 : [TRACE]    CommandHolder::Reading Transaction from file
+24-12-2016 19:27:5 : [TRACE]    Game start
+24-12-2016 19:27:48 : [TRACE]    Game start
+24-12-2016 19:33:43 : [TRACE]    Game start
+24-12-2016 19:34:0 : [TRACE]    Game start
+24-12-2016 19:35:39 : [TRACE]    Game start
+24-12-2016 19:35:40 : [TRACE]    Game start
+24-12-2016 19:35:41 : [TRACE]    Game start
+24-12-2016 19:35:50 : [TRACE]    Game start
+24-12-2016 19:39:58 : [TRACE]    Game start
+24-12-2016 19:45:9 : [TRACE]    Game start
+24-12-2016 19:45:59 : [TRACE]    Game start
+24-12-2016 19:55:25 : [TRACE]    Game start
+24-12-2016 19:55:30 : [TRACE]    Game start
+24-12-2016 19:55:31 : [TRACE]    Game start
+24-12-2016 19:55:32 : [TRACE]    Game start
+24-12-2016 19:55:32 : [TRACE]    Game start
+24-12-2016 19:55:33 : [TRACE]    Game start
+24-12-2016 19:55:33 : [TRACE]    Game start
+24-12-2016 19:55:33 : [TRACE]    Game start
+24-12-2016 19:55:34 : [TRACE]    Game start
+24-12-2016 19:55:36 : [TRACE]    Game start
+24-12-2016 19:55:37 : [TRACE]    Game start
+24-12-2016 19:55:38 : [TRACE]    Game start
+24-12-2016 19:55:39 : [TRACE]    Game start
+24-12-2016 19:55:40 : [TRACE]    Game start
+24-12-2016 19:55:41 : [TRACE]    Game start
+24-12-2016 19:55:42 : [TRACE]    Game start
+24-12-2016 19:55:43 : [TRACE]    Game start
+24-12-2016 20:6:4 : [TRACE]    Game start
+24-12-2016 20:9:15 : [TRACE]    Game start
+24-12-2016 20:10:16 : [TRACE]    Game start

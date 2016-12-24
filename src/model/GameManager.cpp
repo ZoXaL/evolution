@@ -3,6 +3,8 @@
 #include "model/cards/AbilityCard.h"
 #include "model/cards/Card.h"
 #include "model/cards/abilities/Fat.h"
+#include "model/cards/abilities/Waterfowl.h"
+#include "model/cards/abilities/Ability.h"
 #include "model/deck/Deck.h"
 #include "controllers/commands/GiveCardToPlayerCommand.h"
 #include "controllers/commands/CommandHolder.h"
@@ -28,16 +30,17 @@ GameModel* GameManager::buildGame(const char* firstPlayerName, const char* secon
 
 	Deck<shared_ptr<AbilityCard>>* cardDeck = model->getCardDeck();
 	startDeck.clear();
-	for (int i = 0; i < 10; i++) {
-		if (i%2) {
-			shared_ptr<AbilityCard> newCard(new Fat());
-			cardDeck->push_back(newCard);
-			startDeck.push_back(newCard);
-		} else {
-			shared_ptr<AbilityCard> newCard(new Fat());
-			cardDeck->push_back(newCard);
-			startDeck.push_back(newCard);
-		}	
+	for (int i = 0; i < 5; i++) {
+		shared_ptr<AbilityCard> newCard(new Fat());
+		cardDeck->push_back(newCard);
+	}
+	for (int i = 0; i < 5; i++) {
+		shared_ptr<AbilityCard> newCard(new Waterfowl());
+		cardDeck->push_back(newCard);
+	}
+	cardDeck->shuffle();
+	for (auto i = cardDeck->begin(); i != cardDeck->end(); i++) {
+		startDeck.push_back(*i);
 	}
 	giveCardsToPlayers(model->getCardDeck());
 	return model;

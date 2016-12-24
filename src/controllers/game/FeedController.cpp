@@ -14,6 +14,7 @@
 #include "model/GameModel.h"
 #include "model/Player.h"
 #include "model/cards/AbilityCard.h"
+#include "model/cards/interfaces/ActiveAbility.h"
 
 #include "functions.h"
 
@@ -167,16 +168,16 @@ void FeedController::useAnimalAbility(shared_ptr<Animal> animal) {
 		return;
 	}
 	cout << "Select animal ability to use:" << endl;
-	vector<shared_ptr<AbilityCard>>* abilities = animal->getAbilities();
-	for (auto i = abilities->begin(); i != abilities->end(); i++) {
-		cout << (i-abilities->begin()+1) << ") " << (*i)->getDescription() << endl;
+	vector<shared_ptr<AbilityCard>> abilities = animal->getActiveAbilities();
+	for (auto i = abilities.begin(); i != abilities.end(); i++) {
+		cout << (i-abilities.begin()+1) << ") " << (*i)->getDescription() << endl;
 	}
-	cout << (abilities->size()+1) << ") Cancel" << endl;
-	int answer = getInt(cin, 1, abilities->size()+1);
-	if (answer == (abilities->size()+1)) {
+	cout << (abilities.size()+1) << ") Cancel" << endl;
+	int answer = getInt(cin, 1, abilities.size()+1);
+	if (answer == (abilities.size()+1)) {
 		return;
 	}
-	shared_ptr<AbilityCard> abilityToUse = abilities->at(answer-1);
+	ActiveAbility* abilityToUse = (ActiveAbility*)(abilities.at(answer-1).get());
 	CommandHolder* holder = CommandHolder::getInstance();
 	holder->openTransaction();
 	abilityToUse->use();

@@ -14,10 +14,9 @@ class AbilityCard : public Card {
 protected:
 	Ability::AbilityType ability;
 	bool duplicated;
-	bool passive;
 	Animal* owner;
 public:
-	AbilityCard(Ability::AbilityType, bool duplicated, bool passive);
+	AbilityCard(Ability::AbilityType, bool duplicated);
 
 	Ability::AbilityType getAbility();	
 
@@ -28,12 +27,10 @@ public:
 	virtual istream& read(istream&) = 0;
 
 	bool isDuplicated();
-	bool isPassive();
 	
 	void setOwner(Animal* owner);
 
 	virtual string getStatus() = 0;
-	virtual void use() = 0;
 	static shared_ptr<AbilityCard> readFromFile(istream&);
 };
 

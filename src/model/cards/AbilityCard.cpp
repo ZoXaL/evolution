@@ -6,9 +6,8 @@
 #include <string>
 using namespace std;
 
-AbilityCard::AbilityCard(Ability::AbilityType _ability, bool _duplicated, bool _passive) : ability(_ability) {
+AbilityCard::AbilityCard(Ability::AbilityType _ability, bool _duplicated) : ability(_ability) {
 	this->duplicated = duplicated;
-	this->passive = passive;
 };
 
 Ability::AbilityType AbilityCard::getAbility() {
@@ -21,9 +20,7 @@ string AbilityCard::getDescription() {
 bool AbilityCard::isDuplicated() {
 	return this->duplicated;
 }
-bool AbilityCard::isPassive() {
-	return this->passive;
-}
+
 AbilityCard* AbilityCard::getAbilityCard() {
 	return this;
 }

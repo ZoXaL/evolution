@@ -17,6 +17,7 @@ class Animal {
 public:
 	Animal(shared_ptr<AbilityCard> createdFrom, Player* owner);
 	vector<shared_ptr<AbilityCard>>* getAbilities();
+	vector<shared_ptr<AbilityCard>> getActiveAbilities();
 	void pushAbility(shared_ptr<AbilityCard> newAbility);
 	shared_ptr<AbilityCard> popAbility();
 	AbilityCard* getAbility(int index);

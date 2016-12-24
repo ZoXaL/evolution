@@ -2,7 +2,7 @@
 #define ABILITY_H
 namespace Ability {
 	enum AbilityType {
-		FAT=1, FAST
+		FAT=1, HUNTER, WATERFOWL
 	};
 }
 #endif

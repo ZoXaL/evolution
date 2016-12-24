@@ -3,10 +3,13 @@
 
 #include <memory>
 #include "exceptions/Exception.h"
+// #include "exceptions/DeckException.h"
 #include "interfaces/Serializable.h"
 #include "controllers/commands/AbstractCommand.h"
 #include "model/cards/AbilityCard.h"
 #include "DeckIterator.h"
+#include <stdlib.h>
+
 
 using namespace std;
 
@@ -25,6 +28,7 @@ class Deck {
 	Node* first;
 	Node* last;
 	int size;
+	Node* at(int index);
 public:
 	typedef DeckIterator<T> iterator_t;
 	friend iterator_t;
@@ -42,10 +46,13 @@ public:
 	bool isEmpty();
 	int getSize();
 
+	void shuffle();
+	void swap(Node*, Node*);
+
 	ostream& write(ostream&);
 
-	template<typename T1>
-	friend ostream& operator<<(ostream& stream, Deck<T1> deck);
+	// template<typename T1>
+	// friend ostream& operator<<(ostream& stream, Deck<T1> deck);
 };
 
 template<typename T> 
@@ -134,9 +141,89 @@ template<typename T>
 typename Deck<T>::iterator_t Deck<T>::end() {
 	return iterator_t(last);
 }
+
+template<typename T> 
+void Deck<T>::shuffle() {
+	for (int k = 0; k < size*3; k++) {
+		Node* first = at(rand() % size);
+		Node* second = at(rand() % size);
+		swap(first, second);
+	}
+}
+
+template<typename T> 
+void Deck<T>::swap(Node* firstNode, Node* secondNode) {
+	if (first == firstNode || first == secondNode) {
+		if (first == secondNode) {
+			first = firstNode;
+		} else {
+			first = secondNode;
+		}
+	}
+	if (last == firstNode || last == secondNode) {
+		if (last == secondNode) {
+			last = firstNode;
+		} else {
+			last = secondNode;
+		}
+	}
+	if (secondNode->next == firstNode) {
+		secondNode->next = firstNode->next;
+		firstNode->previous = secondNode->previous;
+		firstNode->next = secondNode;
+		secondNode->previous = firstNode;
+		if (secondNode->next != nullptr) {
+			secondNode->next->previous = secondNode;
+		}
+		if (firstNode->previous != nullptr) {
+			firstNode->previous->next = firstNode;
+		}
+		return;
+	}
+	if (secondNode->previous == firstNode) {
+		secondNode->previous = firstNode->previous;
+		firstNode->next = secondNode->next;
+		firstNode->previous = secondNode;
+		secondNode->next = firstNode;
+		if (firstNode->next != nullptr) {
+			firstNode->next->previous = firstNode;
+		}
+		if (secondNode->previous != nullptr) {
+			secondNode->previous->next = secondNode;
+		}
+		return;
+	}
+
+	Node* tmp = secondNode->next;
+	secondNode->next = firstNode->next;
+	firstNode->next = tmp;
+	if (firstNode->next != nullptr) {
+		firstNode->next->previous = firstNode;
+	}
+	if (secondNode->next != nullptr) {
+		secondNode->next->previous = secondNode;
+	}
+
+	tmp = secondNode->previous;
+	secondNode->previous = firstNode->previous;
+	firstNode->previous = tmp;
+	if (firstNode->previous != nullptr) {
+		firstNode->previous->next = firstNode;
+	}
+	if (secondNode->previous != nullptr) {
+		secondNode->previous->next = secondNode;
+	}
+}
 template<typename T>
-ostream& operator<<(ostream& stream, Deck<T> deck) {
-	cout << "kk" << endl;
+typename Deck<T>::Node* Deck<T>::at(int index) {
+	if (index >= size) {
+		throw Exception("Out of range");
+	}
+	Node* tmp = first;
+	for (int i = 0; i < index; i++) {
+		tmp = tmp->next;
+	}
+	return tmp;
 }
 
 template<typename T>

@@ -9,7 +9,7 @@
 #include <string>
 using namespace std;
 
-Fat::Fat() : AbilityCard(Ability::FAT, true, false) {};
+Fat::Fat() : AbilityCard(Ability::FAT, true) {};
 
 bool Fat::needFood() {
 	return false;

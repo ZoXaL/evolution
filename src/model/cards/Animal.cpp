@@ -2,6 +2,7 @@
 #include "model/cards/abilities/Fat.h"
 #include "model/cards/abilities/Ability.h"
 #include "model/cards/interfaces/FoodModification.h"
+#include "model/cards/interfaces/ActiveAbility.h"
 #include "exceptions/Exception.h"
 #include <memory>
 #include <string>
@@ -77,6 +78,17 @@ bool Animal::isHungry() {
 
 void Animal::setFed(bool newFed) {
 	fed = newFed;
+}
+
+vector<shared_ptr<AbilityCard>> Animal::getActiveAbilities() {
+	vector<shared_ptr<AbilityCard>> activeAbilities;
+	for (int i = 0; i < abilities.size(); i++) {
+		ActiveAbility* ability = dynamic_cast<ActiveAbility*>(abilities[i].get());
+		if (ability) {
+			activeAbilities.push_back(abilities[i]);
+		}			
+	}
+	return activeAbilities;
 }
 // list<pair<int, shared_ptr<AbilityCard>>> Animal::getAbilitiesToFeed() {
 // 	list<pair<int, shared_ptr<AbilityCard>>> foodModifications;
