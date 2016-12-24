@@ -1,18 +1,18 @@
-#ifndef FEED_COMMAND
-#define FEED_COMMAND
+#ifndef RESET_USE_COMMAND
+#define RESET_USE_COMMAND
 #include "controllers/commands/AbstractCommand.h"
 #include "model/Player.h"
-#include "model/cards/Animal.h"
+#include "model/cards/AbilityCard.h"
 #include <iostream>
 
-class FeedCommand: public AbstractCommand {
+class ResetUseCommand: public AbstractCommand {
 int playerId;
 int animalId;
 int abilityId;
+bool used;
 public:
-	FeedCommand(int playerId, int animalId);
-	FeedCommand(Player* player, int animalId);
-	FeedCommand(Animal* animal);
+	ResetUseCommand(AbilityCard* ability, bool used);
+	ResetUseCommand(Player* player, int animalId, int abilityId, bool used);
 	void execute();
 	void undo();
 	std::ostream& write(std::ostream& stream);

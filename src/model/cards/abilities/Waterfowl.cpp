@@ -10,7 +10,7 @@ Waterfowl::Waterfowl() : AbilityCard(Ability::WATERFOWL, false) {};
 bool Waterfowl::defend(Animal* hunter) {
 	vector<shared_ptr<AbilityCard>>* hunterAbilities = hunter->getAbilities();
 	for (auto i = hunterAbilities->begin(); i != hunterAbilities->end(); i++) {
-		Waterfowl* waterfowl = (Waterfowl*)(i->get());
+		Waterfowl* waterfowl = dynamic_cast<Waterfowl*>(i->get());
 		if (waterfowl) {
 			return false;
 		}

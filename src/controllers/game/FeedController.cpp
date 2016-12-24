@@ -177,7 +177,7 @@ void FeedController::useAnimalAbility(shared_ptr<Animal> animal) {
 	if (answer == (abilities.size()+1)) {
 		return;
 	}
-	ActiveAbility* abilityToUse = (ActiveAbility*)(abilities.at(answer-1).get());
+	ActiveAbility* abilityToUse = dynamic_cast<ActiveAbility*>(abilities.at(answer-1).get());
 	CommandHolder* holder = CommandHolder::getInstance();
 	holder->openTransaction();
 	abilityToUse->use();

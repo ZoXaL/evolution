@@ -13,7 +13,8 @@ namespace Command {
 		POP_FOOD,
 		SWITCH_PHAZE,
 		USE_FAT,
-		TRANSACTION
+		TRANSACTION,
+		RESET_USE
 	};
 }
 #endif

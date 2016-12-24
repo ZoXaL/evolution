@@ -29,6 +29,9 @@ AbilityCard* AbilityCard::getAbilityCard() {
 void AbilityCard::setOwner(Animal* owner) {
 	this->owner = owner;
 }
+Animal* AbilityCard::getOwner() {
+	return owner;
+}
 
 shared_ptr<AbilityCard> AbilityCard::readFromFile(istream& stream) {
 	Ability::AbilityType type;

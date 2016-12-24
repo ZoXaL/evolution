@@ -14,6 +14,7 @@
 #include "controllers/commands/SwitchPhazeCommand.h"
 #include "controllers/commands/TransactionCommand.h"
 #include "controllers/commands/UseFatCommand.h"
+#include "controllers/commands/ResetUseCommand.h"
 
 TransactionCommand::TransactionCommand() {
 	type = Command::TRANSACTION;
@@ -127,6 +128,11 @@ istream& TransactionCommand::read(istream& stream) {
 			case (Command::USE_FAT) : {
 				cout << "CommandHolder::Reading USE_FAT from file" << endl;
 				command = new UseFatCommand(nullptr, nullptr, nullptr);
+				break;
+			}
+			case (Command::RESET_USE) : {
+				cout << "CommandHolder::Reading RESET_USE from file" << endl;
+				command = new ResetUseCommand(nullptr, -1, -1, false);
 				break;
 			}
 			default : {

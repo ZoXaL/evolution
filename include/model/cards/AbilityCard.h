@@ -30,6 +30,7 @@ public:
 	bool canDuplicate();
 	
 	void setOwner(Animal* owner);
+	Animal* getOwner();
 
 	virtual string getStatus() = 0;
 	static shared_ptr<AbilityCard> readFromFile(istream&);

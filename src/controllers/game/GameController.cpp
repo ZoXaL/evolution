@@ -9,8 +9,10 @@
 #include "controllers/commands/KillAnimalCommand.h"
 #include "controllers/commands/ClearAnimalFoodCommand.h"
 #include "controllers/commands/GiveCardToPlayerCommand.h"
+#include "controllers/commands/ResetUseCommand.h"
 #include "controllers/commands/EndMoveCommand.h"
 #include "controllers/commands/CommandHolder.h"
+#include "model/cards/interfaces/ActiveAbility.h"
 #include "Logger.h"
 
 #include "model/GameModel.h"
@@ -71,9 +73,9 @@ AbstractController* GameController::run() {
 
 				// Time to give more cards to players
 				int firstPlayerCardsToGive = player1->animalsCount();
-				if (firstPlayerCardsToGive == 0) firstPlayerCardsToGive = 6;
+				if (player1->handSize() == 0) firstPlayerCardsToGive = 6;
 				int secondPlayerCardsToGive = player2->animalsCount();
-				if (secondPlayerCardsToGive == 0) secondPlayerCardsToGive = 6;
+				if (player2->handSize() == 0) secondPlayerCardsToGive = 6;
 				Player* minCardsPlayer;
 				int minCardsGive = 0;
 				Player* maxCardsPlayer;
@@ -147,6 +149,12 @@ void GameController::deathPhaze() {
 		} else {
 			holder->addCommand(new ClearAnimalFoodCommand(player1, i-animals1->begin()));
 		}
+		for (auto j = (*i)->getAbilities()->begin(); j != (*i)->getAbilities()->end(); j++) {
+			ActiveAbility* activeAbility = dynamic_cast<ActiveAbility*>(j->get());
+			if (activeAbility && !activeAbility->canUse()) {
+				holder->addCommand(new ResetUseCommand(player1, i+1-animals1->begin(), j-(*i)->getAbilities()->begin(), false));
+			}
+		}
 	}
 
 	vector<shared_ptr<Animal>>* animals2 = player2->getAnimals();
@@ -156,6 +164,12 @@ void GameController::deathPhaze() {
 			holder->addCommand(new KillAnimalCommand(player2, i+1-animals2->begin()));
 		} else {
 			holder->addCommand(new ClearAnimalFoodCommand(player2, i-animals2->begin()));
+		}
+		for (auto j = (*i)->getAbilities()->begin(); j != (*i)->getAbilities()->end(); j++) {
+			ActiveAbility* activeAbility = dynamic_cast<ActiveAbility*>(j->get());
+			if (activeAbility && !activeAbility->canUse()) {
+				holder->addCommand(new ResetUseCommand(player2, i+1-animals2->begin(), j-(*i)->getAbilities()->begin(), false));
+			}
 		}
 	}
 

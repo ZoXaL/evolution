@@ -9,7 +9,8 @@
 #include <string>
 
 class Hunter : public AbilityCard, public FoodModification, public ActiveAbility {
-int reserve;
+bool reserve;
+bool used;
 public:
 	Hunter();
 	virtual ~Hunter() {};
@@ -23,12 +24,15 @@ public:
 	AbilityCard* clone();
 
 	void use();
-
+	bool canUse();
+	void resetUse();
+	void setUsed(bool);
+	
 	std::string getStatus();
 	int getCost();
-
-	std::ostream& write(std::ostream&);
+	
 	std::istream& read(std::istream&);
+	std::ostream& write(std::ostream&);
 };
 
 #endif

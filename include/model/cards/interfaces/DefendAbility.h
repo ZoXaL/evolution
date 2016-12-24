@@ -5,5 +5,6 @@
 class DefendAbility {
 public:
 	virtual bool defend(Animal* hunter) = 0;
+	virtual ~DefendAbility() {};
 };
 #endif

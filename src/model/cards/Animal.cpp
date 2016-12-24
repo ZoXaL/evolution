@@ -93,7 +93,7 @@ vector<shared_ptr<AbilityCard>> Animal::getActiveAbilities() {
 	vector<shared_ptr<AbilityCard>> activeAbilities;
 	for (int i = 0; i < abilities.size(); i++) {
 		ActiveAbility* ability = dynamic_cast<ActiveAbility*>(abilities[i].get());
-		if (ability) {
+		if (ability && ability->canUse()) {
 			activeAbilities.push_back(abilities[i]);
 		}			
 	}

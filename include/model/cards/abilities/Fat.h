@@ -23,6 +23,9 @@ public:
 	AbilityCard* clone();
 
 	void use();
+	bool canUse();
+	void resetUse();
+	void setUsed(bool);
 
 	std::string getStatus();
 	int getCost();

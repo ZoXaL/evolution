@@ -91,3 +91,32 @@
 24-12-2016 23:2:20 : [TRACE]    Game start
 24-12-2016 23:9:43 : [TRACE]    Game start
 24-12-2016 23:10:47 : [TRACE]    Game start
+24-12-2016 23:18:21 : [TRACE]    Game start
+24-12-2016 23:20:25 : [TRACE]    Game start
+24-12-2016 23:23:17 : [TRACE]    Game start
+24-12-2016 23:23:51 : [TRACE]    Game start
+24-12-2016 23:25:11 : [TRACE]    Game start
+24-12-2016 23:29:26 : [TRACE]    Game start
+24-12-2016 23:33:56 : [TRACE]    Game start
+24-12-2016 23:35:25 : [TRACE]    Game start
+24-12-2016 23:37:7 : [TRACE]    Game start
+24-12-2016 23:39:42 : [TRACE]    Game start
+24-12-2016 23:53:0 : [TRACE]    Game start
+24-12-2016 23:58:56 : [TRACE]    Game start
+24-12-2016 23:59:30 : [WARN]    Animal doesn't need food
+25-12-2016 0:1:36 : [TRACE]    Game start
+25-12-2016 0:2:13 : [WARN]    Animal doesn't need food
+25-12-2016 0:3:2 : [TRACE]    Game start
+25-12-2016 0:5:26 : [TRACE]    Game start
+25-12-2016 0:52:7 : [TRACE]    Game start
+25-12-2016 1:0:26 : [TRACE]    Game start
+25-12-2016 1:16:33 : [TRACE]    Game start
+25-12-2016 1:17:39 : [TRACE]    Game start
+25-12-2016 1:19:8 : [TRACE]    Game start
+25-12-2016 1:19:36 : [TRACE]    Game start
+25-12-2016 1:19:46 : [TRACE]    Game start
+25-12-2016 1:21:7 : [TRACE]    Game start
+25-12-2016 1:26:45 : [TRACE]    Game start
+25-12-2016 1:26:48 : [TRACE]    Game start
+25-12-2016 1:28:36 : [TRACE]    Game start
+25-12-2016 1:29:19 : [TRACE]    Game start

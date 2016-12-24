@@ -32,10 +32,18 @@ void Fat::giveFood() {
 	reserve = true;
 }
 
+bool Fat::canUse() {
+	return true;
+}
+void Fat::resetUse() {}
+
+void Fat::setUsed(bool used) {}
+
+
 string Fat::getStatus() {
 	string status = abilityToString(ability);
 	status += "(";
-	status += (reserve)? "full" : "empty";
+	status += (reserve)? "f" : "e";
 	status += ")";
 	return status;
 }
