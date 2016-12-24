@@ -28,6 +28,7 @@ public:
 	bool isHungry();	// if no, animal dies
 	int feed();
 	bool canGetFood();
+	bool defend(Animal* hunter);
 	// list<pair<int, shared_ptr<AbilityCard>>> getAbilitiesToFeed();
 	void setFed(bool);
 	Player* getOwner();

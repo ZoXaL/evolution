@@ -8,7 +8,7 @@
 
 class GameManager {
 	static bool gameInitialized;
-	static list<shared_ptr<AbilityCard>> startDeck;
+	static list<AbilityCard*> startDeck;
 public:
 	static GameModel* buildGame(const char* firstPlayerName, const char* secondPlayerName);
 	static void saveGame(std::fstream&);

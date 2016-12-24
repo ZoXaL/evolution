@@ -8,7 +8,14 @@
 Waterfowl::Waterfowl() : AbilityCard(Ability::WATERFOWL, false) {};
 
 bool Waterfowl::defend(Animal* hunter) {
-	return false;
+	vector<shared_ptr<AbilityCard>>* hunterAbilities = hunter->getAbilities();
+	for (auto i = hunterAbilities->begin(); i != hunterAbilities->end(); i++) {
+		Waterfowl* waterfowl = (Waterfowl*)(i->get());
+		if (waterfowl) {
+			return false;
+		}
+	}
+	return true;
 }
 
 string Waterfowl::getStatus() {
@@ -17,6 +24,10 @@ string Waterfowl::getStatus() {
 
 int Waterfowl::getCost() {
 	return 1;
+}
+
+AbilityCard* Waterfowl::clone() {
+	return new Waterfowl(*this);
 }
 
 ostream& Waterfowl::write(ostream& stream)  {

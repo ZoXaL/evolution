@@ -1,5 +1,7 @@
 #include "model/cards/AbilityCard.h"
 #include "model/cards/abilities/Fat.h"
+#include "model/cards/abilities/Hunter.h"
+#include "model/cards/abilities/Waterfowl.h"
 #include "model/cards/abilities/Ability.h"
 #include "exceptions/Exception.h"
 #include "functions.h"
@@ -36,6 +38,16 @@ shared_ptr<AbilityCard> AbilityCard::readFromFile(istream& stream) {
 	switch (ability) {
 		case (Ability::FAT) : {
 			abilityToReturn = new Fat();
+			abilityToReturn->read(stream);
+			break;
+		}
+		case (Ability::HUNTER) : {
+			abilityToReturn = new Hunter();
+			abilityToReturn->read(stream);
+			break;
+		}
+		case (Ability::WATERFOWL) : {
+			abilityToReturn = new Waterfowl();
 			abilityToReturn->read(stream);
 			break;
 		}

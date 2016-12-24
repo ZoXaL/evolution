@@ -21,6 +21,9 @@ bool Fat::canGetFood() {
 void Fat::resetFood() {
 	reserve = false;
 }
+void Fat::decreaseFood() {
+	reserve = false;
+}
 
 void Fat::giveFood() {
 	if (reserve) {
@@ -46,6 +49,11 @@ void Fat::use() {
 		return;
 	}
 	CommandHolder::getInstance()->addCommand(new UseFatCommand(owner->getOwner(), owner, this));
+}
+
+
+AbilityCard* Fat::clone() {
+	return new Fat(*this);
 }
 
 ostream& Fat::write(ostream& stream)  {

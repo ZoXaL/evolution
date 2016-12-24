@@ -8,6 +8,7 @@ public:
 	virtual bool canGetFood() = 0;
 	virtual void giveFood() = 0;
 	virtual void resetFood() = 0;
+	virtual void decreaseFood() = 0;
 	virtual ~FoodModification() {};
 	// virtual void takeAwayFood() = 0;
 };

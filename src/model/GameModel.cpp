@@ -64,13 +64,14 @@ Player* GameModel::getCurrentPlayer() {
 Player* GameModel::getFirstPlayer() {
 	return firstPlayer;
 }
-
+Player* GameModel::getOpponent(Player* player) {
+	return (player==&players[0]) ? &players[1] : &players[0];
+}
 Player* GameModel::switchPlayer() {
 	Player* next = (currentPlayer == &players[1]) ? &players[0] : &players[1];
 	currentPlayer = next;
 	return currentPlayer;
 }
-
 Player* GameModel::switchFirstPlayer() {
 	Player* next = (firstPlayer == &players[1]) ? &players[0] : &players[1];
 	firstPlayer = next;

@@ -27,6 +27,7 @@ void AddAbilityCommand::execute() {
 	shared_ptr<AbilityCard> newAbility = player->getCardFromHand(abilityId);
 	player->removeCardFromHand(abilityId);
 	shared_ptr<Animal> animal = player->getAnimal(animalId);
+	newAbility->setOwner(animal.get());
 	animal->pushAbility(newAbility);
 }
 
@@ -36,6 +37,7 @@ void AddAbilityCommand::undo() {
 	shared_ptr<Animal> animal = player->getAnimal(animalId);
 
 	shared_ptr<AbilityCard> ability = animal->popAbility();
+	ability->setOwner(nullptr);
 	player->addCardToHand(ability, abilityId);	
 }
 ostream& AddAbilityCommand::write(ostream& stream) {

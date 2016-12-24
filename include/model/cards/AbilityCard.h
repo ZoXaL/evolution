@@ -7,10 +7,11 @@
 #include "model/cards/Card.h"
 #include "model/cards/Animal.h"
 #include "model/cards/abilities/Ability.h"
+#include "interfaces/Cloneable.h"
 #include "functions.h"
 using namespace std;
 
-class AbilityCard : public Card {
+class AbilityCard : public Card, public Cloneable<AbilityCard*> {
 protected:
 	Ability::AbilityType ability;
 	bool duplicated;

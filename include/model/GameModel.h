@@ -35,6 +35,7 @@ public:
 	Player* getPlayer(int);
 	Player* getCurrentPlayer();
 	Player* getFirstPlayer();
+	Player* getOpponent(Player* player);
 	Player* switchPlayer();
 	Player* switchFirstPlayer();
 

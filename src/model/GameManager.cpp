@@ -16,7 +16,7 @@
 using namespace std;
 
 bool GameManager::gameInitialized = false;
-list<shared_ptr<AbilityCard>> GameManager::startDeck;
+list<AbilityCard*> GameManager::startDeck;
 
 GameModel* GameManager::buildGame(const char* firstPlayerName, const char* secondPlayerName) {
 	gameInitialized = true;
@@ -40,8 +40,9 @@ GameModel* GameManager::buildGame(const char* firstPlayerName, const char* secon
 	}
 	cardDeck->shuffle();
 	for (auto i = cardDeck->begin(); i != cardDeck->end(); i++) {
-		startDeck.push_back(*i);
+		startDeck.push_back((*i)->clone());
 	}
+	startDeck.push_back((*(cardDeck->end()))->clone());
 	giveCardsToPlayers(model->getCardDeck());
 	return model;
 }
@@ -84,7 +85,7 @@ GameModel* GameManager::loadGame(fstream& stream) {
 	for (int i = 0; i< deckSize; i++) {
 		shared_ptr<AbilityCard> newCard = AbilityCard::readFromFile(stream);
 		cardDeck->push_back(newCard);
-		startDeck.push_back(newCard);
+		startDeck.push_back(newCard.get());
 	}
 	giveCardsToPlayers(model->getCardDeck());
 	// cardDeck->read(stream);

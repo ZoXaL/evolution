@@ -17,7 +17,10 @@ public:
 	bool needFood();
 	void giveFood();
 	void resetFood();
+	void decreaseFood();
 	bool canGetFood();
+
+	AbilityCard* clone();
 
 	void use();
 

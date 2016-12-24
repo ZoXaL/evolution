@@ -3,6 +3,7 @@
 #include "model/cards/abilities/Ability.h"
 #include "model/cards/interfaces/FoodModification.h"
 #include "model/cards/interfaces/ActiveAbility.h"
+#include "model/cards/interfaces/DefendAbility.h"
 #include "exceptions/Exception.h"
 #include <memory>
 #include <string>
@@ -89,6 +90,16 @@ vector<shared_ptr<AbilityCard>> Animal::getActiveAbilities() {
 		}			
 	}
 	return activeAbilities;
+}
+
+bool Animal::defend(Animal* hunter) {
+	for (int i = 0; i < abilities.size(); i++) {
+		DefendAbility* ability = dynamic_cast<DefendAbility*>(abilities[i].get());
+		if (ability && ability->defend(hunter)) {
+			return true;
+		}			
+	}
+	return false;
 }
 // list<pair<int, shared_ptr<AbilityCard>>> Animal::getAbilitiesToFeed() {
 // 	list<pair<int, shared_ptr<AbilityCard>>> foodModifications;

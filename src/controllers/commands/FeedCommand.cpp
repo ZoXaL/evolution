@@ -35,7 +35,7 @@ void FeedCommand::execute() {
 			animal->setFed(true);
 		} else {
 			FoodModification* abilityFed = dynamic_cast<FoodModification*>(animal->getAbility(abilityId));
-			abilityFed->resetFood();
+			abilityFed->giveFood();
 		}	
 	}	
 	if (abilityId == -2) throw Exception("Animal doesn't need food");
@@ -49,7 +49,7 @@ void FeedCommand::undo() {
 		animal->setFed(false);
 	} else {
 		FoodModification* abilityFed = dynamic_cast<FoodModification*>(animal->getAbility(abilityId));
-		abilityFed->resetFood();
+		abilityFed->decreaseFood();
 	}	
 }
 ostream& FeedCommand::write(ostream& stream) {

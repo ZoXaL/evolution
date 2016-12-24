@@ -14,6 +14,8 @@ public:
 
 	bool defend(Animal* hunter);
 
+	AbilityCard* clone();
+
 	std::string getStatus();
 	int getCost();
 
