@@ -9,7 +9,7 @@
 using namespace std;
 
 AbilityCard::AbilityCard(Ability::AbilityType _ability, bool _duplicated) : ability(_ability) {
-	this->duplicated = duplicated;
+	this->duplicated = _duplicated;
 };
 
 Ability::AbilityType AbilityCard::getAbility() {

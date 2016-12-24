@@ -59,6 +59,7 @@ ostream& TransactionCommand::write(ostream& stream) {
 	return stream;
 }
 istream& TransactionCommand::read(istream& stream) {
+	deck.clear();
 	int commandsNum;
 	stream >> commandsNum;
 	cout << commandsNum << endl;
@@ -100,7 +101,7 @@ istream& TransactionCommand::read(istream& stream) {
 			}
 			case (Command::KILL_ANIMAL) : {
 				cout << "CommandHolder::Reading KILL_ANIMAL from file" << endl;
-				command = new KillAnimalCommand(-1, -1);
+				command = new KillAnimalCommand(0, 0);
 				break;
 			}
 			case (Command::PASS) : {

@@ -46,6 +46,8 @@ public:
 	bool isEmpty();
 	int getSize();
 
+	void clear();
+
 	void shuffle();
 	void swap(Node*, Node*);
 
@@ -109,6 +111,7 @@ T Deck<T>::pop_front() {
 	T returnData = first->data;
 	Node* tmp = first;
 	first = first->next;
+	first->next = nullptr;
 	delete tmp;
 	size--;
 	if (size == 0) {
@@ -125,6 +128,7 @@ T Deck<T>::pop_back() {
 	T returnData = last->data;
 	Node* tmp = last;
 	last = last->previous;
+	last->next = nullptr;
 	delete tmp;
 	size--;
 	if (size == 0) {
@@ -133,6 +137,18 @@ T Deck<T>::pop_back() {
 	}
 	return returnData;
 }
+
+template<typename T> 
+void Deck<T>::clear() {
+	if (!first) return;	
+	while(first) {
+		Node* tmp = first;
+		first = first->next;
+		delete tmp;		
+	}
+	size = 0;
+}
+
 template<typename T>
 typename Deck<T>::iterator_t Deck<T>::begin() {
 	return iterator_t(first);

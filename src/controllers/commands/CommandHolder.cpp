@@ -83,7 +83,7 @@ void CommandHolder::undo() {
 			throw e;
 		}
 		commandToUndo->undo();
-	} while(GameModel::getInstance()->getCurrentPlayer() != undoPlayer);
+	} while(GameModel::getInstance()->getCurrentPlayer() != undoPlayer || undoPlayer->isPassed());
 	// if (undoPlayer == GameModel::getInstance()->getCurrentPlayer()) {
 	// 	return;
 	// }	
@@ -100,6 +100,7 @@ ostream& CommandHolder::write(ostream& stream) {
 
 istream& CommandHolder::read(istream& stream) {
 	int commandsNum;
+	deck.clear();
 	stream >> commandsNum;
 	for (int i = 0; i < commandsNum; i++) {
 		int commandType;
