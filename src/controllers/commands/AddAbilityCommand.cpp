@@ -1,6 +1,6 @@
 #include "controllers/commands/AddAbilityCommand.h"
 #include "model/cards/Card.h"
-#include "model/cards/AnimalCard.h"
+#include "model/cards/Animal.h"
 #include "model/GameModel.h"
 #include "model/Player.h"
 #include "controllers/commands/CommandType.h"
@@ -26,14 +26,14 @@ void AddAbilityCommand::execute() {
 	// 2) Add abilityCard to animal abilities
 	shared_ptr<AbilityCard> newAbility = player->getCardFromHand(abilityId);
 	player->removeCardFromHand(abilityId);
-	shared_ptr<AnimalCard> animal = player->getAnimal(animalId);
+	shared_ptr<Animal> animal = player->getAnimal(animalId);
 	animal->pushAbility(newAbility);
 }
 
 void AddAbilityCommand::undo() {
 	GameModel* model = GameModel::getInstance();
 	Player* player = model->getPlayer(playerId);
-	shared_ptr<AnimalCard> animal = player->getAnimal(animalId);
+	shared_ptr<Animal> animal = player->getAnimal(animalId);
 
 	shared_ptr<AbilityCard> ability = animal->popAbility();
 	player->addCardToHand(ability, abilityId);	

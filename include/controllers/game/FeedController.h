@@ -2,23 +2,23 @@
 #define FEED_CONTROLLER_H
 
 #include "controllers/AbstractController.h"
-#include "model/cards/AnimalCard.h"
-#include "ModelView.h"
+#include "model/cards/Animal.h"
+#include "PhazeController.h"
 #include <memory>
 #include <string>
 
-class FeedController : public AbstractController, protected ModelView {
+class FeedController : public AbstractController, protected PhazeController {
 public:
 	AbstractController* run();
 private:
 	static std::string alert;
 
 	void feedAnimal();
-	void useAnimalAbility(std::shared_ptr<AnimalCard>);
-	shared_ptr<AnimalCard> selectAnimalToUse();
+	void useAnimalAbility(std::shared_ptr<Animal>);
+	shared_ptr<Animal> selectAnimalToUse();
 protected:
 	void displayStatistic();
-	string displayAnimal(std::shared_ptr<AnimalCard>);
+	string displayAnimal(std::shared_ptr<Animal>);
 	void pass();
 	// getAvailableMoves();
 	

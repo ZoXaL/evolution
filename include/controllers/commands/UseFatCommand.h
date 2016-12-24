@@ -2,7 +2,7 @@
 #define USE_FAT_COMMAND
 #include "controllers/commands/AbstractCommand.h"
 #include "model/Player.h"
-#include "model/cards/AnimalCard.h"
+#include "model/cards/Animal.h"
 #include "model/cards/AbilityCard.h"
 #include <iostream>
 
@@ -12,7 +12,7 @@ class UseFatCommand: public AbstractCommand {
 	int fatAbilityId;
 	int fedAbilityId;
 public:
-	UseFatCommand(Player*, AnimalCard*, AbilityCard*);
+	UseFatCommand(Player*, Animal*, AbilityCard*);
 	void execute();
 	void undo();
 	std::ostream& write(std::ostream& stream);

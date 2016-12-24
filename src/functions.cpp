@@ -1,7 +1,7 @@
 #include <iostream>
 #include <climits>
 #include "model/cards/abilities/Ability.h"
-#include "model/cards/AnimalCard.h"
+#include "model/cards/Animal.h"
 #include "model/cards/AbilityCard.h"
 #include "model/GamePhaze.h"
 #include "model/GameModel.h"
@@ -93,8 +93,8 @@ int getPlayerId(Player* player) {
 	return (GameModel::getInstance()->getPlayer(0) == player) ? 0 : 1;
 }
 
-int getAnimalId(Player* player, AnimalCard* animal) {
-	vector<shared_ptr<AnimalCard>>* animals = player->getAnimals();
+int getAnimalId(Player* player, Animal* animal) {
+	vector<shared_ptr<Animal>>* animals = player->getAnimals();
 	for (auto i = animals->begin(); i != animals->end(); i++) {
 		if (i->get() == animal) {
 			return distance(animals->begin(), i);
@@ -102,7 +102,7 @@ int getAnimalId(Player* player, AnimalCard* animal) {
 	}
 	return -1;
 }
-int getAbilityId(AnimalCard* animal, AbilityCard* ability) {
+int getAbilityId(Animal* animal, AbilityCard* ability) {
 	vector<shared_ptr<AbilityCard>>* abilities = animal->getAbilities();
 	for (auto i = abilities->begin(); i != abilities->end(); i++) {
 		if (i->get() == ability) {

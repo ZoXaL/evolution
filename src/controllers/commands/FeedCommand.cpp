@@ -1,6 +1,6 @@
 #include "controllers/commands/FeedCommand.h"
 #include "model/cards/Card.h"
-#include "model/cards/AnimalCard.h"
+#include "model/cards/Animal.h"
 #include "model/GameModel.h"
 #include "model/Player.h"
 #include "model/cards/interfaces/FoodModification.h"
@@ -26,14 +26,14 @@ FeedCommand::FeedCommand(Player* player, int animalId) {
 void FeedCommand::execute() {
 	GameModel* model = GameModel::getInstance();
 	Player* player = model->getPlayer(playerId);
-	shared_ptr<AnimalCard> animal = player->getAnimal(animalId);
+	shared_ptr<Animal> animal = player->getAnimal(animalId);
 	abilityId = animal->feed();
 }
 
 void FeedCommand::undo() {
 	GameModel* model = GameModel::getInstance();
 	Player* player = model->getPlayer(playerId);
-	shared_ptr<AnimalCard> animal = player->getAnimal(animalId);
+	shared_ptr<Animal> animal = player->getAnimal(animalId);
 	if (abilityId == -1) {
 		animal->setHungry(true);
 	} else {

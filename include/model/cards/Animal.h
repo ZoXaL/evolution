@@ -8,15 +8,14 @@ using namespace std;
 #include "model/Player.h"
 #include "model/cards/AbilityCard.h"
 
-
-class AnimalCard {
+class Animal {
 	shared_ptr<AbilityCard> createdFrom;
 	vector<shared_ptr<AbilityCard>> abilities;
 	bool _isHungry;
 	bool _needFood;
 	Player* owner;
 public:
-	AnimalCard(shared_ptr<AbilityCard> createdFrom, Player* owner);
+	Animal(shared_ptr<AbilityCard> createdFrom, Player* owner);
 	vector<shared_ptr<AbilityCard>>* getAbilities();
 	void pushAbility(shared_ptr<AbilityCard> newAbility);
 	shared_ptr<AbilityCard> popAbility();

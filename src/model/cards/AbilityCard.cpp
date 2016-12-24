@@ -27,7 +27,7 @@ bool AbilityCard::isPassive() {
 AbilityCard* AbilityCard::getAbilityCard() {
 	return this;
 }
-void AbilityCard::setOwner(AnimalCard* owner) {
+void AbilityCard::setOwner(Animal* owner) {
 	this->owner = owner;
 }
 

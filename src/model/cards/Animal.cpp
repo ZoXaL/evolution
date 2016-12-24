@@ -1,4 +1,4 @@
-#include "model/cards/AnimalCard.h"
+#include "model/cards/Animal.h"
 #include "model/cards/abilities/Fat.h"
 #include "model/cards/abilities/Ability.h"
 #include "model/cards/interfaces/FoodModification.h"
@@ -9,27 +9,27 @@
 
 using namespace std;
 
-AnimalCard::AnimalCard(shared_ptr<AbilityCard> createdFrom, Player* owner) {
+Animal::Animal(shared_ptr<AbilityCard> createdFrom, Player* owner) {
 	this->createdFrom = createdFrom;
 	this->_isHungry = true;
 	this->_needFood = true;
 	this->owner = owner;
 }
-vector<shared_ptr<AbilityCard>>* AnimalCard::getAbilities() {
+vector<shared_ptr<AbilityCard>>* Animal::getAbilities() {
 	return &abilities;
 }
-Player* AnimalCard::getOwner() {
+Player* Animal::getOwner() {
 	return owner;
 }
-shared_ptr<AbilityCard> AnimalCard::getCreatedFrom() {
+shared_ptr<AbilityCard> Animal::getCreatedFrom() {
 	return createdFrom;
 }
 
-void AnimalCard::pushAbility(shared_ptr<AbilityCard> newAbility) {
+void Animal::pushAbility(shared_ptr<AbilityCard> newAbility) {
 	newAbility->setOwner(this);
 	abilities.push_back(newAbility);
 }
-shared_ptr<AbilityCard> AnimalCard::popAbility() {
+shared_ptr<AbilityCard> Animal::popAbility() {
 	if (abilities.size() == 0) {
 		throw Exception("Cannot pop animal ability because there is no one");
 	}
@@ -38,14 +38,14 @@ shared_ptr<AbilityCard> AnimalCard::popAbility() {
 	return abilityToReturn;
 }
 
-AbilityCard* AnimalCard::getAbility(int index) {
+AbilityCard* Animal::getAbility(int index) {
 	if (index >= abilities.size() || index < 0) {
 		throw Exception("Cannot get ability on illegal index");
 	}
 	return abilities[index].get();
 }
 
-string AnimalCard::getStatus() {
+string Animal::getStatus() {
 	if (abilities.size() == 0) {
 		return "Empty animal";
 	}
@@ -57,7 +57,7 @@ string AnimalCard::getStatus() {
 	}
 	return status;
 }
-int AnimalCard::getCost() {
+int Animal::getCost() {
 	int totalCost = 3;
 	for (auto ibegin = abilities.begin(); ibegin != abilities.end(); ibegin++) {
 		totalCost += (*ibegin)->getCost();
@@ -65,23 +65,23 @@ int AnimalCard::getCost() {
 	return totalCost;
 }
 
-bool AnimalCard::needFood() {
+bool Animal::needFood() {
 	return _needFood;
 }
-bool AnimalCard::isHungry() {
+bool Animal::isHungry() {
 	return _isHungry;
 }
-void AnimalCard::setHungry(bool hungry) {
+void Animal::setHungry(bool hungry) {
 	this->_isHungry = hungry;
 	if (hungry) {
 		this->_needFood = true;
 	}	
 }
-void AnimalCard::setNeedFood(bool needFood) {
+void Animal::setNeedFood(bool needFood) {
 	this->_needFood = needFood;
 }
 
-int AnimalCard::feed() {
+int Animal::feed() {
 	bool abilitiesNeedFood = false;
 	int abilityToFeed = -1;
 	for (int i = 0; i < abilities.size(); i++) {

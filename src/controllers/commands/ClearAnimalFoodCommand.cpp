@@ -1,6 +1,6 @@
 #include "controllers/commands/ClearAnimalFoodCommand.h"
 #include "model/cards/Card.h"
-#include "model/cards/AnimalCard.h"
+#include "model/cards/Animal.h"
 #include "model/GameModel.h"
 #include "model/Player.h"
 #include "controllers/commands/CommandType.h"
@@ -19,7 +19,7 @@ ClearAnimalFoodCommand::ClearAnimalFoodCommand(Player* player,int animalId) {
 void ClearAnimalFoodCommand::execute() {
 	GameModel* model = GameModel::getInstance();
 	Player* player = model->getPlayer(playerId);
-	shared_ptr<AnimalCard> animal = player->getAnimal(animalId);
+	shared_ptr<Animal> animal = player->getAnimal(animalId);
 	wasHungry = animal->isHungry();
 	neededFood = animal->needFood();
 	animal->setHungry(true);
@@ -28,7 +28,7 @@ void ClearAnimalFoodCommand::execute() {
 void ClearAnimalFoodCommand::undo() {
 	GameModel* model = GameModel::getInstance();
 	Player* player = model->getPlayer(playerId);
-	shared_ptr<AnimalCard> animal = player->getAnimal(animalId);
+	shared_ptr<Animal> animal = player->getAnimal(animalId);
 	animal->setHungry(wasHungry);
 	animal->setNeedFood(neededFood);
 }

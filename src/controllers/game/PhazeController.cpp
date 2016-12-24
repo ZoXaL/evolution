@@ -1,16 +1,16 @@
-#include "controllers/game/ModelView.h"
+#include "controllers/game/PhazeController.h"
 #include "model/GameModel.h"
 #include "model/Player.h"
 #include "model/deck/Deck.h"
 #include "model/cards/AbilityCard.h"
-#include "model/cards/AnimalCard.h"
+#include "model/cards/Animal.h"
 
 #include "functions.h"
 #include <iomanip>
 #include <memory>
 using namespace std;
 
-void ModelView::displayModel(bool showHand) {
+void PhazeController::displayModel(bool showHand) {
 	GameModel* model = GameModel::getInstance();
 	Player* currentPlayer = model->getCurrentPlayer();
 	Player* opponent = (model->getPlayer(1) == currentPlayer) ? model->getPlayer(0) : model->getPlayer(1);
@@ -42,8 +42,8 @@ void ModelView::displayModel(bool showHand) {
 	cout << "Current phaze: " << phazeToString(model->getPhaze()) << endl;
 	cout << "Deck size: " << cardDeck->getSize() << endl;
 	displayStatistic();
-	cout << "--------------------------------------------------------------------------------" << endl;	
 	displayAlert();
+	cout << "--------------------------------------------------------------------------------" << endl;		
 	//Player hand
 	if (showHand) {
 		cout << "Your cards:" << endl;
@@ -52,13 +52,13 @@ void ModelView::displayModel(bool showHand) {
 		}
 	}	
 }
-void ModelView::displayStatistic() {
+void PhazeController::displayStatistic() {
 	//cout << "" << endl;
 }
 
-string ModelView::displayAnimal(shared_ptr<AnimalCard> animal) {
+string PhazeController::displayAnimal(shared_ptr<Animal> animal) {
 	return animal->getStatus();
 }
-void ModelView::displayAlert() {
+void PhazeController::displayAlert() {
 
 }

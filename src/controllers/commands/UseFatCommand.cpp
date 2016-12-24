@@ -8,7 +8,7 @@
 #include "controllers/commands/CommandType.h"
 using namespace std;
 
-UseFatCommand::UseFatCommand(Player* player, AnimalCard* animal, AbilityCard* ability) {
+UseFatCommand::UseFatCommand(Player* player, Animal* animal, AbilityCard* ability) {
 	this->playerId = getPlayerId(player);
 	this->animalId = getAnimalId(player, animal);
 	this->fatAbilityId = getAbilityId(animal, ability);
@@ -18,7 +18,7 @@ UseFatCommand::UseFatCommand(Player* player, AnimalCard* animal, AbilityCard* ab
 void UseFatCommand::execute() {
 	GameModel* model = GameModel::getInstance();
 	Player* player = model->getPlayer(playerId);
-	shared_ptr<AnimalCard> animal = player->getAnimal(animalId);
+	shared_ptr<Animal> animal = player->getAnimal(animalId);
 	Fat* fatAbility = (Fat*)(animal->getAbility(fatAbilityId));
 	fatAbility->resetFood();
 	fedAbilityId = animal->feed();
@@ -27,7 +27,7 @@ void UseFatCommand::execute() {
 void UseFatCommand::undo() {
 	GameModel* model = GameModel::getInstance();
 	Player* player = model->getPlayer(playerId);
-	shared_ptr<AnimalCard> animal = player->getAnimal(animalId);
+	shared_ptr<Animal> animal = player->getAnimal(animalId);
 	Fat* fatAbility = (Fat*)(animal->getAbility(fatAbilityId));
 	fatAbility->giveFood();
 

@@ -2,7 +2,7 @@
 #define FEED_COMMAND
 #include "controllers/commands/AbstractCommand.h"
 #include "model/Player.h"
-#include "model/cards/AnimalCard.h"
+#include "model/cards/Animal.h"
 #include <iostream>
 
 class FeedCommand: public AbstractCommand {

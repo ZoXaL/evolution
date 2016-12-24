@@ -5,7 +5,7 @@
 #include <iostream>
 #include <memory>
 #include "model/cards/Card.h"
-#include "model/cards/AnimalCard.h"
+#include "model/cards/Animal.h"
 #include "model/cards/abilities/Ability.h"
 #include "functions.h"
 using namespace std;
@@ -15,7 +15,7 @@ protected:
 	Ability::AbilityType ability;
 	bool duplicated;
 	bool passive;
-	AnimalCard* owner;
+	Animal* owner;
 public:
 	AbilityCard(Ability::AbilityType, bool duplicated, bool passive);
 
@@ -30,7 +30,7 @@ public:
 	bool isDuplicated();
 	bool isPassive();
 	
-	void setOwner(AnimalCard* owner);
+	void setOwner(Animal* owner);
 
 	virtual string getStatus() = 0;
 	virtual void use() = 0;

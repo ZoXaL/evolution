@@ -52,26 +52,26 @@ shared_ptr<AbilityCard> Player::getCardFromHand(int cardNum) {
 int Player::handSize() {
 	return hand.size();
 }
-vector<shared_ptr<AnimalCard>>* Player::getAnimals() {
+vector<shared_ptr<Animal>>* Player::getAnimals() {
 	return &animals;
 }
-void Player::addAnimal(shared_ptr<AnimalCard> newAnimal) {
+void Player::addAnimal(shared_ptr<Animal> newAnimal) {
 	animals.push_back(newAnimal);
 }
-void Player::addAnimal(shared_ptr<AnimalCard> animal, int index) {
+void Player::addAnimal(shared_ptr<Animal> animal, int index) {
 	animals.insert(animals.begin()+index, animal);
 }
-shared_ptr<AnimalCard> Player::deleteAnimal(int animalNum) {
+shared_ptr<Animal> Player::deleteAnimal(int animalNum) {
 	if(!checkRange(animalNum, 0, animals.size())) {
 		return nullptr;
 	}
 	auto returnAnimalIt = animals.begin()+animals.size()-1;
-	shared_ptr<AnimalCard> returnAnimal = *returnAnimalIt;
+	shared_ptr<Animal> returnAnimal = *returnAnimalIt;
 	animals.pop_back();
 	return returnAnimal;
 }
 
-shared_ptr<AnimalCard> Player::getAnimal(int animalNum) {
+shared_ptr<Animal> Player::getAnimal(int animalNum) {
 	if(!checkRange(animalNum, 0, animals.size())) {
 		Exception noSuchPos("Cannot get animal from player: no animal with num "+to_string(animalNum));
 		noSuchPos.log();

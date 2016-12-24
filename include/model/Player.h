@@ -6,11 +6,11 @@
 using namespace std;
 
 class AbilityCard;
-class AnimalCard;
+class Animal;
 
 class Player {
 	vector<shared_ptr<AbilityCard>> hand;
-	vector<shared_ptr<AnimalCard>> animals;
+	vector<shared_ptr<Animal>> animals;
 	char name[80];
 	bool passed;
 public:
@@ -28,11 +28,11 @@ public:
 	shared_ptr<AbilityCard> popCardFromHand();
 	shared_ptr<AbilityCard> removeCardFromHand(int cardId);
 
-	shared_ptr<AnimalCard> getAnimal(int animalId);
-	vector<shared_ptr<AnimalCard>>* getAnimals();
-	void addAnimal(shared_ptr<AnimalCard>);
-	void addAnimal(shared_ptr<AnimalCard>, int index);
-	shared_ptr<AnimalCard> deleteAnimal(int);
+	shared_ptr<Animal> getAnimal(int animalId);
+	vector<shared_ptr<Animal>>* getAnimals();
+	void addAnimal(shared_ptr<Animal>);
+	void addAnimal(shared_ptr<Animal>, int index);
+	shared_ptr<Animal> deleteAnimal(int);
 
 	int handSize();
 	int animalsCount();

@@ -139,7 +139,7 @@ void GameController::deathPhaze() {
 	Player* player2 = model->getPlayer(1);
 	CommandHolder* holder = CommandHolder::getInstance();
 
-	vector<shared_ptr<AnimalCard>>* animals1 = player1->getAnimals();
+	vector<shared_ptr<Animal>>* animals1 = player1->getAnimals();
 	for (auto i = animals1->begin(); i != animals1->end(); i++) {
 		if ((*i)->isHungry()) {
 			i--;
@@ -149,7 +149,7 @@ void GameController::deathPhaze() {
 		}
 	}
 
-	vector<shared_ptr<AnimalCard>>* animals2 = player2->getAnimals();
+	vector<shared_ptr<Animal>>* animals2 = player2->getAnimals();
 	for (auto i = animals2->begin(); i != animals2->end(); i++) {
 		if ((*i)->isHungry()) {
 			i--;

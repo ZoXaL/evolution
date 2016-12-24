@@ -10,7 +10,7 @@
 class KillAnimalCommand: public AbstractCommand {
 int playerId;
 int animalId;
-shared_ptr<AnimalCard> animal;
+shared_ptr<Animal> animal;
 //list<Card> -- list of all abilities cards for undo
 public:
 	KillAnimalCommand(int playerId, int animalId);

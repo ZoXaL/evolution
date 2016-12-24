@@ -1,6 +1,6 @@
 #include "controllers/commands/KillAnimalCommand.h"
 #include "model/cards/Card.h"
-#include "model/cards/AnimalCard.h"
+#include "model/cards/Animal.h"
 #include "model/GameModel.h"
 #include "model/Player.h"
 #include "controllers/commands/CommandType.h"

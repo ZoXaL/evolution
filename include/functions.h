@@ -4,7 +4,7 @@
 #include <iostream>
 #include <climits>
 #include "model/cards/abilities/Ability.h"
-#include "model/cards/AnimalCard.h"
+#include "model/cards/Animal.h"
 #include "model/cards/AbilityCard.h"
 #include "model/GamePhaze.h"
 #include "model/Player.h"
@@ -16,7 +16,7 @@ int abilityToInt(Ability::AbilityType);
 string abilityToString(Ability::AbilityType);
 string phazeToString(GamePhaze::Phaze);
 int getPlayerId(Player*);
-int getAnimalId(Player*, AnimalCard*);
-int getAbilityId(AnimalCard*, AbilityCard*);
+int getAnimalId(Player*, Animal*);
+int getAbilityId(Animal*, AbilityCard*);
 
 #endif

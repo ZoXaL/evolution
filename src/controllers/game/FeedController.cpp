@@ -63,7 +63,7 @@ AbstractController* FeedController::run() {
 				alert = "You have no animals";
 				break;
 			}
-			shared_ptr<AnimalCard> animalToUse = selectAnimalToUse();
+			shared_ptr<Animal> animalToUse = selectAnimalToUse();
 			useAnimalAbility(animalToUse);
 			break;
 		}
@@ -101,7 +101,7 @@ void FeedController::feedAnimal() {
 	vector<int> hungryAnimals;
 
 	for (int i = 0; i < currentPlayer->animalsCount(); i++) {
-		shared_ptr<AnimalCard> animal = currentPlayer->getAnimal(i);
+		shared_ptr<Animal> animal = currentPlayer->getAnimal(i);
 		if (animal->needFood()) {
 			hungryAnimals.push_back(i);
 			cout << hungryAnimals.size() << ") " << currentPlayer->getAnimal(i)->getStatus() << endl;
@@ -121,7 +121,7 @@ void FeedController::feedAnimal() {
 	holder->addCommand(new PopFoodCommand(1));
 	holder->addCommand(new EndMoveCommand());
 }
-shared_ptr<AnimalCard> FeedController::selectAnimalToUse() {
+shared_ptr<Animal> FeedController::selectAnimalToUse() {
 	//Todo:
 	//Check every animal ability
 	//Let player choose
@@ -130,7 +130,7 @@ shared_ptr<AnimalCard> FeedController::selectAnimalToUse() {
 	Player* currentPlayer = model->getCurrentPlayer();
 
 	cout << "Select animal to use it's ability:" << endl;
-	vector<shared_ptr<AnimalCard>>* animals = currentPlayer->getAnimals();
+	vector<shared_ptr<Animal>>* animals = currentPlayer->getAnimals();
 	for (auto i = animals->begin(); i != animals->end(); i++) {
 		cout << (i-animals->begin()+1) << ") " << (*i)->getStatus() << endl;
 	}
@@ -142,7 +142,7 @@ shared_ptr<AnimalCard> FeedController::selectAnimalToUse() {
 	return animals->at(answer-1);
 }
 
-void FeedController::useAnimalAbility(shared_ptr<AnimalCard> animal) {
+void FeedController::useAnimalAbility(shared_ptr<Animal> animal) {
 	if (animal == nullptr) {
 		return;
 	}
@@ -173,7 +173,7 @@ void FeedController::displayStatistic() {
 	}
 }
 
-string FeedController::displayAnimal(shared_ptr<AnimalCard> animal) {
+string FeedController::displayAnimal(shared_ptr<Animal> animal) {
 	string animalStatus;
 	if (animal->isHungry()) {
 		animalStatus += "Hungry: ";
