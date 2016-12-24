@@ -12,6 +12,7 @@ public:
 	bool getFood();
 	int getCapacity();
 	void addFood();
+	void setFood(int);
 };
 
 #endif

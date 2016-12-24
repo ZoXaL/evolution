@@ -18,6 +18,19 @@ AddAbilityCommand::AddAbilityCommand(Player* player, int abilityId, int animalId
 	type = Command::ADD_ABILITY;
 }
 
+AddAbilityCommand::AddAbilityCommand(Animal* animal, int abilityId) {
+	Player* player = animal->getOwner();
+	this->playerId = (GameModel::getInstance()->getPlayer(0) == player) ? 0 : 1;
+	this->animalId = -1;
+	for (auto i = player->getAnimals()->begin(); i != player->getAnimals()->end(); i++) {
+		if (animal == i->get()) this->animalId = i-player->getAnimals()->begin();
+	}
+	if(animalId == -1) {
+		throw Exception("Cannot feed animal cause it not among player's animals ");
+	}
+	this->abilityId = abilityId;
+}
+
 void AddAbilityCommand::execute() {
 	GameModel* model = GameModel::getInstance();
 	Player* player = model->getPlayer(playerId);

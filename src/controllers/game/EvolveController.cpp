@@ -162,7 +162,7 @@ void EvolveController::useAbility() {
 	}
 	CommandHolder* holder = CommandHolder::getInstance();
 	holder->openTransaction();
-	holder->addCommand(new AddAbilityCommand(currentPlayer, abilityId-1, animalId-1));
+	holder->addCommand(new AddAbilityCommand(animalsToEvolve[animalId-1].get(), abilityId-1));
 	holder->addCommand(new EndMoveCommand());
 }
 

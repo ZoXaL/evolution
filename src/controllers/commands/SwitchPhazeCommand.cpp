@@ -5,7 +5,7 @@
 
 SwitchPhazeCommand::SwitchPhazeCommand(GamePhaze::Phaze newPhaze) {
 	this->newPhaze = newPhaze;
-	this->foodCount = 0;
+	this->foodCount = -1;
 	type = Command::SWITCH_PHAZE;
 }
 
@@ -21,7 +21,11 @@ void SwitchPhazeCommand::execute() {
 			break;
 		}
 		case GamePhaze::FEED : {
-			foodCount = model->getFoodStore()->generateFood();
+			if (foodCount == -1) {
+				foodCount = model->getFoodStore()->generateFood();
+			} else {
+				model->getFoodStore()->setFood(foodCount);
+			}			
 			Player* firstPlayer = model->getFirstPlayer();
 			if (model->getCurrentPlayer() != firstPlayer) {
 				model->switchPlayer();

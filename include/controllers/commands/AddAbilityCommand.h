@@ -2,6 +2,7 @@
 #define ADD_ABILITY_COMMAND
 #include "controllers/commands/AbstractCommand.h"
 #include "model/Player.h"
+#include "model/cards/Animal.h"
 #include <iostream>
 
 class AddAbilityCommand: public AbstractCommand {
@@ -11,6 +12,7 @@ class AddAbilityCommand: public AbstractCommand {
 public:
 	AddAbilityCommand(int playerId, int abilityId, int animalId);
 	AddAbilityCommand(Player* player, int abilityId, int animalId);
+	AddAbilityCommand(Animal* animal, int abilityId);
 	void execute();
 	void undo();
 	std::ostream& write(std::ostream& stream);

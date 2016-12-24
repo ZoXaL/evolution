@@ -132,3 +132,15 @@
 25-12-2016 2:0:34 : [TRACE]    Game start
 25-12-2016 2:1:15 : [TRACE]    Game start
 25-12-2016 2:4:17 : [TRACE]    Game start
+25-12-2016 2:18:31 : [TRACE]    Game start
+25-12-2016 2:18:43 : [WARN]    Unsupported ability type
+25-12-2016 2:19:51 : [TRACE]    Game start
+25-12-2016 2:22:46 : [TRACE]    Game start
+25-12-2016 2:22:48 : [WARN]    AbilityCard::readFromFile -- unexpected ability type
+25-12-2016 2:24:36 : [TRACE]    Game start
+25-12-2016 2:29:37 : [TRACE]    Game start
+25-12-2016 2:31:37 : [WARN]    Cannot get animal from player: no animal with num -1
+25-12-2016 2:31:37 : [WARN]    Cannot get animal from player: no animal with num -1
+25-12-2016 2:33:59 : [TRACE]    Game start
+25-12-2016 2:41:1 : [TRACE]    Game start
+25-12-2016 2:41:21 : [TRACE]    Game start

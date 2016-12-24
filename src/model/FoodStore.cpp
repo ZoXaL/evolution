@@ -15,6 +15,9 @@ bool FoodStore::getFood() {
 void FoodStore::addFood() {
 	capacity++;
 }
+void FoodStore::setFood(int capacity) {
+	this->capacity = capacity;
+}
 
 bool FoodStore::isEmpty() {
 	return capacity > 0;
@@ -24,6 +27,7 @@ int FoodStore::generateFood() {
 	capacity = rand() % (MAX_FOOD - MIN_FOOD) + MIN_FOOD;
 	return false;
 }
+
 int FoodStore::getCapacity() {
 	return capacity;
 }

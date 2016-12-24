@@ -52,6 +52,10 @@ string abilityToString(Ability::AbilityType ability) {
 			result = "WATERFOWL";
 			break;
 		}
+		case Ability::GRANT : {
+			result = "GRANT";
+			break;
+		}
 		default : {
 			throw Exception("Unsupported ability type");
 		}
