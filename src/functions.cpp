@@ -56,6 +56,10 @@ string abilityToString(Ability::AbilityType ability) {
 			result = "GRANT";
 			break;
 		}
+		case Ability::FAST : {
+			result = "FAST";
+			break;
+		}
 		default : {
 			throw Exception("Unsupported ability type");
 		}

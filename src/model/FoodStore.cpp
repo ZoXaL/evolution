@@ -25,7 +25,7 @@ bool FoodStore::isEmpty() {
 
 int FoodStore::generateFood() {
 	capacity = rand() % (MAX_FOOD - MIN_FOOD) + MIN_FOOD;
-	return false;
+	return capacity;
 }
 
 int FoodStore::getCapacity() {

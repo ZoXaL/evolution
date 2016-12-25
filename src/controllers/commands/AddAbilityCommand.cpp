@@ -29,6 +29,7 @@ AddAbilityCommand::AddAbilityCommand(Animal* animal, int abilityId) {
 		throw Exception("Cannot feed animal cause it not among player's animals ");
 	}
 	this->abilityId = abilityId;
+	type = Command::ADD_ABILITY;
 }
 
 void AddAbilityCommand::execute() {

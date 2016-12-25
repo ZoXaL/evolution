@@ -6,6 +6,7 @@
 #include "model/cards/abilities/Waterfowl.h"
 #include "model/cards/abilities/Hunter.h"
 #include "model/cards/abilities/Grant.h"
+#include "model/cards/abilities/Fast.h"
 #include "model/cards/abilities/Ability.h"
 #include "model/deck/Deck.h"
 #include "controllers/commands/GiveCardToPlayerCommand.h"
@@ -32,20 +33,24 @@ GameModel* GameManager::buildGame(const char* firstPlayerName, const char* secon
 
 	Deck<shared_ptr<AbilityCard>>* cardDeck = model->getCardDeck();
 	startDeck.clear();
-	for (int i = 0; i < 5; i++) {
-		shared_ptr<AbilityCard> newCard(new Fat());
-		cardDeck->push_back(newCard);
-	}
-	for (int i = 0; i < 5; i++) {
-		shared_ptr<AbilityCard> newCard(new Waterfowl());
-		cardDeck->push_back(newCard);
-	}
-	for (int i = 0; i < 5; i++) {
+	// for (int i = 0; i < 5; i++) {
+	// 	shared_ptr<AbilityCard> newCard(new Fat());
+	// 	cardDeck->push_back(newCard);
+	// }
+	// for (int i = 0; i < 5; i++) {
+	// 	shared_ptr<AbilityCard> newCard(new Waterfowl());
+	// 	cardDeck->push_back(newCard);
+	// }
+	for (int i = 0; i < 10; i++) {
 		shared_ptr<AbilityCard> newCard(new Hunter());
 		cardDeck->push_back(newCard);
 	}
-	for (int i = 0; i < 5; i++) {
-		shared_ptr<AbilityCard> newCard(new Grant());
+	// for (int i = 0; i < 5; i++) {
+	// 	shared_ptr<AbilityCard> newCard(new Grant());
+	// 	cardDeck->push_back(newCard);
+	// }
+	for (int i = 0; i < 10; i++) {
+		shared_ptr<AbilityCard> newCard(new Fast());
 		cardDeck->push_back(newCard);
 	}
 	cardDeck->shuffle();

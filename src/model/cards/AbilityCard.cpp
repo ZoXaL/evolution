@@ -3,6 +3,7 @@
 #include "model/cards/abilities/Hunter.h"
 #include "model/cards/abilities/Waterfowl.h"
 #include "model/cards/abilities/Grant.h"
+#include "model/cards/abilities/Fast.h"
 #include "model/cards/abilities/Ability.h"
 #include "exceptions/Exception.h"
 #include "functions.h"
@@ -57,6 +58,11 @@ shared_ptr<AbilityCard> AbilityCard::readFromFile(istream& stream) {
 		}
 		case (Ability::GRANT) : {
 			abilityToReturn = new Grant();
+			abilityToReturn->read(stream);
+			break;
+		}
+		case (Ability::FAST) : {
+			abilityToReturn = new Fast();
 			abilityToReturn->read(stream);
 			break;
 		}

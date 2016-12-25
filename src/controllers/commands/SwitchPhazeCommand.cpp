@@ -21,10 +21,10 @@ void SwitchPhazeCommand::execute() {
 			break;
 		}
 		case GamePhaze::FEED : {
-			if (foodCount == -1) {
-				foodCount = model->getFoodStore()->generateFood();
+			if (this->foodCount == -1) {
+				this->foodCount = model->getFoodStore()->generateFood();
 			} else {
-				model->getFoodStore()->setFood(foodCount);
+				model->getFoodStore()->setFood(this->foodCount);
 			}			
 			Player* firstPlayer = model->getFirstPlayer();
 			if (model->getCurrentPlayer() != firstPlayer) {

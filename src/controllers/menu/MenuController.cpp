@@ -20,7 +20,7 @@ AbstractController* MenuController::run() {
 }
 
 AbstractController* MenuController::showMainMenu() {
-	//system("clear");
+	system("clear");
 	if (GameManager::isGameInitilized()) {
 		cout << "Welcome to evolive!" << endl;
 		cout << "1) Start new game" << endl;
