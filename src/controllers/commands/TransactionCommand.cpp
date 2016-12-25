@@ -76,74 +76,73 @@ istream& TransactionCommand::read(istream& stream) {
 	deck.clear();
 	int commandsNum;
 	stream >> commandsNum;
-	cout << commandsNum << endl;
 	for (int i = 0; i < commandsNum; i++) {
 		int commandType;
 		stream >> commandType;
 		AbstractCommand* command;
 		switch (commandType) {
 			case (Command::ADD_ABILITY) : {
-				cout << "CommandHolder::Reading ADD_ABILITY from file" << endl;
+				Logger::trace("CommandHolder::Reading ADD_ABILITY from file");
 				command = new AddAbilityCommand(-1, -1, -1);
 				break;
 			}
 			case (Command::CLEAR_ANIMAL_FOOD) : {
-				cout << "CommandHolder::Reading CLEAR_ANIMAL_FOOD from file" << endl;
+				Logger::trace("CommandHolder::Reading CLEAR_ANIMAL_FOOD from file");
 				command = new ClearAnimalFoodCommand(-1, -1);
 				break;
 			}
 			case (Command::CREATE_ANIMAL) : {
-				cout << "CommandHolder::Reading CREATE_ANIMAL from file" << endl;
+				Logger::trace("CommandHolder::Reading CREATE_ANIMAL from file");
 				command = new CreateAnimalCommand(-1, -1);
 				break;
 			}
 			case (Command::END_MOVE) : {
-				cout << "CommandHolder::Reading END_MOVE from file" << endl;
+				Logger::trace("CommandHolder::Reading END_MOVE from file");
 				command = new EndMoveCommand();
 				break;
 			}
 			case (Command::FEED) : {
-				cout << "CommandHolder::Reading FEED from file" << endl;
+				Logger::trace("CommandHolder::Reading FEED from file");
 				command = new FeedCommand(-1, -1);
 				break;
 			}
 			case (Command::GIVE_CARD_TO_PLAYER) : {
-				cout << "CommandHolder::Reading GIVE_CARD_TO_PLAYER from file" << endl;
+				Logger::trace("CommandHolder::Reading GIVE_CARD_TO_PLAYER from file");
 				command = new GiveCardToPlayerCommand(-1);				
 				break;
 			}
 			case (Command::KILL_ANIMAL) : {
-				cout << "CommandHolder::Reading KILL_ANIMAL from file" << endl;
+				Logger::trace("CommandHolder::Reading KILL_ANIMAL from file");
 				command = new KillAnimalCommand(0, 0);
 				break;
 			}
 			case (Command::PASS) : {
-				cout << "CommandHolder::Reading PASS from file" << endl;
+				Logger::trace("CommandHolder::Reading PASS from file");
 				command = new PassCommand(-1);
 				break;
 			}
 			case (Command::POP_FOOD) : {
-				cout << "CommandHolder::Reading POP_FOOD from file" << endl;
+				Logger::trace("CommandHolder::Reading POP_FOOD from file");
 				command = new PopFoodCommand(-1);
 				break;
 			}
 			case (Command::SWITCH_PHAZE) : {
-				cout << "CommandHolder::Reading SWITCH_PHAZE from file" << endl;
+				Logger::trace("CommandHolder::Reading SWITCH_PHAZE from file");
 				command = new SwitchPhazeCommand(GamePhaze::EVOLVE);
 				break;
 			}
 			case (Command::TRANSACTION) : {
-				cout << "CommandHolder::Reading TRANSACTION from file" << endl;
+				Logger::trace("CommandHolder::Reading TRANSACTION from file");
 				command = new TransactionCommand();
 				break;
 			}
 			case (Command::USE_FAT) : {
-				cout << "CommandHolder::Reading USE_FAT from file" << endl;
+				Logger::trace("CommandHolder::Reading USE_FAT from file");
 				command = new UseFatCommand(nullptr, nullptr, nullptr);
 				break;
 			}
 			case (Command::RESET_USE) : {
-				cout << "CommandHolder::Reading RESET_USE from file" << endl;
+				Logger::trace("CommandHolder::Reading RESET_USE from file");
 				command = new ResetUseCommand(nullptr, -1, -1, false);
 				break;
 			}

@@ -7,7 +7,7 @@ using namespace std;
 
 
 const char Logger::logPath[80] = "log/log.txt";
-const Logger::LogLevel Logger::logLevel= Logger::TRACE;
+const Logger::LogLevel Logger::logLevel= Logger::DEBUG;
 
 void Logger::log(string message, Logger::LogLevel level) {
 	if (level > logLevel) return;

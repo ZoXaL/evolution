@@ -5,14 +5,25 @@
 #include "controllers/menu/ExitGameController.h"
 #include "controllers/AbstractController.h"
 #include "model/GameManager.h"
+#include "model/GameModel.h"
+#include "model/Player.h"
+#include "exceptions/IOException.h"
 
 #include <iostream>
 using namespace std;
 
 #include "functions.h"
 
-MenuController::MenuController() {
+string MenuController::alert = "";
 
+MenuController::MenuController() {
+	this->firstPlayerScore = -1;
+	this->secondPlayerScore = -1;
+}
+
+MenuController::MenuController(int firstPlayerScore, int secondPlayerScore) {
+	this->firstPlayerScore = firstPlayerScore;
+	this->secondPlayerScore = secondPlayerScore;
 }
 
 AbstractController* MenuController::run() {
@@ -21,6 +32,17 @@ AbstractController* MenuController::run() {
 
 AbstractController* MenuController::showMainMenu() {
 	system("clear");
+	if (alert != "") {
+		cout << alert << endl;
+		alert = "";
+	}
+	Player* player1 = GameModel::getInstance()->getPlayer(0);
+	Player* player2 = GameModel::getInstance()->getPlayer(1);
+	if (firstPlayerScore != -1 && secondPlayerScore != -1) {
+		cout << "Game over, thanks" << endl;
+		cout << player1->getName() << " score: " << firstPlayerScore << endl;
+		cout << player2->getName() << " score: " << secondPlayerScore << endl;
+	}	
 	if (GameManager::isGameInitilized()) {
 		cout << "Welcome to evolive!" << endl;
 		cout << "1) Start new game" << endl;
@@ -38,10 +60,22 @@ AbstractController* MenuController::showMainMenu() {
 					return new StartGameController(false);
 				}
 				case 3 : {
-					return new LoadGameController();
+					AbstractController* loadGame = new LoadGameController();
+					try {
+						return loadGame->run();
+					} catch (IOException& e) {
+						alert = e.getMessage();
+						return new MenuController();
+					}
 				}
 				case 4 : {
-					return new SaveGameController();
+					AbstractController* saveGame = new SaveGameController();
+					try {
+						return saveGame->run();
+					} catch (IOException& e) {
+						alert = e.getMessage();
+						return new MenuController();
+					}
 				}
 				case 5 : {
 					cout << "Good bye!" << endl;
@@ -64,7 +98,13 @@ AbstractController* MenuController::showMainMenu() {
 					return new StartGameController(true);
 				} 
 				case 2 : {
-					return new LoadGameController();
+					AbstractController* loadGame = new LoadGameController();
+					try {
+						return loadGame->run();
+					} catch (IOException& e) {
+						alert = e.getMessage();
+						return new MenuController();
+					}
 				}
 				case 3 : {
 					cout << "Good bye!" << endl;

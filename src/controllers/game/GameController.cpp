@@ -48,11 +48,7 @@ AbstractController* GameController::run() {
 
 				if (deckSize == 0) {	
 					// game ends
-					cout << "Game over, thanks" << endl;
-					cout << player1->getName() << " score: " << player1->getScore() << endl;
-					cout << player2->getName() << " score: " << player2->getScore() << endl;
-
-					return new MenuController();
+					return new MenuController(player1->getScore(), player2->getScore());
 				}
 				
 				CommandHolder* holder = CommandHolder::getInstance();
@@ -67,10 +63,10 @@ AbstractController* GameController::run() {
 											
 
 				// Time to give more cards to players
-				int firstPlayerCardsToGive = player1->animalsCount();
-				if (player1->handSize() == 0) firstPlayerCardsToGive = 6;
-				int secondPlayerCardsToGive = player2->animalsCount();
-				if (player2->handSize() == 0) secondPlayerCardsToGive = 6;
+				int firstPlayerCardsToGive = player1->animalsCount() + 1;
+				if (firstPlayerCardsToGive == 1) firstPlayerCardsToGive = 6;
+				int secondPlayerCardsToGive = player2->animalsCount() + 1;
+				if (secondPlayerCardsToGive == 1) secondPlayerCardsToGive = 6;
 				Player* minCardsPlayer;
 				int minCardsGive = 0;
 				Player* maxCardsPlayer;
@@ -137,35 +133,36 @@ void GameController::deathPhaze() {
 	CommandHolder* holder = CommandHolder::getInstance();
 	try {
 		vector<shared_ptr<Animal>>* animals1 = player1->getAnimals();
-		for (auto i = animals1->begin(); i != animals1->end(); i++) {
+		for (auto i = animals1->begin(); i != animals1->end();) {
 			if ((*i)->isHungry()) {
-				i--;
 				holder->addCommand(new KillAnimalCommand(player1, i+1-animals1->begin()));
 			} else {
 				holder->addCommand(new ClearAnimalFoodCommand(player1, i-animals1->begin()));
-			}
-			for (auto j = (*i)->getAbilities()->begin(); j != (*i)->getAbilities()->end(); j++) {
+				for (auto j = (*i)->getAbilities()->begin(); j != (*i)->getAbilities()->end(); j++) {
 				ActiveAbility* activeAbility = dynamic_cast<ActiveAbility*>(j->get());
-				if (activeAbility && !activeAbility->canUse()) {
-					holder->addCommand(new ResetUseCommand(player1, i-animals1->begin(), j-(*i)->getAbilities()->begin(), false));
+					if (activeAbility && !activeAbility->canUse()) {
+						holder->addCommand(new ResetUseCommand(player1, i-animals1->begin(), j-(*i)->getAbilities()->begin(), false));
+					}
 				}
+				i++;
 			}
 		}
 
 		vector<shared_ptr<Animal>>* animals2 = player2->getAnimals();
-		for (auto i = animals2->begin(); i != animals2->end(); i++) {
+		for (auto i = animals2->begin(); i != animals2->end();) {
 			if ((*i)->isHungry()) {
-				i--;
 				holder->addCommand(new KillAnimalCommand(player2, i+1-animals2->begin()));
 			} else {
 				holder->addCommand(new ClearAnimalFoodCommand(player2, i-animals2->begin()));
-			}
-			for (auto j = (*i)->getAbilities()->begin(); j != (*i)->getAbilities()->end(); j++) {
-				ActiveAbility* activeAbility = dynamic_cast<ActiveAbility*>(j->get());
-				if (activeAbility && !activeAbility->canUse()) {
-					holder->addCommand(new ResetUseCommand(player2, i-animals2->begin(), j-(*i)->getAbilities()->begin(), false));
+				for (auto j = (*i)->getAbilities()->begin(); j != (*i)->getAbilities()->end(); j++) {
+					ActiveAbility* activeAbility = dynamic_cast<ActiveAbility*>(j->get());
+					if (activeAbility && !activeAbility->canUse()) {
+						holder->addCommand(new ResetUseCommand(player2, i-animals2->begin(), j-(*i)->getAbilities()->begin(), false));
+					}
 				}
+				i++;
 			}
+			
 		}
 	} catch (Exception& e) {
 		Logger::fatal("GameController: deathPhaze, cause: " + e.getMessage());
