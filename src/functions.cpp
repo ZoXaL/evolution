@@ -60,6 +60,14 @@ string abilityToString(Ability::AbilityType ability) {
 			result = "FAST";
 			break;
 		}
+		case Ability::ACUTE_EYESIGHT : {
+			result = "EYE";
+			break;
+		}
+		case Ability::CAMOUFLAGE : {
+			result = "CAMOUFLAGE";
+			break;
+		}
 		default : {
 			throw Exception("Unsupported ability type");
 		}

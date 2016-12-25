@@ -6,7 +6,9 @@ namespace Ability {
 		HUNTER, 
 		WATERFOWL, 
 		GRANT, 
-		FAST
+		FAST,
+		ACUTE_EYESIGHT,
+		CAMOUFLAGE
 	};
 }
 #endif
