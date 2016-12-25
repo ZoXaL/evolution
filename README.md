@@ -6,7 +6,7 @@ Note, that it has console interface and supports only two human players.
 
 ##Developing
 My OS is Ubuntu 16.04 and i am using GNU toolchain for developing. For writing code I use Sublime Text 3. 
-Here is main utilites:
+Here are main utilites:
 * G++
 * GNU make
 * GDB
