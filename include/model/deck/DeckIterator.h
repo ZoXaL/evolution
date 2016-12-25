@@ -1,7 +1,7 @@
 #ifndef DECK_ITERATOR_H
 #define DECK_ITERATOR_H
 
-#include "exceptions/Exception.h"
+#include "exceptions/DeckException.h"
 
 template<typename T>
 class Deck;
@@ -32,7 +32,7 @@ DeckIterator<T>::DeckIterator(pointer_t current) {
 template<typename T>
 DeckIterator<T> DeckIterator<T>::operator++() {
 	if (current->next == nullptr) {
-		throw Exception("Illegal DeckIterator state");
+		throw DeckException("Illegal DeckIterator state: cannot ++");
 	} else {
 		current = current->next;
 	}
@@ -41,7 +41,7 @@ DeckIterator<T> DeckIterator<T>::operator++() {
 template<typename T>
 DeckIterator<T> DeckIterator<T>::operator--() {
 	if (current->previous == nullptr) {
-		throw Exception("Illegal DeckIterator state");
+		throw DeckException("Illegal DeckIterator state: cannot --");
 	} else {
 		current = current->previous;
 	}
@@ -50,7 +50,7 @@ DeckIterator<T> DeckIterator<T>::operator--() {
 template<typename T>
 DeckIterator<T> DeckIterator<T>::operator++(int a) {
 	if (current->next == nullptr) {
-		throw Exception("Illegal DeckIterator state");
+		throw DeckException("Illegal DeckIterator state: cannot ++");
 	} else {
 		current = current->next;
 	}
@@ -59,7 +59,7 @@ DeckIterator<T> DeckIterator<T>::operator++(int a) {
 template<typename T>
 DeckIterator<T> DeckIterator<T>::operator--(int a) {
 	if (current->previous == nullptr) {
-		throw Exception("Illegal DeckIterator state");
+		throw DeckException("Illegal DeckIterator state: cannot --");
 	} else {
 		current = current->previous;
 	}
@@ -68,12 +68,15 @@ DeckIterator<T> DeckIterator<T>::operator--(int a) {
 template<typename T>
 T DeckIterator<T>::operator*() {
 	if (current == nullptr) {
-		throw Exception("Cannot * iterator because it points to nullptr");
+		throw DeckException("DeckIterator: Cannot * iterator because it points to nullptr");
 	}
 	return current->data;	
 }
 template<typename T>
 T* DeckIterator<T>::operator->() {
+	if (current == nullptr) {
+		throw DeckException("DeckIterator: Cannot -> iterator because it points to nullptr");
+	}
 	return &(current->data);
 }
 template<typename T>

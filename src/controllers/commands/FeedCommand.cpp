@@ -7,6 +7,8 @@
 #include "controllers/commands/CommandType.h"
 #include "exceptions/Exception.h"
 #include <memory>
+#include "exceptions/CommandException.h"
+#include "Logger.h"
 
 using namespace std;
 
@@ -24,7 +26,9 @@ FeedCommand::FeedCommand(Player* player, int animalId) {
 	type = Command::FEED;
 }
 FeedCommand::FeedCommand(Animal* animal) {
+	if (animal == nullptr) throw CommandException("FeedCommand: animal is null");
 	Player* player = animal->getOwner();
+	if (player == nullptr) throw CommandException("FeedCommand: player is null");
 	this->playerId = (GameModel::getInstance()->getPlayer(0) == player) ? 0 : 1;
 	this->animalId = -1;
 	for (auto i = player->getAnimals()->begin(); i != player->getAnimals()->end(); i++) {
@@ -39,31 +43,41 @@ FeedCommand::FeedCommand(Animal* animal) {
 
 void FeedCommand::execute() {
 	GameModel* model = GameModel::getInstance();
-	Player* player = model->getPlayer(playerId);
-	shared_ptr<Animal> animal = player->getAnimal(animalId);
-	if (abilityId == -3) {
-		abilityId = animal->feed();
-	} else {
-		if (abilityId == -1) {
-			animal->setFed(true);
+	try {
+		Player* player = model->getPlayer(playerId);
+		shared_ptr<Animal> animal = player->getAnimal(animalId);
+		if (abilityId == -3) {
+			abilityId = animal->feed();
 		} else {
-			FoodModification* abilityFed = dynamic_cast<FoodModification*>(animal->getAbility(abilityId));
-			abilityFed->giveFood();
+			if (abilityId == -1) {
+				animal->setFed(true);
+			} else {
+				FoodModification* abilityFed = dynamic_cast<FoodModification*>(animal->getAbility(abilityId));
+				abilityFed->giveFood();
+			}	
 		}	
-	}	
-	if (abilityId == -2) throw Exception("Animal doesn't need food");
+		if (abilityId == -2) throw CommandException("FeedCommand: Animal doesn't need food");
+	} catch (Exception& e) {
+		Logger::fatal(e.getMessage());
+		throw CommandException("FeedCommand: cannot execute because of inner exception");
+	}
 }
 
 void FeedCommand::undo() {
 	GameModel* model = GameModel::getInstance();
-	Player* player = model->getPlayer(playerId);
-	shared_ptr<Animal> animal = player->getAnimal(animalId);
-	if (abilityId == -1) {
-		animal->setFed(false);
-	} else {
-		FoodModification* abilityFed = dynamic_cast<FoodModification*>(animal->getAbility(abilityId));
-		abilityFed->decreaseFood();
-	}	
+	try {
+		Player* player = model->getPlayer(playerId);
+		shared_ptr<Animal> animal = player->getAnimal(animalId);
+		if (abilityId == -1) {
+			animal->setFed(false);
+		} else {
+			FoodModification* abilityFed = dynamic_cast<FoodModification*>(animal->getAbility(abilityId));
+			abilityFed->decreaseFood();
+		}	
+	} catch (Exception& e) {
+		Logger::fatal(e.getMessage());
+		throw CommandException("FeedCommand: cannot undo because of inner exception");
+	}
 }
 ostream& FeedCommand::write(ostream& stream) {
 	stream << type << endl;

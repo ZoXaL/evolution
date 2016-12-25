@@ -4,11 +4,25 @@
 #include <time.h>
 #include <stdlib.h>
 #include "model/deck/Deck.h"
+#include "exceptions/DeckException.h"
+
+void evoliveTerminate() {
+	Logger::fatal("Terminate exit");
+	exit(1);
+}
+
+void evoliveUnexpected() {
+	Logger::fatal("Unexpected exception");
+	exit(1);
+}
 
 int main() {
+	set_terminate(evoliveTerminate);
+	set_unexpected(evoliveUnexpected);
 	std::srand (std::time(NULL));
-	std::system("clear");
-	Logger::log("Game start", Logger::TRACE);
+	Logger::info("Game starts");
+
+	std::system("clear");	
 	MainController controller;
 	controller.run();
 	return 0;

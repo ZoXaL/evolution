@@ -9,6 +9,7 @@
 #include "model/cards/abilities/Fast.h"
 #include "model/cards/abilities/AcuteEyesight.h"
 #include "model/cards/abilities/Camouflage.h"
+#include "model/cards/abilities/Toxic.h"
 #include "model/cards/abilities/Ability.h"
 #include "model/deck/Deck.h"
 #include "controllers/commands/GiveCardToPlayerCommand.h"
@@ -35,27 +36,31 @@ GameModel* GameManager::buildGame(const char* firstPlayerName, const char* secon
 
 	Deck<shared_ptr<AbilityCard>>* cardDeck = model->getCardDeck();
 	startDeck.clear();
-	// for (int i = 0; i < 5; i++) {
-	// 	shared_ptr<AbilityCard> newCard(new Fat());
-	// 	cardDeck->push_back(newCard);
-	// }
-	// for (int i = 0; i < 5; i++) {
-	// 	shared_ptr<AbilityCard> newCard(new Waterfowl());
-	// 	cardDeck->push_back(newCard);
-	// }
+	for (int i = 0; i < 3; i++) {
+		shared_ptr<AbilityCard> newCard(new Fat());
+		cardDeck->push_back(newCard);
+	}
+	for (int i = 0; i < 4; i++) {
+		shared_ptr<AbilityCard> newCard(new Waterfowl());
+		cardDeck->push_back(newCard);
+	}
 	for (int i = 0; i < 5; i++) {
 		shared_ptr<AbilityCard> newCard(new Hunter());
 		cardDeck->push_back(newCard);
 	}
-	// for (int i = 0; i < 5; i++) {
-	// 	shared_ptr<AbilityCard> newCard(new Grant());
-	// 	cardDeck->push_back(newCard);
-	// }
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 2; i++) {
+		shared_ptr<AbilityCard> newCard(new Toxic());
+		cardDeck->push_back(newCard);
+	}
+	for (int i = 0; i < 4; i++) {
+		shared_ptr<AbilityCard> newCard(new Grant());
+		cardDeck->push_back(newCard);
+	}
+	for (int i = 0; i < 3; i++) {
 		shared_ptr<AbilityCard> newCard(new AcuteEyesight());
 		cardDeck->push_back(newCard);
 	}
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 3; i++) {
 		shared_ptr<AbilityCard> newCard(new Camouflage());
 		cardDeck->push_back(newCard);
 	}

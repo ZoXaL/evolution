@@ -4,6 +4,8 @@
 #include "model/GameModel.h"
 #include "model/Player.h"
 #include "controllers/commands/CommandType.h"
+#include "exceptions/CommandException.h"
+#include "Logger.h"
 
 CreateAnimalCommand::CreateAnimalCommand(int playerId, int cardId) {
 	this->playerId = playerId;
@@ -18,24 +20,30 @@ CreateAnimalCommand::CreateAnimalCommand(Player* player, int cardId) {
 
 void CreateAnimalCommand::execute() {
 	GameModel* model = GameModel::getInstance();
-	Player* player = model->getPlayer(playerId);
-	// TODO:
-	// 1) Take abilityCard and delete from hand
-	// 2) Convert to Animal
-	// 3) Add Animal to cards
-	shared_ptr<AbilityCard> createFrom = player->getCardFromHand(cardId);
-	player->removeCardFromHand(cardId);
-	shared_ptr<Animal> newAnimal(new Animal(createFrom, player));
-	player->addAnimal(newAnimal);
+	try {
+		Player* player = model->getPlayer(playerId);
+		shared_ptr<AbilityCard> createFrom = player->getCardFromHand(cardId);
+		player->removeCardFromHand(cardId);
+		shared_ptr<Animal> newAnimal(new Animal(createFrom, player));
+		player->addAnimal(newAnimal);
+	} catch (Exception& e) {
+		Logger::fatal(e.getMessage());
+		throw CommandException("CreateAnimalCommand: cannot execute because of inner exception");
+	}	
 }
 
 void CreateAnimalCommand::undo() {
 	GameModel* model = GameModel::getInstance();
-	Player* player = model->getPlayer(playerId);
+	try {
+		Player* player = model->getPlayer(playerId);
 
-	shared_ptr<Animal> animal = player->deleteAnimal(player->animalsCount()-1);
-	shared_ptr<AbilityCard> createdFrom = animal->getCreatedFrom();
-	player->addCardToHand(createdFrom, cardId);
+		shared_ptr<Animal> animal = player->deleteAnimal(player->animalsCount()-1);
+		shared_ptr<AbilityCard> createdFrom = animal->getCreatedFrom();
+		player->addCardToHand(createdFrom, cardId);
+	} catch (Exception& e) {
+		Logger::fatal(e.getMessage());
+		throw CommandException("CreateAnimalCommand: cannot undo because of inner exception");
+	}
 }
 
 ostream& CreateAnimalCommand::write(ostream& stream) {

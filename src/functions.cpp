@@ -68,6 +68,10 @@ string abilityToString(Ability::AbilityType ability) {
 			result = "CAMOUFLAGE";
 			break;
 		}
+		case Ability::TOXIC : {
+			result = "TOXIC";
+			break;
+		}
 		default : {
 			throw Exception("Unsupported ability type");
 		}

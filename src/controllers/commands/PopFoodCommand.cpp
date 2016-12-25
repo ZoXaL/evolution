@@ -1,8 +1,9 @@
 #include "controllers/commands/PopFoodCommand.h"
 #include "model/GameModel.h"
 #include "model/Player.h"
-#include "exceptions/Exception.h"
 #include "controllers/commands/CommandType.h"
+#include "exceptions/CommandException.h"
+#include "Logger.h"
 
 PopFoodCommand::PopFoodCommand(int count) {
 	this->count = count;
@@ -12,9 +13,7 @@ PopFoodCommand::PopFoodCommand(int count) {
 void PopFoodCommand::execute() {
 	for (int i = 0; i < count; i++) {
 		if(!GameModel::getInstance()->getFoodStore()->getFood()) {
-			Exception emptyFoodStore("Cannot get food from empty Food Store");
-			emptyFoodStore.log();
-			throw emptyFoodStore;
+			throw CommandException("Cannot get food from empty Food Store");;
 		}
 	}	
 }

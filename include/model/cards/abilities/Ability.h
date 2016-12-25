@@ -8,7 +8,8 @@ namespace Ability {
 		GRANT, 
 		FAST,
 		ACUTE_EYESIGHT,
-		CAMOUFLAGE
+		CAMOUFLAGE,
+		TOXIC
 	};
 }
 #endif

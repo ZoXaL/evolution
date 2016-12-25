@@ -6,6 +6,8 @@
 #include <vector>
 #include <memory>
 #include "controllers/commands/CommandType.h"
+#include "exceptions/CommandException.h"
+#include "Logger.h"
 using namespace std;
 
 UseFatCommand::UseFatCommand(Player* player, Animal* animal, AbilityCard* ability) {
@@ -23,29 +25,40 @@ UseFatCommand::UseFatCommand(Player* player, Animal* animal, AbilityCard* abilit
 
 void UseFatCommand::execute() {
 	if (playerId == -1 || animalId == -1 || fatAbilityId == -1) {
-		throw Exception("Fields have not been initialized");
+		throw CommandException("UseFatCommand: Fields have not been initialized");
 	}
 	GameModel* model = GameModel::getInstance();
-	Player* player = model->getPlayer(playerId);
-	shared_ptr<Animal> animal = player->getAnimal(animalId);
-	Fat* fatAbility = (Fat*)(animal->getAbility(fatAbilityId));
-	fatAbility->resetFood();
-	fedAbilityId = animal->feed();
+	try {
+		Player* player = model->getPlayer(playerId);
+		shared_ptr<Animal> animal = player->getAnimal(animalId);
+		Fat* fatAbility = (Fat*)(animal->getAbility(fatAbilityId));
+		fatAbility->resetFood();
+		fedAbilityId = animal->feed();
+	} catch (Exception& e) {
+		Logger::fatal(e.getMessage());
+		throw CommandException("UseFatCommand: cannot execute because of inner exception");
+	}
 }
 
 void UseFatCommand::undo() {
 	GameModel* model = GameModel::getInstance();
-	Player* player = model->getPlayer(playerId);
-	shared_ptr<Animal> animal = player->getAnimal(animalId);
-	Fat* fatAbility = (Fat*)(animal->getAbility(fatAbilityId));
-	fatAbility->giveFood();
+	try {
+		Player* player = model->getPlayer(playerId);
+		shared_ptr<Animal> animal = player->getAnimal(animalId);
+		Fat* fatAbility = (Fat*)(animal->getAbility(fatAbilityId));
+		fatAbility->giveFood();
 
-	if (fedAbilityId == -1) {
-		animal->setFed(false);
-	} else {
-		FoodModification* abilityFed = (FoodModification*)(animal->getAbility(fedAbilityId));
-		abilityFed->resetFood();
-	}	
+		if (fedAbilityId == -1) {
+			animal->setFed(false);
+		} else {
+			FoodModification* abilityFed = (FoodModification*)(animal->getAbility(fedAbilityId));
+			abilityFed->resetFood();
+		}	
+	} catch (Exception& e) {
+		Logger::fatal(e.getMessage());
+		throw CommandException("UseFatCommand: cannot undo because of inner exception");
+	}
+	
 }
 
 ostream& UseFatCommand::write(ostream& stream) {

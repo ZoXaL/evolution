@@ -15,6 +15,7 @@ shared_ptr<Animal> animal;
 public:
 	KillAnimalCommand(int playerId, int animalId);
 	KillAnimalCommand(Player* player, int animalId);
+	KillAnimalCommand(Animal* animal);
 	void execute();
 	void undo();
 	std::ostream& write(std::ostream& stream);

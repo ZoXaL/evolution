@@ -7,13 +7,13 @@
 using namespace std;
 
 class Exception {
-string message;
+protected:
+	string message;
 public:
 	Exception(string message = "No message");
-	void log();
-	void log(Logger::LogLevel level);
+	virtual void log();
+	virtual void log(Logger::LogLevel level);
 	virtual string getMessage();
-	friend ostream& operator<<(ostream& stream, const Exception&);
 	virtual ~Exception() {};
 };
 #endif

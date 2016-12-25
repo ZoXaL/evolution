@@ -1,15 +1,8 @@
 #ifndef DECK_H
 #define DECK_H
 
-#include <memory>
-#include "exceptions/Exception.h"
-// #include "exceptions/DeckException.h"
-#include "interfaces/Serializable.h"
-#include "controllers/commands/AbstractCommand.h"
-#include "model/cards/AbilityCard.h"
+#include "exceptions/DeckException.h"
 #include "DeckIterator.h"
-#include <stdlib.h>
-
 
 using namespace std;
 
@@ -106,7 +99,7 @@ void Deck<T>::push_back(const T& data) {
 template<typename T> 
 T Deck<T>::pop_front() {
 	if (first == nullptr) {
-		throw Exception("Cannot pop_back from Deck: there is no elements");
+		throw DeckException("Cannot pop_back from Deck: there is no elements");
 	}
 	T returnData = first->data;
 	Node* tmp = first;
@@ -125,7 +118,7 @@ T Deck<T>::pop_front() {
 template<typename T> 
 T Deck<T>::pop_back() {
 	if (last == nullptr) {
-		throw Exception("Cannot pop_front from Deck: there is no elements");
+		throw DeckException("Cannot pop_front from Deck: there is no elements");
 	}
 	T returnData = last->data;
 	Node* tmp = last;
@@ -237,7 +230,7 @@ void Deck<T>::swap(Node* firstNode, Node* secondNode) {
 template<typename T>
 typename Deck<T>::Node* Deck<T>::at(int index) {
 	if (index >= size) {
-		throw Exception("Out of range");
+		throw DeckException("Out of range");
 	}
 	Node* tmp = first;
 	for (int i = 0; i < index; i++) {

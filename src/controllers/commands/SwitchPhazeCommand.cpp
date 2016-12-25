@@ -2,6 +2,8 @@
 #include "model/GameModel.h"
 #include "model/GamePhaze.h"
 #include "controllers/commands/CommandType.h"
+#include "exceptions/CommandException.h"
+#include "Logger.h"
 
 SwitchPhazeCommand::SwitchPhazeCommand(GamePhaze::Phaze newPhaze) {
 	this->newPhaze = newPhaze;

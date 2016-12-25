@@ -15,6 +15,9 @@
 #include "controllers/commands/TransactionCommand.h"
 #include "controllers/commands/UseFatCommand.h"
 #include "controllers/commands/ResetUseCommand.h"
+#include "exceptions/CommandException.h"
+#include "exceptions/IOException.h"
+#include "Logger.h"
 
 TransactionCommand::TransactionCommand() {
 	type = Command::TRANSACTION;
@@ -34,19 +37,29 @@ void TransactionCommand::addCommand(AbstractCommand* newCommand) {
 void TransactionCommand::execute() {
 	if (deck.getSize() > 0) {
 		auto i = deck.begin();
-		for (; i != deck.end(); i++) {
+		try {
+			for (; i != deck.end(); i++) {
+				(*i)->execute();
+			}
 			(*i)->execute();
-		}
-		(*i)->execute();
-	}	
+		} catch (CommandException& e) {
+			Logger::fatal("TransactionCommand: " + e.getMessage());
+			throw e;
+		}	
+	}
 }
 void TransactionCommand::undo() {
 	if (deck.getSize() > 0) {
 		auto i = deck.end();
-		for (; i != deck.begin(); i--) {
+		try {
+			for (; i != deck.begin(); i--) {
+				(*i)->undo();
+			}
 			(*i)->undo();
-		}
-		(*i)->undo();
+		} catch (CommandException& e) {
+			Logger::fatal("TransactionCommand: " + e.getMessage());
+			throw e;
+		}			
 	}
 }
 
@@ -136,7 +149,7 @@ istream& TransactionCommand::read(istream& stream) {
 				break;
 			}
 			default : {
-				throw Exception("Unexpected command type");
+				throw IOException("Unexpected command type");
 			}
 		}
 		command->read(stream);

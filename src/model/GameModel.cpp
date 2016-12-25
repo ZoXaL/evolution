@@ -53,7 +53,7 @@ FoodStore* GameModel::getFoodStore() {
 
 Player* GameModel::getPlayer(int playerNum) {
 	if (!checkRange(playerNum, 0, 1)) {
-		throw 1;
+		throw Exception("GameModel::getPlayer: playerNum is not in 0..1");
 	}
 	return &players[playerNum];
 }
@@ -85,9 +85,7 @@ void GameModel::increaseMove() {
 }
 void GameModel::decreaseMove() {
 	if (moveNum < 0) {
-		Exception illegalModelState("Cannot decrease moveNum below zero");
-		illegalModelState.log();
-		throw illegalModelState;
+		throw Exception("GameModel::decreaseMove: Cannot decrease moveNum below zero");;
 	}
 	moveNum--;
 }

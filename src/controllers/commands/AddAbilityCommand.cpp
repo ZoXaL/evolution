@@ -4,6 +4,8 @@
 #include "model/GameModel.h"
 #include "model/Player.h"
 #include "controllers/commands/CommandType.h"
+#include "exceptions/CommandException.h"
+#include "Logger.h"
 
 AddAbilityCommand::AddAbilityCommand(int playerId, int abilityId, int animalId){
 	this->playerId = playerId;
@@ -26,7 +28,7 @@ AddAbilityCommand::AddAbilityCommand(Animal* animal, int abilityId) {
 		if (animal == i->get()) this->animalId = i-player->getAnimals()->begin();
 	}
 	if(animalId == -1) {
-		throw Exception("Cannot feed animal cause it not among player's animals ");
+		throw CommandException("AddAbilityCommand:Cannot feed animal cause it not among player's animals ");
 	}
 	this->abilityId = abilityId;
 	type = Command::ADD_ABILITY;
@@ -34,25 +36,31 @@ AddAbilityCommand::AddAbilityCommand(Animal* animal, int abilityId) {
 
 void AddAbilityCommand::execute() {
 	GameModel* model = GameModel::getInstance();
-	Player* player = model->getPlayer(playerId);
-	// TODO:
-	// 1) Take abilityCard and delete from hand
-	// 2) Add abilityCard to animal abilities
-	shared_ptr<AbilityCard> newAbility = player->getCardFromHand(abilityId);
-	player->removeCardFromHand(abilityId);
-	shared_ptr<Animal> animal = player->getAnimal(animalId);
-	newAbility->setOwner(animal.get());
-	animal->pushAbility(newAbility);
+	try {
+		Player* player = model->getPlayer(playerId);
+		shared_ptr<AbilityCard> newAbility = player->getCardFromHand(abilityId);
+		player->removeCardFromHand(abilityId);
+		shared_ptr<Animal> animal = player->getAnimal(animalId);
+		newAbility->setOwner(animal.get());
+		animal->pushAbility(newAbility);		
+	} catch (Exception& e) {
+		Logger::fatal(e.getMessage());
+		throw CommandException("AddAbilityCommand: cannot execute because of inner exception");
+	}		
 }
 
 void AddAbilityCommand::undo() {
 	GameModel* model = GameModel::getInstance();
-	Player* player = model->getPlayer(playerId);
-	shared_ptr<Animal> animal = player->getAnimal(animalId);
-
-	shared_ptr<AbilityCard> ability = animal->popAbility();
-	ability->setOwner(nullptr);
-	player->addCardToHand(ability, abilityId);	
+	try {
+		Player* player = model->getPlayer(playerId);
+		shared_ptr<Animal> animal = player->getAnimal(animalId);
+		shared_ptr<AbilityCard> ability = animal->popAbility();	
+		ability->setOwner(nullptr);
+		player->addCardToHand(ability, abilityId);		
+	} catch (Exception& e) {
+		Logger::fatal(e.getMessage());
+		throw CommandException("AddAbilityCommand: cannot undo because of inner exception");
+	}
 }
 ostream& AddAbilityCommand::write(ostream& stream) {
 	stream << type << endl;

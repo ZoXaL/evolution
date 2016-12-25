@@ -1,6 +1,8 @@
 #include "controllers/commands/EndMoveCommand.h"
 #include "model/GameModel.h"
 #include "controllers/commands/CommandType.h"
+#include "exceptions/CommandException.h"
+#include "Logger.h"
 
 EndMoveCommand::EndMoveCommand() {
 	type = type = Command::END_MOVE;
@@ -14,7 +16,12 @@ void EndMoveCommand::execute() {
 
 void EndMoveCommand::undo() {
 	GameModel* model = GameModel::getInstance();
-	model->decreaseMove();
+	try {
+		model->decreaseMove();
+	} catch (Exception& e) {
+		Logger::warn("EndMoveCommand: cannot undo because of "+e.getMessage());
+	}
+	
 	model->switchPlayer();
 }
 

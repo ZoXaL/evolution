@@ -2,6 +2,8 @@
 #include "model/GameModel.h"
 #include "model/Player.h"
 #include "controllers/commands/CommandType.h"
+#include "exceptions/CommandException.h"
+#include "Logger.h"
 
 PassCommand::PassCommand(int playerId, bool pass) {
 	this->playerId = playerId;

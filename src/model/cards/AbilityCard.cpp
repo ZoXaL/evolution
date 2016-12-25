@@ -6,6 +6,7 @@
 #include "model/cards/abilities/Fast.h"
 #include "model/cards/abilities/Camouflage.h"
 #include "model/cards/abilities/AcuteEyesight.h"
+#include "model/cards/abilities/Toxic.h"
 #include "model/cards/abilities/Ability.h"
 #include "exceptions/Exception.h"
 #include "functions.h"
@@ -75,6 +76,11 @@ shared_ptr<AbilityCard> AbilityCard::readFromFile(istream& stream) {
 		}
 		case (Ability::CAMOUFLAGE) : {
 			abilityToReturn = new Camouflage();
+			abilityToReturn->read(stream);
+			break;
+		}
+		case (Ability::TOXIC) : {
+			abilityToReturn = new Toxic();
 			abilityToReturn->read(stream);
 			break;
 		}

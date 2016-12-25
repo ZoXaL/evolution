@@ -6,6 +6,8 @@
 #include "model/GameModel.h"
 #include "model/Player.h"
 #include "controllers/commands/CommandType.h"
+#include "exceptions/CommandException.h"
+#include "Logger.h"
 
 ClearAnimalFoodCommand::ClearAnimalFoodCommand(int playerId, int animalId){
 	this->playerId = playerId;
@@ -20,30 +22,40 @@ ClearAnimalFoodCommand::ClearAnimalFoodCommand(Player* player,int animalId) {
 
 void ClearAnimalFoodCommand::execute() {
 	GameModel* model = GameModel::getInstance();
-	Player* player = model->getPlayer(playerId);
-	shared_ptr<Animal> animal = player->getAnimal(animalId);
-	animal->setFed(false);
-	for (auto i = animal->getAbilities()->begin(); i != animal->getAbilities()->end(); i++) {
-		FoodModification* foodModification = dynamic_cast<FoodModification*>(i->get());
-		if (foodModification && !dynamic_cast<Fat*>(foodModification)) {
-			foodModification->resetFood();
-		}			
-	}
+	try {
+		Player* player = model->getPlayer(playerId);
+		shared_ptr<Animal> animal = player->getAnimal(animalId);
+		animal->setFed(false);
+		for (auto i = animal->getAbilities()->begin(); i != animal->getAbilities()->end(); i++) {
+			FoodModification* foodModification = dynamic_cast<FoodModification*>(i->get());
+			if (foodModification && !dynamic_cast<Fat*>(foodModification)) {
+				foodModification->resetFood();
+			}			
+		}
+	} catch (Exception& e) {
+		Logger::fatal(e.getMessage());
+		throw CommandException("ClearAnimalFoodCommand: cannot execute because of inner exception");
+	}		
 }
 
 void ClearAnimalFoodCommand::undo() {
 	GameModel* model = GameModel::getInstance();
-	Player* player = model->getPlayer(playerId);
-	shared_ptr<Animal> animal = player->getAnimal(animalId);
-	animal->setFed(true);
-	for (auto i = animal->getAbilities()->begin(); i != animal->getAbilities()->end(); i++) {
-		FoodModification* foodModification = dynamic_cast<FoodModification*>(i->get());
-		if (foodModification && !dynamic_cast<Fat*>(foodModification)) {
-			while (foodModification->needFood()) {
-				foodModification->giveFood();
+	try {
+		Player* player = model->getPlayer(playerId);
+		shared_ptr<Animal> animal = player->getAnimal(animalId);
+		animal->setFed(true);
+		for (auto i = animal->getAbilities()->begin(); i != animal->getAbilities()->end(); i++) {
+			FoodModification* foodModification = dynamic_cast<FoodModification*>(i->get());
+			if (foodModification && !dynamic_cast<Fat*>(foodModification)) {
+				while (foodModification->needFood()) {
+					foodModification->giveFood();
+				}			
 			}			
-		}			
-	}
+		}
+	} catch (Exception& e) {
+		Logger::fatal(e.getMessage());
+		throw CommandException("ClearAnimalFoodCommand: cannot undo because of inner exception");
+	}		
 }
 
 ostream& ClearAnimalFoodCommand::write(ostream& stream) {

@@ -1,6 +1,7 @@
 #include "model/Player.h"
 #include "model/cards/Card.h"
 #include "exceptions/Exception.h"
+#include "exceptions/DeckException.h"
 #include <string.h>
 #include "functions.h"
 
@@ -22,7 +23,7 @@ void Player::pushCardToHand(shared_ptr<AbilityCard> card) {
 }
 shared_ptr<AbilityCard> Player::removeCardFromHand(int cardNum) {
 	if(!checkRange(cardNum, 0, hand.size()-1)) {
-		return nullptr;
+		throw DeckException("Player::removeCardFromHand -- cardNum is greater then hand size or less then 0");
 	}
 	shared_ptr<AbilityCard> returnCard = hand[cardNum];
 	hand.erase(hand.begin() + cardNum);
@@ -35,7 +36,7 @@ void Player::addCardToHand(shared_ptr<AbilityCard> ability, int index) {
 
 shared_ptr<AbilityCard> Player::popCardFromHand() {
 	if(hand.size() == 0) {
-		return nullptr;
+		throw DeckException("Player::popCardFromHand -- hand is empty");
 	}
 	auto returnCardIt = hand.begin()+hand.size()-1;
 	shared_ptr<AbilityCard> returnCard = *returnCardIt;
@@ -44,7 +45,7 @@ shared_ptr<AbilityCard> Player::popCardFromHand() {
 }
 shared_ptr<AbilityCard> Player::getCardFromHand(int cardNum) {
 	if(!checkRange(cardNum, 0, hand.size())) {
-		return nullptr;
+		throw DeckException("Player::getCardFromHand -- cardNum is greater then hand size or less then 0");
 	}
 	return hand[cardNum];
 }
@@ -73,7 +74,7 @@ void Player::addAnimal(shared_ptr<Animal> animal, int index) {
 }
 shared_ptr<Animal> Player::deleteAnimal(int animalNum) {
 	if(!checkRange(animalNum, 0, animals.size())) {
-		return nullptr;
+		throw DeckException("Player::deleteAnimal -- animalNum is greater then animals count or less then 0");
 	}
 	shared_ptr<Animal> returnAnimal;
 	if (animalNum == 0) {
@@ -90,9 +91,7 @@ shared_ptr<Animal> Player::deleteAnimal(int animalNum) {
 
 shared_ptr<Animal> Player::getAnimal(int animalNum) {
 	if(!checkRange(animalNum, 0, animals.size())) {
-		Exception noSuchPos("Cannot get animal from player: no animal with num "+to_string(animalNum));
-		noSuchPos.log();
-		throw noSuchPos;
+		throw DeckException("Cannot get animal from player: no animal with num "+to_string(animalNum));
 	}
 	return animals[animalNum];
 }

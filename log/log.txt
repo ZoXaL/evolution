@@ -21,3 +21,12 @@
 25-12-2016 10:52:55 : [TRACE]    Game start
 25-12-2016 10:53:56 : [TRACE]    Game start
 25-12-2016 11:6:11 : [TRACE]    Game start
+25-12-2016 11:23:14 : [TRACE]    Game start
+25-12-2016 11:23:51 : [WARN]    Cannot feed animal cause it not among player's animals 
+25-12-2016 11:24:21 : [WARN]    Cannot feed animal cause it not among player's animals 
+25-12-2016 12:53:29 : [WARN]    Illegal iterator position
+25-12-2016 12:53:29 : [WARN]    Illegal iterator position
+25-12-2016 13:4:30 : [WARN]    DeckException: Illegal iterator position
+25-12-2016 13:4:30 : [FATAL]    Terminate exit
+25-12-2016 13:13:55 : [WARN]    DeckException: Illegal iterator position
+25-12-2016 13:13:55 : [FATAL]    Terminate exit
