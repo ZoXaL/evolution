@@ -46,6 +46,10 @@ void FeedCommand::execute() {
 	try {
 		Player* player = model->getPlayer(playerId);
 		shared_ptr<Animal> animal = player->getAnimal(animalId);
+		if (abilityId == -2) {
+			Logger::info("FeedCommand: Animal doesn't need food");
+			return;
+		}
 		if (abilityId == -3) {
 			abilityId = animal->feed();
 		} else {
@@ -55,8 +59,7 @@ void FeedCommand::execute() {
 				FoodModification* abilityFed = dynamic_cast<FoodModification*>(animal->getAbility(abilityId));
 				abilityFed->giveFood();
 			}	
-		}	
-		if (abilityId == -2) throw CommandException("FeedCommand: Animal doesn't need food");
+		}			
 	} catch (Exception& e) {
 		Logger::fatal(e.getMessage());
 		throw CommandException("FeedCommand: cannot execute because of inner exception");

@@ -7,6 +7,7 @@
 #include "model/Player.h"
 #include "model/deck/Deck.h"
 
+#include "Logger.h"
 #include <fstream>
 using namespace std;
 
@@ -18,6 +19,7 @@ AbstractController* LoadGameController::run() {
 	fstream loadStream(fullSaveName, ios::in);
 	if (!loadStream) {
 		cout << "Cannot open file to read data" << endl;
+		Logger::warn("Cannot open "+saveName+" to read data");
 		return new MenuController();
 	}	
 	GameManager::loadGame(loadStream);

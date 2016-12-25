@@ -1,32 +1,57 @@
-25-12-2016 10:22:11 : [TRACE]    Game start
-25-12-2016 10:22:14 : [WARN]    Cannot fill full reserve for Hunter ability
-25-12-2016 10:22:59 : [TRACE]    Game start
-25-12-2016 10:32:28 : [TRACE]    Game start
-25-12-2016 10:32:58 : [TRACE]    Game start
-25-12-2016 10:33:27 : [TRACE]    Game start
-25-12-2016 10:34:46 : [TRACE]    Game start
-25-12-2016 10:34:49 : [WARN]    Cannot pop_front from Deck: there is no elements
-25-12-2016 10:37:14 : [TRACE]    Game start
-25-12-2016 10:41:17 : [TRACE]    Game start
-25-12-2016 10:43:42 : [TRACE]    Game start
-25-12-2016 10:44:58 : [TRACE]    Game start
-25-12-2016 10:46:44 : [TRACE]    Game start
-25-12-2016 10:47:26 : [TRACE]    Game start
-25-12-2016 10:48:7 : [TRACE]    Game start
-25-12-2016 10:48:52 : [TRACE]    Game start
-25-12-2016 10:49:35 : [TRACE]    Game start
-25-12-2016 10:50:20 : [TRACE]    Game start
-25-12-2016 10:51:15 : [TRACE]    Game start
-25-12-2016 10:51:48 : [TRACE]    Game start
-25-12-2016 10:52:55 : [TRACE]    Game start
-25-12-2016 10:53:56 : [TRACE]    Game start
-25-12-2016 11:6:11 : [TRACE]    Game start
-25-12-2016 11:23:14 : [TRACE]    Game start
-25-12-2016 11:23:51 : [WARN]    Cannot feed animal cause it not among player's animals 
-25-12-2016 11:24:21 : [WARN]    Cannot feed animal cause it not among player's animals 
-25-12-2016 12:53:29 : [WARN]    Illegal iterator position
-25-12-2016 12:53:29 : [WARN]    Illegal iterator position
-25-12-2016 13:4:30 : [WARN]    DeckException: Illegal iterator position
-25-12-2016 13:4:30 : [FATAL]    Terminate exit
-25-12-2016 13:13:55 : [WARN]    DeckException: Illegal iterator position
-25-12-2016 13:13:55 : [FATAL]    Terminate exit
+25-12-2016 14:37:20 : [WARN]    CommandException: FeedCommand: Animal doesn't need food
+25-12-2016 14:37:20 : [FATAL]    CommandException: FeedCommand: Animal doesn't need food
+25-12-2016 14:37:20 : [WARN]    CommandException: FeedCommand: cannot execute because of inner exception
+25-12-2016 14:41:28 : [INFO]    Game starts
+25-12-2016 14:42:6 : [INFO]    Game starts
+25-12-2016 14:42:13 : [INFO]    Game starts
+25-12-2016 14:42:23 : [INFO]    FeedCommand: Animal doesn't need food
+25-12-2016 14:42:30 : [WARN]    DeckException: Player::getCardFromHand -- cardNum is greater then hand size or less then 0
+25-12-2016 14:42:30 : [FATAL]    DeckException: Player::getCardFromHand -- cardNum is greater then hand size or less then 0
+25-12-2016 14:42:30 : [WARN]    CommandException: CreateAnimalCommand: cannot execute because of inner exception
+25-12-2016 14:42:30 : [FATAL]    TransactionCommand: CommandException: CreateAnimalCommand: cannot execute because of inner exception
+25-12-2016 14:42:30 : [FATAL]    CommandHolder: CommandException: CreateAnimalCommand: cannot execute because of inner exception
+25-12-2016 14:42:30 : [FATAL]    Terminate exit
+25-12-2016 14:44:13 : [INFO]    Game starts
+25-12-2016 14:44:19 : [WARN]    DeckException: Player::getCardFromHand -- cardNum is greater then hand size or less then 0
+25-12-2016 14:44:19 : [FATAL]    DeckException: Player::getCardFromHand -- cardNum is greater then hand size or less then 0
+25-12-2016 14:44:19 : [WARN]    CommandException: CreateAnimalCommand: cannot execute because of inner exception
+25-12-2016 14:44:19 : [FATAL]    TransactionCommand: CommandException: CreateAnimalCommand: cannot execute because of inner exception
+25-12-2016 14:44:19 : [FATAL]    CommandHolder: CommandException: CreateAnimalCommand: cannot execute because of inner exception
+25-12-2016 14:44:19 : [FATAL]    Terminate exit
+25-12-2016 14:44:29 : [INFO]    Game starts
+25-12-2016 14:44:46 : [INFO]    Game starts
+25-12-2016 14:44:52 : [INFO]    Game starts
+25-12-2016 14:45:40 : [WARN]    DeckException: Player::getCardFromHand -- cardNum is greater then hand size or less then 0
+25-12-2016 14:45:40 : [FATAL]    DeckException: Player::getCardFromHand -- cardNum is greater then hand size or less then 0
+25-12-2016 14:45:40 : [WARN]    CommandException: CreateAnimalCommand: cannot execute because of inner exception
+25-12-2016 14:45:40 : [FATAL]    TransactionCommand: CommandException: CreateAnimalCommand: cannot execute because of inner exception
+25-12-2016 14:45:40 : [FATAL]    CommandHolder: CommandException: CreateAnimalCommand: cannot execute because of inner exception
+25-12-2016 14:45:40 : [FATAL]    Terminate exit
+25-12-2016 14:46:41 : [INFO]    Game starts
+25-12-2016 14:48:58 : [INFO]    Game starts
+25-12-2016 14:49:27 : [INFO]    Game starts
+25-12-2016 14:52:43 : [INFO]    Game starts
+25-12-2016 14:54:14 : [INFO]    Game starts
+25-12-2016 14:56:49 : [INFO]    Game starts
+25-12-2016 15:0:41 : [WARN]    DeckException: Player::getCardFromHand -- cardNum is greater then hand size or less then 0
+25-12-2016 15:0:41 : [FATAL]    DeckException: Player::getCardFromHand -- cardNum is greater then hand size or less then 0
+25-12-2016 15:0:41 : [WARN]    CommandException: CreateAnimalCommand: cannot execute because of inner exception
+25-12-2016 15:0:41 : [FATAL]    TransactionCommand: CommandException: CreateAnimalCommand: cannot execute because of inner exception
+25-12-2016 15:0:41 : [FATAL]    CommandHolder: CommandException: CreateAnimalCommand: cannot execute because of inner exception
+25-12-2016 15:0:41 : [FATAL]    Terminate exit
+25-12-2016 15:1:2 : [INFO]    Game starts
+25-12-2016 15:1:12 : [INFO]    Game starts
+25-12-2016 15:2:10 : [INFO]    Game starts
+25-12-2016 15:5:4 : [INFO]    Game starts
+25-12-2016 15:10:25 : [INFO]    Game starts
+25-12-2016 15:10:48 : [INFO]    FeedCommand: Animal doesn't need food
+25-12-2016 15:10:55 : [WARN]    Cannot get ability on illegal index
+25-12-2016 15:10:55 : [FATAL]    Cannot get ability on illegal index
+25-12-2016 15:10:55 : [WARN]    CommandException: FeedCommand: cannot execute because of inner exception
+25-12-2016 15:10:55 : [FATAL]    TransactionCommand: CommandException: FeedCommand: cannot execute because of inner exception
+25-12-2016 15:10:55 : [FATAL]    CommandHolder: CommandException: FeedCommand: cannot execute because of inner exception
+25-12-2016 15:10:55 : [FATAL]    Terminate exit
+25-12-2016 15:13:27 : [INFO]    Game starts
+25-12-2016 15:13:29 : [INFO]    FeedCommand: Animal doesn't need food
+25-12-2016 15:13:38 : [INFO]    FeedCommand: Animal doesn't need food
+25-12-2016 15:13:46 : [INFO]    FeedCommand: Animal doesn't need food

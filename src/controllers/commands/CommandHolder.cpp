@@ -90,7 +90,7 @@ void CommandHolder::undo() {
 }
 
 bool CommandHolder::canUndo() {
-	return deck.getSize() >= 2;
+	return (deck.getSize() >= 2 && currentTransaction == nullptr);
 }
 
 ostream& CommandHolder::write(ostream& stream) {
@@ -107,7 +107,6 @@ istream& CommandHolder::read(istream& stream) {
 		stream >> commandType;
 		switch (commandType) {
 			case (Command::TRANSACTION) : {
-				// Logger::trace("CommandHolder::Reading Transaction from file");
 				AbstractCommand* transaction = new TransactionCommand();
 				transaction->read(stream);
 				deck.push_back(transaction);

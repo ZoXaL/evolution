@@ -10,6 +10,9 @@
 #include "controllers/commands/TransactionCommand.h"
 #include "controllers/commands/CommandHolder.h"
 
+#include "exceptions/Exception.h"
+#include "exceptions/TransactionException.h"
+
 #include "model/GameModel.h"
 #include "model/Player.h"
 #include "model/cards/AbilityCard.h"
@@ -20,14 +23,8 @@
 #include <list>
 #include <memory>
 using namespace std;
-/*
-	TODO:
-		* Get move
-		* Dialog for move
-		* Create command
- */
+
 AbstractController* EvolveController::run() {
-	//Здесь закончился предыдущий ход
 	CommandHolder* holder = CommandHolder::getInstance();
 	if (holder->isTransactionOpened()) {
 		holder->commit();
@@ -35,7 +32,6 @@ AbstractController* EvolveController::run() {
 	system("clear");
 	GameModel* model = GameModel::getInstance();
 	Player* currentPlayer = model->getCurrentPlayer();
-	// cout << "Here will be GameModel view" << endl<< endl<< endl;
 
 	displayModel();
 	cout << endl;
@@ -56,7 +52,12 @@ AbstractController* EvolveController::run() {
 			} 
 			case 2 : {
 				if (holder->canUndo()) {
-					CommandHolder::getInstance()->undo();	
+					try {
+						CommandHolder::getInstance()->undo();	
+					} catch (Exception& e) {
+						Logger::fatal("EvolveController: cannot undo, cause: "+ e.getMessage());
+						throw e;
+					}					
 				} else {
 					alert = "Cannot undo";
 				}			
@@ -101,7 +102,12 @@ AbstractController* EvolveController::run() {
 			} 
 			case 4 : {
 				if (holder->canUndo()) {
-					CommandHolder::getInstance()->undo();	
+					try {
+						CommandHolder::getInstance()->undo();	
+					} catch (Exception& e) {
+						Logger::fatal("EvolveController: cannot undo, cause: "+ e.getMessage());
+						throw e;
+					}	
 				} else {
 					alert = "Cannot undo";
 				}
@@ -132,9 +138,14 @@ void EvolveController::createNewAnimal() {
 		return;
 	}
 	CommandHolder* holder = CommandHolder::getInstance();
-	holder->openTransaction();
-	holder->addCommand(new CreateAnimalCommand(currentPlayer, answer-1));
-	holder->addCommand(new EndMoveCommand());
+	try {
+		holder->openTransaction();
+		holder->addCommand(new CreateAnimalCommand(currentPlayer, answer-1));
+		holder->addCommand(new EndMoveCommand());
+	} catch (Exception& e) {
+		Logger::fatal("EvolveController: cannot create new animal, cause: "+ e.getMessage());
+		throw e;
+	}		
 	return;
 }
 
@@ -161,9 +172,14 @@ void EvolveController::useAbility() {
 		return;
 	}
 	CommandHolder* holder = CommandHolder::getInstance();
-	holder->openTransaction();
-	holder->addCommand(new AddAbilityCommand(animalsToEvolve[animalId-1].get(), abilityId-1));
-	holder->addCommand(new EndMoveCommand());
+	try {
+		holder->openTransaction();
+		holder->addCommand(new AddAbilityCommand(animalsToEvolve[animalId-1].get(), abilityId-1));
+		holder->addCommand(new EndMoveCommand());
+	} catch (Exception& e) {
+		Logger::fatal("EvolveController: cannot use ability, cause: "+ e.getMessage());
+		throw e;
+	}		
 }
 
 void EvolveController::pass() {
@@ -171,7 +187,12 @@ void EvolveController::pass() {
 	Player* currentPlayer = model->getCurrentPlayer();
 
 	CommandHolder* holder = CommandHolder::getInstance();
-	holder->openTransaction();
-	holder->addCommand(new PassCommand(currentPlayer));
-	holder->addCommand(new EndMoveCommand());
+	try {
+		holder->openTransaction();
+		holder->addCommand(new PassCommand(currentPlayer));
+		holder->addCommand(new EndMoveCommand());
+	} catch (Exception& e) {
+		Logger::fatal("EvolveController: cannot pass, cause: "+ e.getMessage());
+		throw e;
+	}	
 }

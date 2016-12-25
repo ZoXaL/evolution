@@ -143,6 +143,8 @@ void Deck<T>::clear() {
 		first = first->next;
 		delete tmp;		
 	}
+	first = nullptr;
+	last = nullptr;
 	size = 0;
 }
 

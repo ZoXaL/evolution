@@ -80,7 +80,6 @@ istream& TransactionCommand::read(istream& stream) {
 	for (int i = 0; i < commandsNum; i++) {
 		int commandType;
 		stream >> commandType;
-		cout << commandsNum << endl;
 		AbstractCommand* command;
 		switch (commandType) {
 			case (Command::ADD_ABILITY) : {
@@ -149,6 +148,7 @@ istream& TransactionCommand::read(istream& stream) {
 				break;
 			}
 			default : {
+				Logger::fatal("TransactionCommand::read: Unexpected command type");
 				throw IOException("Unexpected command type");
 			}
 		}

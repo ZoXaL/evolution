@@ -18,6 +18,7 @@ AbstractController* SaveGameController::run() {
 	fstream saveStream(fullSaveName, ios::out | ios::trunc);
 	if (!saveStream) {
 		cout << "Cannot open file to write data" << endl;
+		Logger::warn("Cannot open "+saveName+" to write data");
 		return new MenuController();
 	}	
 	GameManager::saveGame(saveStream);

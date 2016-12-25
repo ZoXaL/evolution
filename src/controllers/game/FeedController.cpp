@@ -17,6 +17,8 @@
 #include "model/cards/interfaces/ActiveAbility.h"
 
 #include "functions.h"
+#include "exceptions/TransactionException.h"
+#include "exceptions/Exception.h"
 
 #include <iostream>
 #include <list>
@@ -74,9 +76,14 @@ AbstractController* FeedController::run() {
 			nextController = new GameController();
 			break;
 		}
-		case 4 : {
+		case 4 : {	
 			if (holder->canUndo()) {
-				CommandHolder::getInstance()->undo();	
+				try {
+					CommandHolder::getInstance()->undo();	
+				} catch (Exception& e) {
+					Logger::fatal("EvolveController: cannot undo, cause: "+ e.getMessage());
+					throw e;
+				}		
 			} else {
 				alert = "Cannot undo";
 			}
@@ -117,19 +124,6 @@ void FeedController::feedAnimal() {
 		return;
 	}
 
-	// shared_ptr<Animal> hungryAnimal = currentPlayer->getAnimal(hungryAnimals[answer-1]);
-
-	// list<pair<int, shared_ptr<AbilityCard>>> abilitiesToFeed = hungryAnimal->getAbilitiesToFeed();
-	// for (auto i = abilitiesToFeed.begin(); i != abilitiesToFeed.end(); i++) {
-	// 	cout << distance(abilitiesToFeed.begin(), i)+1 << ") " << i->second->getDescription() << endl;
-	// }
-	// cancelOption = abilitiesToFeed.size()+1;
-	// cout << cancelOption << ") Cancel" << endl;
-	// answer = getInt(cin, 1, cancelOption);
-	// if (answer == cancelOption) {
-	// 	return;
-	// }
-
 	CommandHolder* holder = CommandHolder::getInstance();
 	holder->openTransaction();
 	try {
@@ -138,15 +132,16 @@ void FeedController::feedAnimal() {
 		alert = e.getMessage();
 		holder->rollback();
 		return;
-	}	
-	holder->addCommand(new PopFoodCommand(1));
-	holder->addCommand(new EndMoveCommand());
+	}
+	try {
+		holder->addCommand(new PopFoodCommand(1));
+		holder->addCommand(new EndMoveCommand());
+	} catch (Exception& e) {
+		Logger::fatal("EvolveController: cannot pass, cause: "+ e.getMessage());
+		throw e;
+	}		
 }
 shared_ptr<Animal> FeedController::selectAnimalToUse() {
-	//Todo:
-	//Check every animal ability
-	//Let player choose
-	//USE IT!!!
 	GameModel* model = GameModel::getInstance();
 	Player* currentPlayer = model->getCurrentPlayer();
 
@@ -179,9 +174,14 @@ void FeedController::useAnimalAbility(shared_ptr<Animal> animal) {
 	}
 	ActiveAbility* abilityToUse = dynamic_cast<ActiveAbility*>(abilities.at(answer-1).get());
 	CommandHolder* holder = CommandHolder::getInstance();
-	holder->openTransaction();
-	abilityToUse->use();
-	holder->addCommand(new EndMoveCommand());
+	try {
+		holder->openTransaction();
+		abilityToUse->use();
+		holder->addCommand(new EndMoveCommand());
+	} catch (Exception& e) {
+		Logger::fatal("EvolveController: cannot pass, cause: "+ e.getMessage());
+		throw e;
+	}		
 	return;
 }
 
@@ -211,8 +211,13 @@ void FeedController::pass() {
 	Player* currentPlayer = model->getCurrentPlayer();
 
 	CommandHolder* holder = CommandHolder::getInstance();
-	holder->openTransaction();
-	holder->addCommand(new PassCommand(currentPlayer));
-	holder->addCommand(new EndMoveCommand());	
+	try {
+		holder->openTransaction();
+		holder->addCommand(new PassCommand(currentPlayer));
+		holder->addCommand(new EndMoveCommand());
+	} catch (Exception& e) {
+		Logger::fatal("EvolveController: cannot pass, cause: "+ e.getMessage());
+		throw e;
+	}			
 }
 

@@ -22,7 +22,8 @@ int main() {
 	std::srand (std::time(NULL));
 	Logger::info("Game starts");
 
-	std::system("clear");	
+	std::system("resize -s 40 150");		
+	std::system("clear");		
 	MainController controller;
 	controller.run();
 	return 0;
