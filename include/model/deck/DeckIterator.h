@@ -10,7 +10,6 @@ template<typename T>
 class DeckIterator {	
 public:
 	typedef typename Deck<T>::Node* pointer_t;
-	typedef T value_type;
 	DeckIterator(pointer_t);
 
 	DeckIterator<T> operator++();

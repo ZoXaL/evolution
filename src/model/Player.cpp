@@ -1,5 +1,4 @@
 #include "model/Player.h"
-#include "model/cards/Card.h"
 #include "exceptions/Exception.h"
 #include "exceptions/DeckException.h"
 #include <string.h>

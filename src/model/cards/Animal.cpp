@@ -112,18 +112,6 @@ bool Animal::defend(Animal* hunter) {
 	}
 	return false;
 }
-// list<pair<int, shared_ptr<AbilityCard>>> Animal::getAbilitiesToFeed() {
-// 	list<pair<int, shared_ptr<AbilityCard>>> foodModifications;
-// 	for (auto i = abilities.begin(); i != abilities.end(); i++) {
-// 		FoodModification* foodModification = dynamic_cast<FoodModification*>(i->get());
-// 		if (foodModification && foodModification->needFood()) {
-// 			foodModifications.push_back(make_pair(i - abilities.begin(), *i));
-// 		}
-// 		// try to cast
-// 		// check if need food
-// 	}
-// 	return foodModifications;
-// }
 
 bool Animal::canGetFood() {
 	if (!fed) return true;
@@ -141,7 +129,8 @@ int Animal::feed() {
 	// if index = -1, feed animal itself
 	// if index > 0, give food to ability
 	for (int i = 0; i < abilities.size(); i++) {
-		FoodModification* foodModification = dynamic_cast<FoodModification*>(abilities[i].get());
+		AbilityCard* ability = abilities[i].get();
+		FoodModification* foodModification = dynamic_cast<FoodModification*>(ability);
 		if (foodModification && foodModification->needFood()) {
 			foodModification->giveFood();
 			return i;
@@ -153,7 +142,8 @@ int Animal::feed() {
 		return -1;
 	} 
 	for (int i = 0; i < abilities.size(); i++) {
-		Fat* fat = dynamic_cast<Fat*>(abilities[i].get());
+		AbilityCard* ability = abilities[i].get();
+		Fat* fat = dynamic_cast<Fat*>(ability);
 		if (fat && fat->canGetFood()) {
 			fat->giveFood();
 			return i;

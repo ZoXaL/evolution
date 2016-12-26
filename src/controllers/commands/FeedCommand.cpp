@@ -1,5 +1,4 @@
 #include "controllers/commands/FeedCommand.h"
-#include "model/cards/Card.h"
 #include "model/cards/Animal.h"
 #include "model/GameModel.h"
 #include "model/Player.h"
@@ -83,13 +82,10 @@ void FeedCommand::undo() {
 	}
 }
 ostream& FeedCommand::write(ostream& stream) {
-	stream << type << endl;
-	stream << playerId << ' ' << animalId << ' ' << abilityId << endl;
+	stream << type << ' ' << playerId << ' ' << animalId << ' ' << abilityId << endl;
 	return stream;
 }
 istream& FeedCommand::read(istream& stream) {
-	stream >> playerId;
-	stream >> animalId;
-	stream >> abilityId;
+	stream >> playerId >> animalId >> abilityId;
 	return stream;
 }

@@ -7,20 +7,16 @@
 #include <memory>
 #include <string>
 
-class FeedController : public AbstractController, protected PhazeController {
+class FeedController : protected PhazeController {
 public:
 	AbstractController* run();
 private:
 	static std::string alert;
-
 	void feedAnimal();
 	void useAnimalAbility(std::shared_ptr<Animal>);
 	shared_ptr<Animal> selectAnimalToUse();
 protected:
 	void displayStatistic();
 	string displayAnimal(std::shared_ptr<Animal>);
-	void pass();
-	// getAvailableMoves();
-	
 };
 #endif

@@ -1,4 +1,7 @@
 #include "controllers/game/PhazeController.h"
+#include "controllers/commands/CommandHolder.h"
+#include "controllers/commands/EndMoveCommand.h"
+#include "controllers/commands/PassCommand.h"
 #include "model/GameModel.h"
 #include "model/Player.h"
 #include "model/deck/Deck.h"
@@ -64,4 +67,21 @@ string PhazeController::displayAnimal(shared_ptr<Animal> animal) {
 }
 void PhazeController::displayAlert() {
 
+}
+
+void PhazeController::pass() {
+	GameModel* model = GameModel::getInstance();
+	Player* currentPlayer = model->getCurrentPlayer();
+
+	CommandHolder* holder = CommandHolder::getInstance();
+	try {
+		if (!holder->isTransactionOpened()) {
+			holder->openTransaction();
+		}		
+		holder->addCommand(new PassCommand(currentPlayer));
+		holder->addCommand(new EndMoveCommand());
+	} catch (Exception& e) {
+		Logger::fatal("EvolveController: cannot pass, cause: "+ e.getMessage());
+		throw e;
+	}			
 }

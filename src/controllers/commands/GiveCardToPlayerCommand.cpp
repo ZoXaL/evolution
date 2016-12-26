@@ -42,8 +42,7 @@ void GiveCardToPlayerCommand::undo() {
 	}	
 }
 ostream& GiveCardToPlayerCommand::write(ostream& stream) {
-	stream << type << endl;
-	stream << playerId << endl;
+	stream << type << ' ' << playerId << endl;
 	return stream;
 }
 istream& GiveCardToPlayerCommand::read(istream& stream) {

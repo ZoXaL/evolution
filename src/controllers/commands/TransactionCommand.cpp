@@ -68,7 +68,7 @@ int TransactionCommand::getSize() {
 }
 
 ostream& TransactionCommand::write(ostream& stream) {
-	stream << type << endl;
+	stream << type << ' ';
 	deck.write(stream);
 	return stream;
 }

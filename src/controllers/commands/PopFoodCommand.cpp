@@ -25,8 +25,7 @@ void PopFoodCommand::undo() {
 }
 
 ostream& PopFoodCommand::write(ostream& stream) {
-	stream << type << endl;
-	stream << count << endl;
+	stream << type << ' ' << count << endl;
 	return stream;
 }
 istream& PopFoodCommand::read(istream& stream) {

@@ -47,12 +47,10 @@ void CreateAnimalCommand::undo() {
 }
 
 ostream& CreateAnimalCommand::write(ostream& stream) {
-	stream << type << endl;
-	stream << playerId << ' ' << cardId << ' ' << endl;
+	stream << type << ' '<< playerId << ' ' << cardId << ' ' << endl;
 	return stream;
 }
 istream& CreateAnimalCommand::read(istream& stream) {
-	stream >> playerId;
-	stream >> cardId;
+	stream >> playerId >> cardId;
 	return stream;
 }

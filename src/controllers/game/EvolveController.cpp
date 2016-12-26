@@ -24,6 +24,8 @@
 #include <memory>
 using namespace std;
 
+string EvolveController::alert = "";
+
 AbstractController* EvolveController::run() {
 	CommandHolder* holder = CommandHolder::getInstance();
 	if (holder->isTransactionOpened()) {
@@ -182,17 +184,9 @@ void EvolveController::useAbility() {
 	}		
 }
 
-void EvolveController::pass() {
-	GameModel* model = GameModel::getInstance();
-	Player* currentPlayer = model->getCurrentPlayer();
-
-	CommandHolder* holder = CommandHolder::getInstance();
-	try {
-		holder->openTransaction();
-		holder->addCommand(new PassCommand(currentPlayer));
-		holder->addCommand(new EndMoveCommand());
-	} catch (Exception& e) {
-		Logger::fatal("EvolveController: cannot pass, cause: "+ e.getMessage());
-		throw e;
-	}	
+void EvolveController::displayStatistic() {
+	if (alert != "") {
+		cout << "Alert: " << alert << endl;
+		alert = "";
+	}
 }

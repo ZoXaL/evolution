@@ -8,6 +8,6 @@ class GameController : public AbstractController {
 public:
 	AbstractController* run();
 private:
-	void deathPhaze();
+	void deathPhaze(int playerId);
 };
 #endif

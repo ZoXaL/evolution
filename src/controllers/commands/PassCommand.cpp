@@ -38,13 +38,11 @@ void PassCommand::undo() {
 }
 
 ostream& PassCommand::write(ostream& stream) {
-	stream << type << endl;
-	stream << playerId << ' ' << pass << endl;
+	stream << type << ' ' << playerId << ' ' << pass << endl;
 	return stream;
 }
 
 istream& PassCommand::read(istream& stream) {
-	stream >> playerId;
-	stream >> pass;
+	stream >> playerId >> pass;
 	return stream;
 }

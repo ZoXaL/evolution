@@ -4,7 +4,6 @@
 #include "controllers/AbstractController.h"
 
 class LoadGameController : public AbstractController {
-	bool newGame;
 public:
 	AbstractController* run();
 };

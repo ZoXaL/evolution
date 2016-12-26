@@ -45,9 +45,6 @@ public:
 	void swap(Node*, Node*);
 
 	ostream& write(ostream&);
-
-	// template<typename T1>
-	// friend ostream& operator<<(ostream& stream, Deck<T1> deck);
 };
 
 template<typename T> 
@@ -183,17 +180,8 @@ void Deck<T>::swap(Node* firstNode, Node* secondNode) {
 		}
 	}
 	if (secondNode->next == firstNode) {
-		secondNode->next = firstNode->next;
-		firstNode->previous = secondNode->previous;
-		firstNode->next = secondNode;
-		secondNode->previous = firstNode;
-		if (secondNode->next != nullptr) {
-			secondNode->next->previous = secondNode;
-		}
-		if (firstNode->previous != nullptr) {
-			firstNode->previous->next = firstNode;
-		}
-		return;
+		secondNode = firstNode;
+		firstNode = firstNode->previous;
 	}
 	if (secondNode->previous == firstNode) {
 		secondNode->previous = firstNode->previous;

@@ -4,14 +4,13 @@
 #include <string>
 #include <iostream>
 #include <memory>
-#include "model/cards/Card.h"
 #include "model/cards/Animal.h"
 #include "model/cards/abilities/Ability.h"
-#include "interfaces/Cloneable.h"
+#include "interfaces/Prototype.h"
 #include "functions.h"
 using namespace std;
 
-class AbilityCard : public Card, public Cloneable<AbilityCard*> {
+class AbilityCard : public Prototype<AbilityCard*> {
 protected:
 	Ability::AbilityType ability;
 	bool duplicated;
@@ -29,6 +28,8 @@ public:
 
 	bool canDuplicate();
 	
+	virtual int getCost() = 0;
+
 	void setOwner(Animal* owner);
 	Animal* getOwner();
 

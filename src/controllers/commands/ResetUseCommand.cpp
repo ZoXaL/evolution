@@ -1,5 +1,4 @@
 #include "controllers/commands/ResetUseCommand.h"
-#include "model/cards/Card.h"
 #include "model/cards/Animal.h"
 #include "model/cards/interfaces/ActiveAbility.h"
 #include "model/cards/AbilityCard.h"
@@ -69,15 +68,11 @@ void ResetUseCommand::undo() {
 }
 
 ostream& ResetUseCommand::write(ostream& stream) {
-	stream << type << endl;
-	stream << playerId << ' ' << animalId << ' ' << abilityId << ' ' << used << endl;
+	stream << type << ' ' << playerId << ' ' << animalId << ' ' << abilityId << ' ' << used << endl;
 	return stream;
 }
 
 istream& ResetUseCommand::read(istream& stream) {
-	stream >> playerId;
-	stream >> animalId;
-	stream >> abilityId;
-	stream >> used;
+	stream >> playerId >> animalId >> abilityId >> used;
 	return stream;
 }

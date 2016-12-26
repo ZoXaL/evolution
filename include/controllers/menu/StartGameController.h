@@ -8,8 +8,5 @@ class StartGameController : public AbstractController {
 public:
 	AbstractController* run();
 	StartGameController(bool newGame = false);
-private:	
-	// void initPlayers();
-	// void initGameModel();
 };
 #endif

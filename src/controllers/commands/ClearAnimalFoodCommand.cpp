@@ -1,5 +1,4 @@
 #include "controllers/commands/ClearAnimalFoodCommand.h"
-#include "model/cards/Card.h"
 #include "model/cards/Animal.h"
 #include "model/cards/abilities/Fat.h"
 #include "model/cards/interfaces/FoodModification.h"
@@ -59,14 +58,11 @@ void ClearAnimalFoodCommand::undo() {
 }
 
 ostream& ClearAnimalFoodCommand::write(ostream& stream) {
-	stream << type << endl;
-	stream << playerId << ' ' << animalId << ' ' << neededFood << endl;
+	stream << type << ' ' << playerId << ' ' << animalId << ' ' << neededFood << endl;
 	return stream;
 }
 
 istream& ClearAnimalFoodCommand::read(istream& stream) {
-	stream >> playerId;
-	stream >> animalId;
-	stream >> neededFood;
+	stream >> playerId >> animalId >> neededFood;
 	return stream;
 }

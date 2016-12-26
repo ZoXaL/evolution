@@ -44,7 +44,8 @@ AbstractController* GameController::run() {
 			};
 			case GamePhaze::FEED : {
 				//Time to kill and clear animals
-				deathPhaze();
+				deathPhaze(0);
+				deathPhaze(1);
 
 				if (deckSize == 0) {	
 					// game ends
@@ -126,43 +127,25 @@ AbstractController* GameController::run() {
 	return nextController;
 }
 
-void GameController::deathPhaze() {
+void GameController::deathPhaze(int playerId) {
 	GameModel* model = GameModel::getInstance();
-	Player* player1 = model->getPlayer(0);
-	Player* player2 = model->getPlayer(1);
+	Player* player = model->getPlayer(playerId);
 	CommandHolder* holder = CommandHolder::getInstance();
 	try {
-		vector<shared_ptr<Animal>>* animals1 = player1->getAnimals();
-		for (auto i = animals1->begin(); i != animals1->end();) {
+		vector<shared_ptr<Animal>>* animals = player->getAnimals();
+		for (auto i = animals->begin(); i != animals->end();) {
 			if ((*i)->isHungry()) {
-				holder->addCommand(new KillAnimalCommand(player1, i+1-animals1->begin()));
+				holder->addCommand(new KillAnimalCommand(player, i+1-animals->begin()));
 			} else {
-				holder->addCommand(new ClearAnimalFoodCommand(player1, i-animals1->begin()));
+				holder->addCommand(new ClearAnimalFoodCommand(player, i-animals->begin()));
 				for (auto j = (*i)->getAbilities()->begin(); j != (*i)->getAbilities()->end(); j++) {
 				ActiveAbility* activeAbility = dynamic_cast<ActiveAbility*>(j->get());
 					if (activeAbility && !activeAbility->canUse()) {
-						holder->addCommand(new ResetUseCommand(player1, i-animals1->begin(), j-(*i)->getAbilities()->begin(), false));
+						holder->addCommand(new ResetUseCommand(player, i-animals->begin(), j-(*i)->getAbilities()->begin(), false));
 					}
 				}
 				i++;
 			}
-		}
-
-		vector<shared_ptr<Animal>>* animals2 = player2->getAnimals();
-		for (auto i = animals2->begin(); i != animals2->end();) {
-			if ((*i)->isHungry()) {
-				holder->addCommand(new KillAnimalCommand(player2, i+1-animals2->begin()));
-			} else {
-				holder->addCommand(new ClearAnimalFoodCommand(player2, i-animals2->begin()));
-				for (auto j = (*i)->getAbilities()->begin(); j != (*i)->getAbilities()->end(); j++) {
-					ActiveAbility* activeAbility = dynamic_cast<ActiveAbility*>(j->get());
-					if (activeAbility && !activeAbility->canUse()) {
-						holder->addCommand(new ResetUseCommand(player2, i-animals2->begin(), j-(*i)->getAbilities()->begin(), false));
-					}
-				}
-				i++;
-			}
-			
 		}
 	} catch (Exception& e) {
 		Logger::fatal("GameController: deathPhaze, cause: " + e.getMessage());

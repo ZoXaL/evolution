@@ -1,5 +1,4 @@
 #include "controllers/commands/KillAnimalCommand.h"
-#include "model/cards/Card.h"
 #include "model/cards/Animal.h"
 #include "model/GameModel.h"
 #include "model/Player.h"
@@ -64,12 +63,10 @@ void KillAnimalCommand::undo() {
 }
 
 ostream& KillAnimalCommand::write(ostream& stream) {
-	stream << type << endl;
-	stream << playerId << ' ' << animalId << endl;
+	stream << type << ' ' << playerId << ' ' << animalId << endl;
 	return stream;
 }
 istream& KillAnimalCommand::read(istream& stream) {
-	stream >> playerId;
-	stream >> animalId;
+	stream >> playerId >> animalId;
 	return stream;
 }

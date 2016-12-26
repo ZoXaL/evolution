@@ -61,16 +61,13 @@ void SwitchPhazeCommand::undo() {
 }
 
 ostream& SwitchPhazeCommand::write(ostream& stream) {
-	stream << type << endl;
-	stream << newPhaze << ' ' << foodCount << ' ' << playerSwitched << endl;
+	stream << type << ' ' << newPhaze << ' ' << foodCount << ' ' << playerSwitched << endl;
 	return stream;
 }
 
 istream& SwitchPhazeCommand::read(istream& stream) {
-	int nextPhaze;
-	stream >> nextPhaze;
+	int nextPhaze = -1;
+	stream >> nextPhaze >> foodCount >> playerSwitched;
 	newPhaze = static_cast<GamePhaze::Phaze>(nextPhaze);
-	stream >> foodCount;
-	stream >> playerSwitched;
 	return stream;
 }

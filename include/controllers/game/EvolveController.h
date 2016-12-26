@@ -6,13 +6,14 @@
 #include <string>
 
 // Aimed to let player make evolve move
-class EvolveController : public AbstractController, protected PhazeController {
+class EvolveController : protected PhazeController {
 public:
 	AbstractController* run();
 private:
-	std::string alert;
+	static std::string alert;
 	void createNewAnimal();
-	void useAbility();
-	void pass();
+	void useAbility();	
+protected:
+	void displayStatistic();
 };
 #endif
