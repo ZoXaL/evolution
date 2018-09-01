@@ -1,17 +1,17 @@
 
-#Evolution
-##Common
+# Evolution
+## Common
 Here is my course work written on C++. This program is computer version of board game known as "Evolution".
 Note, that it has console interface and supports only two human players.
 
-##Developing
+## Developing
 My OS is Ubuntu 16.04 and i am using GNU toolchain for developing. For writing code I use Sublime Text 3. 
 Here are main utilites:
 * G++
 * GNU make
 * GDB
 
-##Installation and compiling
+## Installation and compiling
 You should have Unix system with GNU toolchain installed to compile this program. 
 
 1. Dowload this repository
@@ -27,5 +27,5 @@ You should have Unix system with GNU toolchain installed to compile this program
   ./build/evolive
   ```
 
-##Contribution
+## Contribution
 Feel free to discover this code, send pull request or make any comments.
